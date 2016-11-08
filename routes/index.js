@@ -8,7 +8,7 @@ router.use(csrfProtection);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('mall/index', { title: 'Ballon' });
+  res.render('index', { title: 'Ballon' });
 });
 
 router.get('/user/signup', function(req, res, next) {
