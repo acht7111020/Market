@@ -1,3 +1,3 @@
-// $(document).ready(function(){
-//   $('.modal-trigger').leanModal();
-// }
+$(document).ready(function(){
+  $("#dropdown1").css({"margin-top": parseInt($("#topbar").css("height"))});
+});

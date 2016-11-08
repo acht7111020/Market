@@ -1,6 +1,11 @@
 <!-- dropdown -->
 <ul id="dropdown1" class="dropdown-content">
-  <!-- fill by jquery -->
+  {{# if login}}
+    <li><a href="/user/logout">Logout</a></li>
+  {{ else}}
+    <li><a href="/user/signin">Sign in</a></li>
+    <li><a href="/user/signup">Sign up</a></li>
+  {{/if}}
 </ul>
 <!-- /dropdown -->
 <nav id="topbarNav">
