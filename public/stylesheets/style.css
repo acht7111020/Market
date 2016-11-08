@@ -1,0 +1,37 @@
+#topbar{
+  padding-left: 20px;
+  background-color: #336699;
+  z-index: 1;
+}
+
+#leftbar {
+  width: 15%;
+  background-color: #ADADAD;
+  overflow-y: scroll !important;
+  display: block !important;
+  padding: 0 !important;
+  margin-top: 3%;
+  z-index: 0;
+  font-family: 'Coiny', cursive;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+#mainArea {
+  width: 85%;
+  margin-left: 15%;
+}
+
+#mainArea #signupForm {
+  padding: 5% 25%;
+}
+
+.signupBtn {
+  float: right;
+  margin: 30px 0px 0px 30px;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 20px;
+}
