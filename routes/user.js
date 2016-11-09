@@ -10,9 +10,11 @@ router.use(csrfProtection);
 
 router.get('/profile', isLoggedIn,  function(req, res, next) {
   User.find(function(err, docs) {
-    var friendList = docs.map(function(item){return item.username});
-    friendList.splice(friendList.indexOf(req.user.username), 1);
-    res.render('user/profile', {user: req.user.username, friends: friendList});
+    var index = docs.map(function(item) {
+      return item.username;
+    }).indexOf(req.user.username);
+    docs.splice(index, 1);
+    res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs});
   })
 });
 

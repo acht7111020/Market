@@ -6,7 +6,8 @@ var schema = new Schema({
   email: {type: String, required: true},
   password: {type: String, required: true},
   username: {type: String, required: true},
-  phone: {type: String, required: true}
+  phone: {type: String, required: true},
+  charHistory: []
 });
 schema.methods.encryptPassword = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
