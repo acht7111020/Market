@@ -70,12 +70,21 @@
   word-wrap: break-word; !important;
   border-radius: 10px;
   line-height: 17px;
-  float: right;
   clear: both;
-  background-color: #336699;
-  color: #c5d5d9
 }
 
 #chatArea {
   padding-bottom: 200px;
+}
+
+.fromOther {
+  float: left;
+  background-color: #c5d5d9;
+  color: #336699;
+}
+
+.fromSelf {
+  float: right;
+  background-color: #336699;
+  color: #c5d5d9;
 }
