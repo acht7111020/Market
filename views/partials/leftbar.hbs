@@ -15,22 +15,24 @@
         <div class="collapsible-header"><i class="material-icons">chat</i>Chat</div>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
-
-            <li class="chatBox">
-              <div class="collapsible-header"><i class="material-icons">perm_identity</i>簡紹安</div>
-              <div class="collapsible-body">
-                <div class="chatContent">
-                </div>
-                <form class="messageForm">
-                  <div id="inputField" class="input-field">
-                    <input type="text" class="messageInput" placeholder="Input message..."/>
+            {{# each friends}}
+              <li class="chatBox">
+                <div class="collapsible-header"><i class="material-icons">perm_identity</i>{{this}}</div>
+                <div class="collapsible-body">
+                  <div class="chatContent">
                   </div>
-                  <button class="btn waves-effect waves-light" type="submit">Send
-                    <i class="material-icons right">send</i>
-                  </button>
-                </form>
-              </div>
-            </li>
+                  <form class="messageForm">
+                    <div id="inputField" class="input-field">
+                      <input type="text" class="messageInput" placeholder="Input message..."/>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit">Send
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </form>
+                </div>
+              </li>
+            {{/each}}
+
 
           </ul>
         </div>

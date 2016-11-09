@@ -2,13 +2,18 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
+var User = require('../models/user');
 
 var csrfProtection = csrf();
 
 router.use(csrfProtection);
 
 router.get('/profile', isLoggedIn,  function(req, res, next) {
-  res.render('user/profile', {user: req.user.email});
+  User.find(function(err, docs) {
+    var friendList = docs.map(function(item){return item.username});
+    friendList.splice(friendList.indexOf(req.user.username), 1);
+    res.render('user/profile', {user: req.user.username, friends: friendList});
+  })
 });
 
 router.get('/logout', isLoggedIn, function(req, res, next){
