@@ -10,7 +10,7 @@ var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
-var MongoStore = require('connect=mongo')(session);
+var MongoStore = require('connect-mongo')(session);
 
 var index = require('./routes/index');
 var user = require('./routes/user');
@@ -44,6 +44,8 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
+  // res.locals.username = req.user.username;
+  // console.log(`user: ${res.locals.username}`);
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
   next();

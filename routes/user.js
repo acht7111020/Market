@@ -8,7 +8,7 @@ var csrfProtection = csrf();
 router.use(csrfProtection);
 
 router.get('/profile', isLoggedIn,  function(req, res, next) {
-  res.render('user/profile');
+  res.render('user/profile', {user: req.user.email});
 });
 
 router.get('/logout', isLoggedIn, function(req, res, next){
