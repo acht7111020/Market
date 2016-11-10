@@ -16,8 +16,7 @@ $(document).ready(function(){
       $messageInput = $('.messageInput').eq(index);
       $chat = $('.chatContent').eq(index);
       var friendsEmail = $('.friendsEmail').eq(index).html();
-      socket.emit('send message', {content: $messageInput.val(), target: friendsEmail, self: email});
-      console.log(email);
+      socket.emit('send message', {content: $messageInput.val(), target: friendsEmail, source: email});
       $messageInput.val('');
     });
 

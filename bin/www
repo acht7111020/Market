@@ -51,8 +51,8 @@ io.sockets.on('connection', function(socket){
   // SendMessage
   socket.on('send message', function(data){
     if (users[data.target])
-      users[data.target].emit('new message from other', {msg: data.content, target: data.target});
-    users[data.self].emit('new message from self', {msg: data.content});
+      users[data.target].emit('new message from other', {msg: data.content, target: data.source});
+    users[data.source].emit('new message from self', {msg: data.content});
   });
 });
 
