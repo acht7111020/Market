@@ -31,7 +31,7 @@ $(document).ready(function(){
       });
       var $fromFriend = $('.chatContent').eq(index);
       $fromFriend.append(`<p class="messageText fromOther">${data.msg}</p>`);
-      $fromFriend.scrollTop($fromFriend.scrollHeight);
+      $fromFriend.scrollTop($fromFriend[0].scrollHeight);
     });
 
     socket.on('new message from self', function(data){
