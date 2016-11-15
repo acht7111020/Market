@@ -17,7 +17,12 @@ var user = require('./routes/user');
 
 var app = express();
 
-mongoose.connect('localhost:27017/Market');
+mongoose.connect('localhost:27017/Market', function(err){
+  if (err) throw err;
+  else {
+    console.log('Connect to mongodb');
+  }
+});
 require('./config/passport');
 
 // view engine setup

@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('market:server');
 var http = require('http');
+var Chat = require('../models/chatSchema');
 
 /**
  * Get port from environment and store in Express.
@@ -50,9 +51,17 @@ io.sockets.on('connection', function(socket){
 
   // SendMessage
   socket.on('send message', function(data){
-    if (users[data.target])
+    var newMsg = new Chat({fromUser: data.self, toUser: data.target, msg: data.content});
+    newMsg.save(function(err){
+      if(err) throw err;
+      //if (users[data.target])
       users[data.target].emit('new message from other', {msg: data.content, target: data.target});
-    users[data.self].emit('new message from self', {msg: data.content});
+      users[data.self].emit('new message from self', {msg: data.content});
+    });
+  });
+
+  socket.on('open chat box', function(data){
+    console.log(data.target);
   });
 });
 

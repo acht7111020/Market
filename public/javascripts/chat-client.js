@@ -10,6 +10,14 @@ $(document).ready(function(){
   if (login == 'true'){
     console.log('hi');
     socket.emit('new user', email);
+
+    // $('.chatBox').click(function(e){
+    //   e.preventDefault();
+    //   var index = $(".chatBox").index(this);
+    //   var friendsEmail = $(".chatBox").eq(index).html();
+    //   socket.emit('open chat box', {target: friendsEmail, self: email});
+    // });
+
     $messageForm.submit(function(e){
       e.preventDefault();
       var index = $(".messageForm").index(this);
