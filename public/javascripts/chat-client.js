@@ -5,38 +5,73 @@ $(document).ready(function(){
   var $chat;
   var $jqueryVars = $('#jqueryVars');
   var login = $jqueryVars.find('#loginVar').html();
-  var email = $jqueryVars.find('#emailVar').html();
+  var myEmail = $jqueryVars.find('#emailVar').html();
+  var openingChat = '';
+  var friendsEmail;
 
   if (login == 'true'){
-    console.log('hi');
-    socket.emit('new user', email);
+    socket.emit('new user', myEmail);
+
+    $('.chatCollapsible').click(function(e){
+      var index = $(".chatCollapsible").index(this);
+      friendsEmail = $(".friendsEmail").eq(index).html();
+      $chat = $('.chatContent').eq(index);
+      e.preventDefault();
+      if (openingChat != friendsEmail){
+        console.log(`email: ${myEmail}`);
+        socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
+        openingChat = friendsEmail;
+      }
+      else{
+        openingChat = '';
+      }
+    });
+
+    socket.on('load old messages', function(data){
+      $chat.html('');
+      for (var i = data.history.length - 1; i >= 0; i--){
+        if (data.history[i].fromUser == myEmail){
+          DisplayMsg(data.history[i].msg, 'fromSelf');
+        }
+        else {
+          DisplayMsg(data.history[i].msg, 'fromOther');
+        }
+        // console.log(data.history[i]);
+      }
+    });
+
     $messageForm.submit(function(e){
       e.preventDefault();
       var index = $(".messageForm").index(this);
       $messageInput = $('.messageInput').eq(index);
-      $chat = $('.chatContent').eq(index);
-      var friendsEmail = $('.friendsEmail').eq(index).html();
-      socket.emit('send message', {content: $messageInput.val(), target: friendsEmail, source: email});
+      socket.emit('send message', {content: $messageInput.val(), target: friendsEmail, origin: myEmail});
+      $chat.append(`<p class="messageText fromSelf">${$messageInput.val()}</p>`);
+      $chat.scrollTop($chat[0].scrollHeight);
       $messageInput.val('');
     });
 
-    socket.on('new message from other', function(data){
-      var $friendsEmail = $('.friendsEmail');
-      var index = 0;
-      $friendsEmail.each(function(){
-        if($(this).html() == data.target){
-          index = $friendsEmail.index(this);
-          return false;
-        }
-      });
-      var $fromFriend = $('.chatContent').eq(index);
-      $fromFriend.append(`<p class="messageText fromOther">${data.msg}</p>`);
-      $fromFriend.scrollTop($fromFriend[0].scrollHeight);
+    socket.on('new message', function(data){
+      if(data.origin == openingChat);{
+          DisplayMsg(data.msg, 'fromOther');
+          console.log(data.origin, friendsEmail);
+      }
     });
+  }
 
-    socket.on('new message from self', function(data){
-      $chat.append(`<p class="messageText fromSelf">${data.msg}</p>`);
-      $chat.scrollTop($chat[0].scrollHeight);
+  function DisplayMsg(msg, from){
+    $chat.append(`<p class="messageText ${from}">${msg}</p>`);
+    $chat.scrollTop($chat[0].scrollHeight);
+  }
+
+  function GetIndex(email){
+    var $friendsEmail = $('.friendsEmail');
+    var index = 0;
+    $friendsEmail.each(function(){
+      if($(this).html() == email){
+        index = $friendsEmail.index(this);
+        return false;
+      }
     });
+    return index;
   }
 });
