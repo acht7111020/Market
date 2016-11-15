@@ -68,7 +68,7 @@ $(document).ready(function(){
     });
 
     socket.on('new message', function(data){
-      if(data.origin == openingChat);{
+      if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
           socket.emit('message read', {friend: openingChat, self: myEmail});
       }

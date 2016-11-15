@@ -94,3 +94,7 @@
   background-color: #0066CC;
   color: #c5d5d9;
 }
+
+.input-field::after{
+  background-color: none !important;
+}
