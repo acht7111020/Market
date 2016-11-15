@@ -61,8 +61,11 @@ io.sockets.on('connection', function(socket){
 
   socket.on('open chat box', function(data){
     var query = Chat.find({$or:[ {fromUser: data.self, toUser: data.friend}, {fromUser: data.friend, toUser: data.self} ]});
-    query.sort('-created').limit(8).exec(function(err, docs){
+    query.sort('-created').limit(15).exec(function(err, docs){
       if(err) throw err;
+      for(var i = 0; i < docs.length; i++){
+        
+      }
       socket.emit('load old messages', {history: docs, target: data.target});
     });
   });

@@ -5,6 +5,7 @@ var schema = new Schema({
   fromUser: String,
   toUser: String,
   msg: String,
+  read: Boolean,
   created: {type: Date, default: Date.now}
 });
 

@@ -8,6 +8,7 @@ $(document).ready(function(){
   var myEmail = $jqueryVars.find('#emailVar').html();
   var openingChat = '';
   var friendsEmail;
+  var oldMessages = {};
 
   if (login == 'true'){
     socket.emit('new user', myEmail);
@@ -18,7 +19,14 @@ $(document).ready(function(){
       $chat = $('.chatContent').eq(index);
       e.preventDefault();
       if (openingChat != friendsEmail){
-        console.log(`email: ${myEmail}`);
+        // if (oldMessages[friendsEmail]){
+        //   LoadOldMsg();
+        //   console.log('hi');
+        // }
+        // else {
+        //   socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
+        //   console.log('hey');
+        // }
         socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
         openingChat = friendsEmail;
       }
@@ -28,17 +36,30 @@ $(document).ready(function(){
     });
 
     socket.on('load old messages', function(data){
+      oldMessages[friendsEmail] = data;
+      LoadOldMsg();
+      // $chat.html('');
+      // for (var i = data.history.length - 1; i >= 0; i--){
+      //   if (data.history[i].fromUser == myEmail){
+      //     DisplayMsg(data.history[i].msg, 'fromSelf');
+      //   }
+      //   else {
+      //     DisplayMsg(data.history[i].msg, 'fromOther');
+      //   }
+      // }
+    });
+
+    function LoadOldMsg(){
       $chat.html('');
-      for (var i = data.history.length - 1; i >= 0; i--){
-        if (data.history[i].fromUser == myEmail){
-          DisplayMsg(data.history[i].msg, 'fromSelf');
+      for (var i = oldMessages[friendsEmail].history.length - 1; i >= 0; i--){
+        if (oldMessages[friendsEmail].history[i].fromUser == myEmail){
+          DisplayMsg(oldMessages[friendsEmail].history[i].msg, 'fromSelf');
         }
         else {
-          DisplayMsg(data.history[i].msg, 'fromOther');
+          DisplayMsg(oldMessages[friendsEmail].history[i].msg, 'fromOther');
         }
-        // console.log(data.history[i]);
       }
-    });
+    }
 
     $messageForm.submit(function(e){
       e.preventDefault();
@@ -53,7 +74,6 @@ $(document).ready(function(){
     socket.on('new message', function(data){
       if(data.origin == openingChat);{
           DisplayMsg(data.msg, 'fromOther');
-          console.log(data.origin, friendsEmail);
       }
     });
   }
