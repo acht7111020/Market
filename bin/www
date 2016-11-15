@@ -51,17 +51,20 @@ io.sockets.on('connection', function(socket){
 
   // SendMessage
   socket.on('send message', function(data){
-    var newMsg = new Chat({fromUser: data.self, toUser: data.target, msg: data.content});
+    var newMsg = new Chat({fromUser: data.origin, toUser: data.target, msg: data.content});
     newMsg.save(function(err){
       if(err) throw err;
-      //if (users[data.target])
-      users[data.target].emit('new message from other', {msg: data.content, target: data.target});
-      users[data.self].emit('new message from self', {msg: data.content});
+      if (users[data.target])
+        users[data.target].emit('new message', {msg: data.content, origin: data.origin});
     });
   });
 
   socket.on('open chat box', function(data){
-    console.log(data.target);
+    var query = Chat.find({$or:[ {fromUser: data.self, toUser: data.friend}, {fromUser: data.friend, toUser: data.self} ]});
+    query.sort('-created').limit(8).exec(function(err, docs){
+      if(err) throw err;
+      socket.emit('load old messages', {history: docs, target: data.target});
+    });
   });
 });
 
