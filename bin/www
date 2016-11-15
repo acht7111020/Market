@@ -51,7 +51,7 @@ io.sockets.on('connection', function(socket){
 
   // SendMessage
   socket.on('send message', function(data){
-    var newMsg = new Chat({fromUser: data.origin, toUser: data.target, msg: data.content});
+    var newMsg = new Chat({fromUser: data.origin, toUser: data.target, msg: data.content, read: false});
     newMsg.save(function(err){
       if(err) throw err;
       if (users[data.target])
@@ -60,15 +60,30 @@ io.sockets.on('connection', function(socket){
   });
 
   socket.on('open chat box', function(data){
-    var query = Chat.find({$or:[ {fromUser: data.self, toUser: data.friend}, {fromUser: data.friend, toUser: data.self} ]});
-    query.sort('-created').limit(15).exec(function(err, docs){
+    var findQuery = Chat.find({$or:[ {fromUser: data.self, toUser: data.friend}, {fromUser: data.friend, toUser: data.self} ]});
+    findQuery.sort('-created').limit(15).exec(function(err, docs){
       if(err) throw err;
-      for(var i = 0; i < docs.length; i++){
-        
-      }
-      socket.emit('load old messages', {history: docs, target: data.target});
+      socket.emit('load old messages', {history: docs});
     });
+    UpdateReadStat(data);
   });
+
+  socket.on('message read', function(data) {
+    UpdateReadStat(data);
+  });
+
+  function UpdateReadStat(data){
+    var updateQuery = Chat.update(
+      {$or:[{fromUser: data.friend, toUser: data.self, read: false} ]},
+      {$set: {read: true}},
+      {multi: true}
+    );
+    updateQuery.exec(function(err, affected){
+      console.log(`set ${affected.nModified} messages read`);
+      if (users[data.friend])
+        users[data.friend].emit('update message read', {friend: data.self});
+    });
+  }
 });
 
 /**

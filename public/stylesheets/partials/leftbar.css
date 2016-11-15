@@ -83,8 +83,14 @@
   color: #336699;
 }
 
-.fromSelf {
+.fromSelfRead {
   float: right;
-  background-color: #336699;
+  background-color: #003D79;
+  color: #c5d5d9;
+}
+
+.fromSelfUnread {
+  float: right;
+  background-color: #0066CC;
   color: #c5d5d9;
 }

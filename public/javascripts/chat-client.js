@@ -36,27 +36,23 @@ $(document).ready(function(){
     });
 
     socket.on('load old messages', function(data){
-      oldMessages[friendsEmail] = data;
+      oldMessages[openingChat] = data;
       LoadOldMsg();
-      // $chat.html('');
-      // for (var i = data.history.length - 1; i >= 0; i--){
-      //   if (data.history[i].fromUser == myEmail){
-      //     DisplayMsg(data.history[i].msg, 'fromSelf');
-      //   }
-      //   else {
-      //     DisplayMsg(data.history[i].msg, 'fromOther');
-      //   }
-      // }
     });
 
     function LoadOldMsg(){
       $chat.html('');
-      for (var i = oldMessages[friendsEmail].history.length - 1; i >= 0; i--){
-        if (oldMessages[friendsEmail].history[i].fromUser == myEmail){
-          DisplayMsg(oldMessages[friendsEmail].history[i].msg, 'fromSelf');
+      for (var i = oldMessages[openingChat].history.length - 1; i >= 0; i--){
+        if (oldMessages[openingChat].history[i].fromUser == myEmail){
+          if (oldMessages[openingChat].history[i].read){
+            DisplayMsg(oldMessages[openingChat].history[i].msg, 'fromSelfRead');
+          }
+          else{
+            DisplayMsg(oldMessages[openingChat].history[i].msg, 'fromSelfUnread');
+          }
         }
         else {
-          DisplayMsg(oldMessages[friendsEmail].history[i].msg, 'fromOther');
+          DisplayMsg(oldMessages[openingChat].history[i].msg, 'fromOther');
         }
       }
     }
@@ -65,8 +61,8 @@ $(document).ready(function(){
       e.preventDefault();
       var index = $(".messageForm").index(this);
       $messageInput = $('.messageInput').eq(index);
-      socket.emit('send message', {content: $messageInput.val(), target: friendsEmail, origin: myEmail});
-      $chat.append(`<p class="messageText fromSelf">${$messageInput.val()}</p>`);
+      socket.emit('send message', {content: $messageInput.val(), target: openingChat, origin: myEmail});
+      $chat.append(`<p class="messageText fromSelfUnread">${$messageInput.val()}</p>`);
       $chat.scrollTop($chat[0].scrollHeight);
       $messageInput.val('');
     });
@@ -74,7 +70,12 @@ $(document).ready(function(){
     socket.on('new message', function(data){
       if(data.origin == openingChat);{
           DisplayMsg(data.msg, 'fromOther');
+          socket.emit('message read', {friend: openingChat, self: myEmail});
       }
+    });
+
+    socket.on('update message read', function(data){
+      $chat.find('.fromSelfUnread').toggleClass('fromSelfUnread fromSelfRead');
     });
   }
 
