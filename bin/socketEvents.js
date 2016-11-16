@@ -13,15 +13,22 @@ function socket(server){
           {$match: {read: false, toUser: socket.email}},
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
       ]);
-      // var distinctQuery = Chat.distinct("fromUser", {toUser: socket.email, read: false});
       aggregateQuery.exec(function(err, docs){
         console.log(docs);
-        socket.emit('highlight unread user', docs);
+        socket.emit('update unread status', docs);
       });
+      for (var email in users){
+        if (email != socket.email)
+          users[email].emit('someone is online or offline', {email: socket.email, online: true});
+      }
+      socket.emit('highlight online user', Object.keys(users));
     });
     // Disconnect
     socket.on('disconnect', function(data){
       delete users[socket.email];
+      for (var email in users){
+        users[email].emit('someone is online or offline', {email: socket.email, online: false});
+      }
       console.log(`[${socket.email}] leaved.`);
     });
 

@@ -76,13 +76,27 @@ $(document).ready(function(){
         $chat.find('.fromSelfUnread').toggleClass('fromSelfUnread fromSelfRead');
     });
 
-    socket.on('highlight unread user', function(data){
-      console.log(data);
+    socket.on('update unread status', function(data){
       for(var i = 0; i < data.length; i++){
         var index = GetIndex(data[i]._id);
         UpdateReadStat(index, data[i].numSend);
       }
-    })
+    });
+
+    socket.on('highlight online user', function(data) {
+      for(var i = 0; i < data.length; i++){
+        if (data[i] != myEmail){
+            var index = GetIndex(data[i]);
+            HighlightOnlineUser(index, true);
+        }
+      }
+    });
+
+    socket.on('someone is online or offline', function(data) {
+      var index = GetIndex(data.email);
+      console.log(index, data.email);
+      HighlightOnlineUser(index, data.online);
+    });
   }
 
   function DisplayMsg(msg, from){
@@ -103,7 +117,6 @@ $(document).ready(function(){
   }
 
   function UpdateReadStat(index, count){
-    console.log(count);
     if (count > 0){
       $('.unreadMessages').eq(index).html(count);
       // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
@@ -116,12 +129,20 @@ $(document).ready(function(){
       else{
         unreadNum = 1;
       }
-        console.log(unreadNum);
       $('.unreadMessages').eq(index).html(unreadNum);
     }
     else{
       $('.unreadMessages').eq(index).html('');
-      // $(".chatCollapsible").eq(index).find('i').css('color', '#CE0000');
+    }
+  }
+
+  function HighlightOnlineUser(index, online){
+    console.log(index);
+    if (online){
+      $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
+    }
+    else{
+      $(".chatCollapsible").eq(index).find('i').css('color', 'black');
     }
   }
 });
