@@ -14,7 +14,7 @@ router.get('/profile', isLoggedIn,  function(req, res, next) {
       return item.username;
     }).indexOf(req.user.username);
     docs.splice(index, 1);
-    res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs});
+    res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs, title: "Ballon"});
   })
 });
 
@@ -28,7 +28,7 @@ router.use('/', notLoggedIn, function(req, res, next) {
 })
 router.get('/signup', function(req, res, next) {
   var messages = req.flash('error');
-  res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+  res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
@@ -40,7 +40,7 @@ router.post('/signup', passport.authenticate('local.signup', {
 
 router.get('/signin', function(req, res, next) {
   var messages = req.flash('error');
-  res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0});
+  res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
 });
 
 

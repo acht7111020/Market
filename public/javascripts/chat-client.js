@@ -9,8 +9,15 @@ $(document).ready(function(){
   var openingChat = '';
   var friendsEmail;
   var oldMessages = {};
+  var titleNewMesssageFunction;
 
   if (login == 'true'){
+    $(window).focus(function(){
+      if (titleNewMesssageFunction){
+        clearInterval(titleNewMesssageFunction);
+        $('title').html('Ballon');
+      }
+    });
     socket.emit('new user', myEmail);
 
     $('.chatCollapsible').click(function(e){
@@ -61,6 +68,8 @@ $(document).ready(function(){
     });
 
     socket.on('new message', function(data){
+      console.log($('title').html());
+      titleNewMesssageFunction = setInterval(function(){ ChangeTitle() }, 1500);
       if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
           socket.emit('message read', {friend: openingChat, self: myEmail});
@@ -70,6 +79,15 @@ $(document).ready(function(){
         UpdateReadStat(index, -1);
       }
     });
+
+    function ChangeTitle(){
+      if ($('title').html() == 'new message'){
+        $('title').html('Ballon');
+      }
+      else{
+        $('title').html('new message');
+      }
+    }
 
     socket.on('update message read', function(data){
       if ($chat)
