@@ -109,7 +109,13 @@ $(document).ready(function(){
       // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
     }
     else if(count == -1){
-      var unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
+      var unreadNum;
+      if ($('.unreadMessages').eq(index).html() != ''){
+          unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
+      }
+      else{
+        unreadNum = 1;
+      }
         console.log(unreadNum);
       $('.unreadMessages').eq(index).html(unreadNum);
     }

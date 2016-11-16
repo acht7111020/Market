@@ -105,4 +105,6 @@
 
 .unreadMessages{
   float: right;
+  color: #AE0000;
+  font-weight: bold;
 }
