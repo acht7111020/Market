@@ -2,21 +2,22 @@ function socket(server){
   var io = require('socket.io').listen(server);
   var Chat = require('../models/chatSchema');
   users = {};
-  connections = [];
 
   io.sockets.on('connection', function(socket){
-    connections.push(socket);
-    console.log('Connected: %s sockets connected', connections.length);
 
     socket.on('new user', function(data, callback) {
       socket.email = data;
       users[socket.email] = socket;
+      console.log(`[${data}] entered.`);
+      var distinctQuery = Chat.distinct("fromUser", {toUser: socket.email, read: false});
+      distinctQuery.exec(function(err, docs){
+        socket.emit('highlight unread user', docs);
+      });
     });
     // Disconnect
     socket.on('disconnect', function(data){
       delete users[socket.email];
-      connections.splice(connections.indexOf(socket), 1);
-      console.log('Disconnected: %s sockets connected', connections.length);
+      console.log(`[${socket.email}] leaved.`);
     });
 
     // SendMessage

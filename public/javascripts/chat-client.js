@@ -19,6 +19,7 @@ $(document).ready(function(){
       $chat = $('.chatContent').eq(index);
       e.preventDefault();
       if (openingChat != friendsEmail){
+        ChangeReadColor(index, true);
         socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
         openingChat = friendsEmail;
       }
@@ -65,11 +66,8 @@ $(document).ready(function(){
           socket.emit('message read', {friend: openingChat, self: myEmail});
       }
       else {
-        console.log('hey');
         var index = GetIndex(data.origin);
-        // console.log($('.chatCollapsible').eq(index).css("background-color"));
-        // $('.chatCollapsible').eq(index).css('background-color': 'red !important');
-        $(".chatCollapsible").eq(index).css('cssText', 'background-color : #FFECEC !important;');
+        ChangeReadColor(index, false);
       }
     });
 
@@ -77,6 +75,14 @@ $(document).ready(function(){
       if ($chat)
         $chat.find('.fromSelfUnread').toggleClass('fromSelfUnread fromSelfRead');
     });
+
+    socket.on('highlight unread user', function(data){
+      console.log(data);
+      for(var i = 0; i < data.length; i++){
+        var index = GetIndex(data[i]);
+        ChangeReadColor(index, false);
+      }
+    })
   }
 
   function DisplayMsg(msg, from){
@@ -94,5 +100,14 @@ $(document).ready(function(){
       }
     });
     return index;
+  }
+
+  function ChangeReadColor(index, read){
+    if (read){
+      $(".chatCollapsible").eq(index).find('i').css('color', 'black');
+    }
+    else{
+      $(".chatCollapsible").eq(index).find('i').css('color', '#CE0000');
+    }
   }
 });
