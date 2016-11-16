@@ -19,14 +19,6 @@ $(document).ready(function(){
       $chat = $('.chatContent').eq(index);
       e.preventDefault();
       if (openingChat != friendsEmail){
-        // if (oldMessages[friendsEmail]){
-        //   LoadOldMsg();
-        //   console.log('hi');
-        // }
-        // else {
-        //   socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
-        //   console.log('hey');
-        // }
         socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
         openingChat = friendsEmail;
       }
@@ -72,10 +64,18 @@ $(document).ready(function(){
           DisplayMsg(data.msg, 'fromOther');
           socket.emit('message read', {friend: openingChat, self: myEmail});
       }
+      else {
+        console.log('hey');
+        var index = GetIndex(data.origin);
+        // console.log($('.chatCollapsible').eq(index).css("background-color"));
+        // $('.chatCollapsible').eq(index).css('background-color': 'red !important');
+        $(".chatCollapsible").eq(index).css('cssText', 'background-color : #FFECEC !important;');
+      }
     });
 
     socket.on('update message read', function(data){
-      $chat.find('.fromSelfUnread').toggleClass('fromSelfUnread fromSelfRead');
+      if ($chat)
+        $chat.find('.fromSelfUnread').toggleClass('fromSelfUnread fromSelfRead');
     });
   }
 
