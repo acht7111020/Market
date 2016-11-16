@@ -23,7 +23,10 @@
             {{# each friends}}
               <li class="chatBox">
                 <div class="friendsEmail" style="display: none;">{{this.email}}</div>
-                <div class="collapsible-header chatCollapsible"><i class="material-icons">perm_identity</i>{{this.username}}</div>
+                <div class="collapsible-header chatCollapsible">
+                  <i class="material-icons">perm_identity</i>{{this.username}}
+                  <span class="unreadMessages"></span>
+                </div>
                 <div class="collapsible-body">
                   <div class="chatContent">
                   </div>

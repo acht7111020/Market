@@ -9,8 +9,13 @@ function socket(server){
       socket.email = data;
       users[socket.email] = socket;
       console.log(`[${data}] entered.`);
-      var distinctQuery = Chat.distinct("fromUser", {toUser: socket.email, read: false});
-      distinctQuery.exec(function(err, docs){
+      var aggregateQuery = Chat.aggregate([
+          {$match: {read: false, toUser: socket.email}},
+          {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
+      ]);
+      // var distinctQuery = Chat.distinct("fromUser", {toUser: socket.email, read: false});
+      aggregateQuery.exec(function(err, docs){
+        console.log(docs);
         socket.emit('highlight unread user', docs);
       });
     });

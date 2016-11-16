@@ -102,3 +102,7 @@
 .input-field::after{
   background-color: none !important;
 }
+
+.unreadMessages{
+  float: right;
+}
