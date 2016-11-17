@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     })
   }
   else {
-    res.render('index', {});
+    res.render('index', {title: "Ballon"});
   }
 });
 
