@@ -108,3 +108,7 @@
   color: #AE0000;
   font-weight: bold;
 }
+
+.sendBtn{
+  display: none;
+}

@@ -22,8 +22,12 @@
   margin-left: 15%;
 }
 
-#mainArea .signForm {
-  padding: 5% 25%;
+#mainAreaBody > .signForm {
+  padding: 0 30%;
+}
+
+#mainArea > #mainAreaBody{
+  margin: 5% 10%;
 }
 
 .signupBtn {
