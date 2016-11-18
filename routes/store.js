@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/userSchema');
+var User = require('../models/user-schema');
 
 router.get('/', function(req, res, next) {
   User.find(function(err, docs) {

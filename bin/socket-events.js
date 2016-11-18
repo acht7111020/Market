@@ -1,6 +1,6 @@
 function socket(server){
   var io = require('socket.io').listen(server);
-  var Chat = require('../models/chatSchema');
+  var Chat = require('../models/chat-schema');
   users = {};
 
   io.sockets.on('connection', function(socket){
