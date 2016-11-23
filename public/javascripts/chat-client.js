@@ -68,7 +68,6 @@ $(document).ready(function(){
     });
 
     socket.on('new message', function(data){
-      console.log($('title').html());
       titleNewMesssageFunction = setInterval(function(){ ChangeTitle() }, 1500);
       if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
@@ -112,7 +111,6 @@ $(document).ready(function(){
 
     socket.on('someone is online or offline', function(data) {
       var index = GetIndex(data.email);
-      console.log(index, data.email);
       HighlightOnlineUser(index, data.online);
     });
   }
@@ -155,7 +153,6 @@ $(document).ready(function(){
   }
 
   function HighlightOnlineUser(index, online){
-    console.log(index);
     if (online){
       $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
     }

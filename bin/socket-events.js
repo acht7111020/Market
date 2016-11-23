@@ -14,7 +14,6 @@ function socket(server){
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
       ]);
       aggregateQuery.exec(function(err, docs){
-        console.log(docs);
         socket.emit('update unread status', docs);
       });
       for (var email in users){

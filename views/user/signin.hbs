@@ -5,14 +5,6 @@
       <p class="errorMsg">{{this}}</p>
     {{/each}}
   {{/if}}
-  <!-- <div class = "input-field">
-    <input id="ifullname" name="fullname" type="text"/>
-    <label>姓名</label>
-  </div>
-  <div class = "input-field">
-    <input id="iphone" name="phone" type="text"/>
-    <label>行動電話</label>
-  </div> -->
   <div class = "input-field">
     <input id="iemail" name="email" type="text"/>
     <label>電子郵件(亦為登入帳號)</label>
@@ -21,15 +13,11 @@
     <input id="ipassword" name="password" type="password"/>
     <label>密碼</label>
   </div>
-  <!-- <div class = "input-field">
-    <input id="iaddress" name="address" type="text"/>
-    <label>聯絡地址</label>
-  </div> -->
   <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
   <button id="submit" name="isubmit" class="btn waves-effect waves-light signupBtn" type="submit">儲存
     <i class="material-icons right">done</i>
   </button>
-  <button class="btn waves-effect waves-light signupBtn" type="submit" onclick="window.history.back();">取消
-    <i class="material-icons right">cancel</i>
-  </button>
 </form>
+<button class="btn waves-effect waves-light signupBtn" type="submit" onclick="window.location = '/';">取消
+  <i class="material-icons right">cancel</i>
+</button>

@@ -2,77 +2,34 @@
 <script type="text/javascript" src="/javascripts/store/store.js"></script>
 <div class="row">
   <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
-      <div class="card-content #eeeeee grey lighten-3">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
-      <div class="card-content #eeeeee grey lighten-3">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
-      <div class="card-content #eeeeee grey lighten-3">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
-      <div class="card-content #eeeeee grey lighten-3">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col s12 m4">
     <div id="counter" class="card  #e0e0e0 grey lighten-2">
 
     </div>
   </div>
 
-
-  <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
+  {{# each products}}
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2" style="background-image: url('{{this.coverImagePath}}')">
+        </div>
+        <div class="card-content #eeeeee grey lighten-3">
+          <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
+          <p>${{this.price}}</p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{this.title}}<i class="material-icons right">close</i></span>
+          <p>{{this.description}}</p>
+        </div>
       </div>
+    </div>
+  {{/each}}
+
+  <!-- <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
       <div class="card-content #eeeeee grey lighten-3">
         <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
@@ -83,11 +40,36 @@
 
   <div class="col s12 m4">
     <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
       <div class="card-content #eeeeee grey lighten-3">
         <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
+      <div class="card-content #eeeeee grey lighten-3">
+        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
+      <div class="card-content #eeeeee grey lighten-3">
+        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
@@ -98,11 +80,10 @@
 
   <div class="col s12 m4">
     <div class="card">
-      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
       <div class="card-content #eeeeee grey lighten-3">
         <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
@@ -113,11 +94,10 @@
 
   <div class="col s12 m4">
     <div class="card">
-      <div class="card-image waves-effect waves-block waves-light   #e0e0e0 grey lighten-2">
-        <!-- <img src="images/GAP.jpg"> -->
-      </div>
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
       <div class="card-content #eeeeee grey lighten-3">
         <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
@@ -125,5 +105,33 @@
       </div>
     </div>
   </div>
+
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2"></div>
+      <div class="card-content #eeeeee grey lighten-3">
+        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m4">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light   #e0e0e0 grey lighten-2"></div>
+      <div class="card-content #eeeeee grey lighten-3">
+        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+        <p>$300</p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      </div>
+    </div>
+  </div> -->
 
 </div>
