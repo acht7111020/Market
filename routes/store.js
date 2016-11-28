@@ -25,6 +25,10 @@ router.get('/', isLoggedIn, function(req, res, next) {
   })
 });
 
+router.get('/product', isLoggedIn, function(req, res, next) {
+  res.render('store/product');
+});
+
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
