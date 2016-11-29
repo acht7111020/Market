@@ -13,7 +13,6 @@ router.get('/', isLoggedIn, function(req, res, next) {
     var findQuery = Product.find();
     findQuery.sort('position').exec(function(productErr, productDocs){
       if(productErr) throw productErr;
-      console.log(productDocs);
       res.render('store/store', {
         username: req.user.username,
         useremail: req.user.email,
@@ -23,6 +22,10 @@ router.get('/', isLoggedIn, function(req, res, next) {
       });
     });
   })
+});
+
+router.get('/products', isLoggedIn, function(req, res, next) {
+  res.render('index');
 });
 
 router.get('/product', isLoggedIn, function(req, res, next) {
@@ -37,3 +40,5 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect('/');
 }
+
+// function spliceUser()

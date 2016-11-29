@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
       }).indexOf(req.user.username);
       docs.splice(index, 1);
       res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs, title: "Ballon"});
-    })
+    });
   }
   else {
     res.render('index', {title: "Ballon"});
