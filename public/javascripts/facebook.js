@@ -1,6 +1,7 @@
 function statusChangeCallback(response) {
   if (response.status === 'connected') {
     testAPI();
+    getFriendList();
   } else if (response.status === 'not_authorized') {
     document.getElementById('status').innerHTML = 'Please log ' +
       'into this app.';
@@ -47,16 +48,58 @@ function testAPI() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
     console.log('Successful login for: ' + response.name);
-    document.getElementById('status').innerHTML =
-      'Thanks for logging in, ' + response.name + '!';
       var username = response.name;
       FB.api('/me/picture', function(response) {
         var url = response.data['url'];
-        document.getElementById('status').innerHTML =
+        document.getElementById('status').innerHTML +=
         `
           <div>Thanks for loggin in, ${username}</div>
           <img src="${url}">
         `
       });
   });
+}
+function getName(){
+  FB.api(
+      "/me/",
+      function (response) {
+        if (response && !response.error) {
+          return response.name;
+        }
+      }
+  );
+}
+function getEmail(){
+  FB.api(
+      "/me/email",
+      function (response) {
+        if (response && !response.error) {
+          return response.email;
+        }
+      }
+  );
+}
+function getPicture(){
+  FB.api(
+      "/me/picture",
+      function (response) {
+        if (response && !response.error) {
+          return response.data['url'];
+        }
+      }
+  );
+}
+function getFriendList() {
+  FB.api('/me/friends',
+    function (response) {
+      if (response && !response.error) {
+        document.getElementById('status').innerHTML +="<div>Your friends:</div>";
+        for(let friend of response.data){
+          var name = friend['name'];
+          document.getElementById('status').innerHTML +=" "+name+" ";
+          console.log(name);
+        }
+          return response.data;
+      }
+    });
 }
