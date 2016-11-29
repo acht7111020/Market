@@ -5,7 +5,7 @@
 }
 
 #leftbar {
-  width: 15%;
+  width: 20%;
   overflow-y: scroll !important;
   display: block !important;
   padding: 0 !important;
@@ -14,11 +14,12 @@
   font-family: 'Coiny', cursive;
   font-family: 'Lato', sans-serif;
   font-family: 'Roboto', sans-serif;
+  background-color: transparent !important;
 }
 
 #mainArea {
-  width: 85%;
-  margin-left: 15%;
+  width: 80%;
+  margin-left: 20%;
 }
 
 #mainAreaBody > .signForm {

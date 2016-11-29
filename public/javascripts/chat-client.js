@@ -9,12 +9,12 @@ $(document).ready(function(){
   var openingChat = '';
   var friendsEmail;
   var oldMessages = {};
-  var titleNewMesssageFunction;
+  var titleNewMessageFunction;
 
   if (login == 'true'){
     $(window).focus(function(){
-      if (titleNewMesssageFunction){
-        clearInterval(titleNewMesssageFunction);
+      if (titleNewMessageFunction){
+        clearInterval(titleNewMessageFunction);
         $('title').html('Ballon');
       }
     });
@@ -68,7 +68,7 @@ $(document).ready(function(){
     });
 
     socket.on('new message', function(data){
-      titleNewMesssageFunction = setInterval(function(){ ChangeTitle() }, 1500);
+      titleNewMessageFunction = setInterval(function(){ ChangeTitle() }, 1500);
       if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
           socket.emit('message read', {friend: openingChat, self: myEmail});

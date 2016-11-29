@@ -9,6 +9,7 @@ function socket(server){
       socket.email = data;
       users[socket.email] = socket;
       console.log(`[${data}] entered.`);
+
       var aggregateQuery = Chat.aggregate([
           {$match: {read: false, toUser: socket.email}},
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
