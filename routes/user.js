@@ -8,7 +8,7 @@ var csrfProtection = csrf();
 
 router.use(csrfProtection);
 
-router.get('/profile', isLoggedIn, findFriends, function(req, res, next) {
+router.get('/profile', isLoggedIn, function(req, res, next) {
   res.render('index', {username: req.user.username, userEmail: req.user.email, friends: req.friends, title: "Ballon"});
 });
 
@@ -60,9 +60,19 @@ function findFriends(req, res, next) {
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    User.find(function(err, docs) {
+      if (err) res.redirect('/');
+      var index = docs.map(function(item) {
+        return item.username;
+      }).indexOf(req.user.username);
+      docs.splice(index, 1);
+      req.friends = docs;
+      return next();
+    });
   }
-  res.redirect('/');
+  else {
+    res.redirect('/');
+  }
 }
 
 function notLoggedIn(req, res, next) {
