@@ -8,14 +8,8 @@ var csrfProtection = csrf();
 
 router.use(csrfProtection);
 
-router.get('/profile', isLoggedIn,  function(req, res, next) {
-  User.find(function(err, docs) {
-    var index = docs.map(function(item) {
-      return item.username;
-    }).indexOf(req.user.username);
-    docs.splice(index, 1);
-    res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs, title: "Ballon"});
-  })
+router.get('/profile', isLoggedIn, findFriends, function(req, res, next) {
+  res.render('index', {username: req.user.username, userEmail: req.user.email, friends: req.friends, title: "Ballon"});
 });
 
 router.get('/logout', isLoggedIn, function(req, res, next){
@@ -25,7 +19,7 @@ router.get('/logout', isLoggedIn, function(req, res, next){
 
 router.use('/', notLoggedIn, function(req, res, next) {
   next();
-})
+});
 router.get('/signup', function(req, res, next) {
   var messages = req.flash('error');
   res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
@@ -51,6 +45,18 @@ router.post('/signin', passport.authenticate('local.signin', {
 }));
 
 module.exports = router;
+
+function findFriends(req, res, next) {
+  User.find(function(err, docs) {
+    if (err) res.redirect('/');
+    var index = docs.map(function(item) {
+      return item.username;
+    }).indexOf(req.user.username);
+    docs.splice(index, 1);
+    req.friends = docs;
+    return next();
+  });
+}
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

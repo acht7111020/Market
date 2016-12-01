@@ -3,25 +3,18 @@ var router = express.Router();
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
 
-router.get('/', isLoggedIn, function(req, res, next) {
-  User.find(function(userErr, userDocs) {
-    if (userErr) throw userErr;
-    var index = userDocs.map(function(item) {
-      return item.username;
-    }).indexOf(req.user.username);
-    userDocs.splice(index, 1);
-    var findQuery = Product.find();
-    findQuery.sort('position').exec(function(productErr, productDocs){
-      if(productErr) throw productErr;
-      res.render('store/store', {
-        username: req.user.username,
-        useremail: req.user.email,
-        friends: userDocs,
-        title: "Ballon",
-        products: productDocs
-      });
+router.get('/', isLoggedIn, findFriends, function(req, res, next) {
+  var findQuery = Product.find();
+  findQuery.sort('position').exec(function(productErr, productDocs){
+    if(productErr) throw productErr;
+    res.render('store/store', {
+      username: req.user.username,
+      userEmail: req.user.email,
+      friends: req.friends,
+      title: "Ballon",
+      products: productDocs
     });
-  })
+  });
 });
 
 router.get('/products', isLoggedIn, function(req, res, next) {
@@ -41,4 +34,14 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
-// function spliceUser()
+function findFriends(req, res, next) {
+  User.find(function(err, docs) {
+    if (err) res.redirect('/');
+    var index = docs.map(function(item) {
+      return item.username;
+    }).indexOf(req.user.username);
+    docs.splice(index, 1);
+    req.friends = docs;
+    return next();
+  });
+}

@@ -5,15 +5,9 @@ var User = require('../models/user-schema');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', findFriends, function(req, res, next) {
   if (req.user){
-    User.find(function(err, docs) {
-      var index = docs.map(function(item) {
-        return item.username;
-      }).indexOf(req.user.username);
-      docs.splice(index, 1);
-      res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs, title: "Ballon"});
-    });
+    res.render('index', {username: req.user.username, userEmail: req.user.email, friends: req.friends, title: "Ballon"});
   }
   else {
     res.render('index', {title: "Ballon"});
@@ -21,3 +15,15 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+function findFriends(req, res, next) {
+  User.find(function(err, docs) {
+    if (err) res.redirect('/');
+    var index = docs.map(function(item) {
+      return item.username;
+    }).indexOf(req.user.username);
+    docs.splice(index, 1);
+    req.friends = docs;
+    return next();
+  });
+}
