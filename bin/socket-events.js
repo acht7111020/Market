@@ -1,11 +1,23 @@
 function socket(server){
   var io = require('socket.io').listen(server);
+
+  var User = require('../models/user-schema');
   var Chat = require('../models/chat-schema');
   users = {};
 
   io.sockets.on('connection', function(socket){
 
     socket.on('new user', function(data, callback) {
+      User.find(function(err, docs) {
+        if(err) throw err;
+        var index = docs.map(function(item) {
+          return item.email;
+        }).indexOf(data);
+        docs.splice(index, 1);
+        console.log(docs);
+        socket.emit('load chat friends', docs);
+      });
+
       socket.email = data;
       users[socket.email] = socket;
       console.log(`[${data}] entered.`);
