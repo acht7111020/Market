@@ -9,12 +9,12 @@ $(document).ready(function(){
   var openingChat = '';
   var friendsEmail;
   var oldMessages = {};
-  var titleNewMesssageFunction;
+  var titleNewMessageFunction;
 
   if (login == 'true'){
     $(window).focus(function(){
-      if (titleNewMesssageFunction){
-        clearInterval(titleNewMesssageFunction);
+      if (titleNewMessageFunction){
+        clearInterval(titleNewMessageFunction);
         $('title').html('Ballon');
       }
     });
@@ -32,6 +32,34 @@ $(document).ready(function(){
       }
       else{
         openingChat = '';
+      }
+    });
+
+    socket.on('load chat friends', function(data) {
+      console.log(data);
+      for (var i = 0; i < data.length; i++){
+          $('#chatArea').append(
+            `<li class="chatBox">`+
+            `<div class="friendsEmail" style="display: none;">${data[i].email}</div>`+
+            `<div class="collapsible-header chatCollapsible">`+
+              `<i class="material-icons">perm_identity</i>${data[i].username}`+
+              `<span class="unreadMessages"></span>`+
+            `</div>`+
+            `<div class="collapsible-body">`+
+              `<div class="chatContent">`+
+              `</div>`+
+              `<form class="messageForm">`+
+                `<div class="inputField">`+
+                  `<input type="text" class="messageInput" placeholder="Input message..."/>`+
+                `</div>`+
+                `<button class="btn waves-effect waves-light sendBtn" type="submit">`+
+                  `Send`+
+                  `<i class="material-icons right">send</i>`+
+                `</button>`+
+              `</form>`+
+            `</div>`+
+          `</li>`
+        );
       }
     });
 
@@ -68,8 +96,7 @@ $(document).ready(function(){
     });
 
     socket.on('new message', function(data){
-      console.log($('title').html());
-      titleNewMesssageFunction = setInterval(function(){ ChangeTitle() }, 1500);
+      titleNewMessageFunction = setInterval(function(){ ChangeTitle() }, 1500);
       if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
           socket.emit('message read', {friend: openingChat, self: myEmail});
@@ -112,7 +139,6 @@ $(document).ready(function(){
 
     socket.on('someone is online or offline', function(data) {
       var index = GetIndex(data.email);
-      console.log(index, data.email);
       HighlightOnlineUser(index, data.online);
     });
   }
@@ -155,7 +181,6 @@ $(document).ready(function(){
   }
 
   function HighlightOnlineUser(index, online){
-    console.log(index);
     if (online){
       $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
     }

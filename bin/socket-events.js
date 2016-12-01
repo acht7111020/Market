@@ -1,20 +1,32 @@
 function socket(server){
   var io = require('socket.io').listen(server);
-  var Chat = require('../models/chatSchema');
+
+  var User = require('../models/user-schema');
+  var Chat = require('../models/chat-schema');
   users = {};
 
   io.sockets.on('connection', function(socket){
 
     socket.on('new user', function(data, callback) {
+      User.find(function(err, docs) {
+        if(err) throw err;
+        var index = docs.map(function(item) {
+          return item.email;
+        }).indexOf(data);
+        docs.splice(index, 1);
+        console.log(docs);
+        socket.emit('load chat friends', docs);
+      });
+
       socket.email = data;
       users[socket.email] = socket;
       console.log(`[${data}] entered.`);
+
       var aggregateQuery = Chat.aggregate([
           {$match: {read: false, toUser: socket.email}},
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
       ]);
       aggregateQuery.exec(function(err, docs){
-        console.log(docs);
         socket.emit('update unread status', docs);
       });
       for (var email in users){
