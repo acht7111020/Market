@@ -2,7 +2,7 @@
 <script type="text/javascript" src="/javascripts/store/store.js"></script>
 <div class="row">
   <div class="col s12 m4">
-    <div id="counter" class="card  #e0e0e0 grey lighten-2">
+    <div id="counter" class="card #e0e0e0 grey lighten-2">
 
     </div>
   </div>
@@ -11,6 +11,7 @@
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2" style="background-image: url('{{this.coverImagePath}}')">
+          <p class="productId" style="display: none;">{{this._id}}</p>
         </div>
         <div class="card-content #eeeeee grey lighten-3">
           <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>

@@ -1,45 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
-
-var upload = multer({dest: 'public/uploads/'});
 
 router.get('/', isLoggedIn, function(req, res, next) {
   var findQuery = Product.find();
   findQuery.sort('position').exec(function(productErr, productDocs){
     if(productErr) throw productErr;
-    res.render('store/store', {
-      username: req.user.username,
-      userEmail: req.user.email,
-      friends: req.friends,
-      title: "Ballon",
-      products: productDocs
-    });
+    req.renderValues.products = productDocs;
+    res.render('store/store', req.renderValues);
   });
 });
 
-router.post('/modify', upload.any(), function(req, res, next) {
-  res.redirect('/');
-});
-
-router.get('/product', isLoggedIn, function(req, res, next) {
-  res.render('store/product', {
-    username: req.user.username,
-    userEmail: req.user.email,
-    friends: req.friends,
-    title: "Ballon"
+router.get('/product/:id', isLoggedIn, function(req, res, next) {
+  Product.findOne({_id: req.params.id}, function(err, docs) {
+    if (err) throw err;
+    req.renderValues.product = docs;
+    res.render('store/product', req.renderValues);
   });
 });
 
 router.get('/modify', isLoggedIn, function(req, res, next) {
-  res.render('store/modify', {
-    username: req.user.username,
-    userEmail: req.user.email,
-    friends: req.friends,
-    title: "Ballon"
-  });
+  res.render('store/modify', req.renderValues);
 });
 
 module.exports = router;
@@ -52,7 +34,12 @@ function isLoggedIn(req, res, next) {
         return item.username;
       }).indexOf(req.user.username);
       docs.splice(index, 1);
-      req.friends = docs;
+      req.renderValues = {
+        title: "Ballon",
+        username: req.user.username,
+        userEmail: req.user.email,
+        friends: docs
+      };
       return next();
     });
   }
