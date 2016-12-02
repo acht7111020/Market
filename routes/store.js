@@ -25,7 +25,12 @@ router.post('/modify', upload.any(), function(req, res, next) {
 });
 
 router.get('/product', isLoggedIn, function(req, res, next) {
-  res.render('index');
+  res.render('store/product', {
+    username: req.user.username,
+    userEmail: req.user.email,
+    friends: req.friends,
+    title: "Ballon"
+  });
 });
 
 router.get('/modify', isLoggedIn, function(req, res, next) {
@@ -54,8 +59,4 @@ function isLoggedIn(req, res, next) {
   else {
     res.redirect('/');
   }
-}
-
-function findFriends(req, res, next) {
-
 }
