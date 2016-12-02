@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/javascripts/chat-client.js"></script>
 <div id="jqueryVars" style="display:none;">
   <p id="loginVar">{{login}}</p>
-  <p id="emailVar">{{useremail}}</p>
+  <p id="emailVar">{{userEmail}}</p>
 </div>
 
 <ul id="leftbar" class="side-nav fixed #eeeeee grey lighten-3">
@@ -20,7 +20,7 @@
         <div class="collapsible-header"><i class="material-icons">chat</i>Chat</div>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
-            <!-- {{# each friends}}
+            {{# each friends}}
               <li class="chatBox">
                 <div class="friendsEmail" style="display: none;">{{this.email}}</div>
                 <div class="collapsible-header chatCollapsible">
@@ -41,7 +41,7 @@
                   </form>
                 </div>
               </li>
-            {{/each}} -->
+            {{/each}}
           </ul>
         </div>
       </li>

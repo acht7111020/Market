@@ -1,3 +1,7 @@
+body {
+  font-family: 'PT Sans', sans-serif;
+}
+
 #topbar{
   padding-left: 20px;
   background-color: #336699;
@@ -11,9 +15,6 @@
   padding: 0 !important;
   margin-top: 3%;
   z-index: 0;
-  font-family: 'Coiny', cursive;
-  font-family: 'Lato', sans-serif;
-  font-family: 'Roboto', sans-serif;
   background-color: transparent !important;
 }
 
@@ -27,7 +28,7 @@
 }
 
 #mainArea > #mainAreaBody{
-  margin: 5% 10%;
+  margin: 2% 7%;
 }
 
 .signupBtn {

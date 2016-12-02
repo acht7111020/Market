@@ -2,43 +2,62 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
+var CartManager = require('../models/cart-manager');
 
 router.get('/', isLoggedIn, function(req, res, next) {
-  User.find(function(userErr, userDocs) {
-    if (userErr) throw userErr;
-    var index = userDocs.map(function(item) {
-      return item.username;
-    }).indexOf(req.user.username);
-    userDocs.splice(index, 1);
-    var findQuery = Product.find();
-    findQuery.sort('position').exec(function(productErr, productDocs){
-      if(productErr) throw productErr;
-      res.render('store/store', {
-        username: req.user.username,
-        useremail: req.user.email,
-        friends: userDocs,
-        title: "Ballon",
-        products: productDocs
-      });
-    });
-  })
+  var findQuery = Product.find();
+  findQuery.sort('position').exec(function(productErr, productDocs){
+    if(productErr) throw productErr;
+    req.renderValues.products = productDocs;
+    res.render('store/store', req.renderValues);
+  });
 });
 
-router.get('/products', isLoggedIn, function(req, res, next) {
-  res.render('index');
+router.get('/product/:id', isLoggedIn, function(req, res, next) {
+  Product.findById(req.params.id, function(err, docs) {
+    if (err) {
+      res.redirect('/');
+    };
+    req.renderValues.product = docs;
+    res.render('store/product', req.renderValues);
+  });
 });
 
-router.get('/product', isLoggedIn, function(req, res, next) {
-  res.render('store/product');
+router.get('/add-to-cart/:id', isLoggedIn, function(req, res, next) {
+  Product.findById(req.params.id, function(err, docs) {
+    if (err) {
+      res.redirect('/');
+    };
+    req.renderValues.product = docs;
+    var cartManager = new CartManager(req.renderValues.userEmail);
+    res.render('store/product', req.renderValues);
+  });
+});
+
+router.get('/modify', isLoggedIn, function(req, res, next) {
+  res.render('store/modify', req.renderValues);
 });
 
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    User.find(function(err, docs) {
+      if (err) res.redirect('/');
+      var index = docs.map(function(item) {
+        return item.username;
+      }).indexOf(req.user.username);
+      docs.splice(index, 1);
+      req.renderValues = {
+        title: "Ballon",
+        username: req.user.username,
+        userEmail: req.user.email,
+        friends: docs
+      };
+      return next();
+    });
   }
-  res.redirect('/');
+  else {
+    res.redirect('/');
+  }
 }
-
-// function spliceUser()
