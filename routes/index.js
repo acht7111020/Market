@@ -6,12 +6,7 @@ var User = require('../models/user-schema');
 
 /* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
-  if (req.user){
-    res.render('index', {username: req.user.username, userEmail: req.user.email, friends: req.friends, title: "Ballon"});
-  }
-  else {
-    res.render('index', {title: "Ballon"});
-  }
+  res.render('index', req.renderValues);
 });
 
 module.exports = router;
@@ -24,11 +19,16 @@ function isLoggedIn(req, res, next) {
         return item.username;
       }).indexOf(req.user.username);
       docs.splice(index, 1);
-      req.friends = docs;
+      req.renderValues = {
+        title: "Ballon",
+        username: req.user.username,
+        userEmail: req.user.email,
+        friends: docs
+      };
       return next();
     });
   }
-  else{
+  else {
     res.render('index', {title: "Ballon"});
   }
 }

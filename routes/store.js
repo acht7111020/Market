@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
+var CartManager = require('../models/cart-manager');
 
 router.get('/', isLoggedIn, function(req, res, next) {
   var findQuery = Product.find();
@@ -13,9 +14,22 @@ router.get('/', isLoggedIn, function(req, res, next) {
 });
 
 router.get('/product/:id', isLoggedIn, function(req, res, next) {
-  Product.findOne({_id: req.params.id}, function(err, docs) {
-    if (err) throw err;
+  Product.findById(req.params.id, function(err, docs) {
+    if (err) {
+      res.redirect('/');
+    };
     req.renderValues.product = docs;
+    res.render('store/product', req.renderValues);
+  });
+});
+
+router.get('/add-to-cart/:id', isLoggedIn, function(req, res, next) {
+  Product.findById(req.params.id, function(err, docs) {
+    if (err) {
+      res.redirect('/');
+    };
+    req.renderValues.product = docs;
+    var cartManager = new CartManager(req.renderValues.userEmail);
     res.render('store/product', req.renderValues);
   });
 });
