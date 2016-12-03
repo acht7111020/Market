@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
   userEmail: {type: String, required: true},
-  items: {type: Object, required: true},
+  items: {type: {}, required: true},
   totalQty: {type: Number, required: true},
   totalPrice: {type: Number, required: true}
 });
