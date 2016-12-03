@@ -1,6 +1,6 @@
 
 .fullpage{
-  width:85%;
+  width:84%;
   height: 100%;
   text-align:center;
   float:center;
@@ -13,11 +13,11 @@
 
 .block{
   text-align: center;
-  width: 90%;
+  width: 84%;
   height: 85%;
   /*margin-top: 2%;*/
-  margin-left: 5%;
-  margin-top: 2%;
+  /*margin-left: 5%;
+  margin-top: 2%;*/
   background-color: rgba(100, 250, 100, 0.1);
 
 }

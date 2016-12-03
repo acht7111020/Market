@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/stylesheets/order/cart.css">
+<div id="cartContent" class="grey lighten-3">
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th class="center">Price</th>
+        <th class="center">Quantity</th>
+        <th class="center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{# each cart.items}}
+        <tr>
+          <td class="pic-td"><div class="productPic" style="background-image: url('{{this.item.coverImagePath}}')"></div></td>
+          <td class="name-td"><h5>{{this.item.title}}</h5></td>
+          <td class="center price-td"><h5>${{this.item.price}}</h5></td>
+          <td class="center qty-td"><h5>{{this.qty}}</h5></td>
+          <td class="center total-td"><h5>${{this.price}}</h5></td>
+        </tr>
+      {{/ each}}
+    </tbody>
+  </table>
+  <a href="" class="waves-effect waves-light btn blue-grey" id="checkoutBtn">Checkout</a>
+</div>

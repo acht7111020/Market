@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user-schema');
-var Store = require('../models/store-schema');
-var expressHbs = require('express-handlebars');
+var Cart = require('../models/cart-schema');
 
-router.get('/', isLoggedIn, function(req, res, next) {
-  var findQuery = Store.find();
-  findQuery.sort('position').exec(function(storeErr, storeDocs) {
-    req.renderValues.stores = storeDocs;
-    res.render('index', req.renderValues);
+router.get('/cart', isLoggedIn, function(req, res, next) {
+  Cart.findOne({userEmail: req.renderValues.userEmail}, function(err, doc) {
+    if (err) throw err;
+    // console.log(req.renderValues.userEmail);
+    req.renderValues.cart = doc;
+    console.log(req.renderValues.cart);
+    res.render('order/cart', req.renderValues);
   });
 });
 
@@ -32,6 +33,6 @@ function isLoggedIn(req, res, next) {
     });
   }
   else {
-    res.render('index', {title: "Ballon"});
+    res.redirect('/');
   }
 }

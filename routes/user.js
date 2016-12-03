@@ -8,16 +8,6 @@ var csrfProtection = csrf();
 
 router.use(csrfProtection);
 
-router.get('/profile', isLoggedIn,  function(req, res, next) {
-  User.find(function(err, docs) {
-    var index = docs.map(function(item) {
-      return item.username;
-    }).indexOf(req.user.username);
-    docs.splice(index, 1);
-    res.render('index', {username: req.user.username, useremail: req.user.email, friends: docs, title: "Ballon"});
-  })
-});
-
 router.get('/logout', isLoggedIn, function(req, res, next){
   req.logout();
   res.redirect('/');
@@ -25,38 +15,64 @@ router.get('/logout', isLoggedIn, function(req, res, next){
 
 router.use('/', notLoggedIn, function(req, res, next) {
   next();
-})
+});
+
 router.get('/signup', function(req, res, next) {
   var messages = req.flash('error');
   res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
-  successRedirect: '/user/profile',
+  successRedirect: '/',
   failureRedirect: '/user/signup',
   failureFlash: true
 }));
-
 
 router.get('/signin', function(req, res, next) {
   var messages = req.flash('error');
   res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
 });
 
-
 router.post('/signin', passport.authenticate('local.signin', {
-  successRedirect: '/user/profile',
+  successRedirect: '/',
   failureRedirect: '/user/signin',
   failureFlash: true
 }));
 
 module.exports = router;
 
+function findFriends(req, res, next) {
+  User.find(function(err, docs) {
+    if (err) res.redirect('/');
+    var index = docs.map(function(item) {
+      return item.username;
+    }).indexOf(req.user.username);
+    docs.splice(index, 1);
+    req.friends = docs;
+    return next();
+  });
+}
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    User.find(function(err, docs) {
+      if (err) res.redirect('/');
+      var index = docs.map(function(item) {
+        return item.username;
+      }).indexOf(req.user.username);
+      docs.splice(index, 1);
+      req.renderValues = {
+        title: "Ballon",
+        username: req.user.username,
+        userEmail: req.user.email,
+        friends: docs
+      };
+      return next();
+    });
   }
-  res.redirect('/');
+  else {
+    res.redirect('/');
+  }
 }
 
 function notLoggedIn(req, res, next) {

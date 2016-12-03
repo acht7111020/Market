@@ -1,0 +1,52 @@
+#cartContent {
+  padding: 50px 20px 80px 20px;
+}
+
+tr{
+  height: 10vmin;
+}
+
+th {
+  color: #8E8E8E;
+}
+
+.productPic {
+  width: 100%;
+  height: 10vmin;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pic-td {
+  width: 20%;
+}
+
+.name-td {
+  width: 50%;
+}
+
+.qty-td {
+  width: 10%;
+}
+
+.price-td {
+  width: 10%;
+}
+
+.total-td {
+  width: 10%;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+table {
+  margin-bottom: 30px;
+}
+
+#checkoutBtn {
+  float: right;
+  /*margin: 30px 0;*/
+}
