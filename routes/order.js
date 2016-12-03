@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user-schema');
+var Cart = require('../models/cart-schema');
 
 router.get('/cart', isLoggedIn, function(req, res, next) {
-  res.render('order/cart', req.renderValues);
+  Cart.findOne({userEmail: req.renderValues.userEmail}, function(err, doc) {
+    if (err) throw err;
+    // console.log(req.renderValues.userEmail);
+    req.renderValues.cart = doc;
+    console.log(req.renderValues.cart);
+    res.render('order/cart', req.renderValues);
+  });
 });
 
 module.exports = router;
