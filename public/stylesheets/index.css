@@ -1,4 +1,6 @@
-
+#mainAreaBody{
+  background-color: rgba(255, 100, 100, 0.1);
+}
 .fullpage{
   width:84%;
   height: 100%;
@@ -8,7 +10,7 @@
   position:fixed;
   /*top:10%;
   left:15%;*/
-  background-color: rgba(255, 100, 100, 0.1);
+  /*background-color: rgba(255, 100, 100, 0.1);*/
 }
 
 .block{
@@ -23,9 +25,10 @@
 }
 
 .indexStore{
-  width:15%;
+
+  width:13%;
   height: 0;
-  padding-bottom: 15%;
+  padding-bottom: 13%;
   background-color: white;
   background-size: contain;
   background-repeat: no-repeat;
@@ -34,6 +37,8 @@
   border-radius:50%;
   position:absolute;
   margin: inherit;
+  margin-left: 0.5%;
+  margin-top: 0.5%;
   box-shadow:5px 5px 5px #aaa;
   transition: all, 3s;
 }
@@ -48,8 +53,8 @@
 .highlight{
   width:70%;
   height:25%;
-  top:32.5%;
-  left:13%;
+  top:29%;
+  left:5%;
   z-index:2;
   position:absolute;
   border-radius:10px;
