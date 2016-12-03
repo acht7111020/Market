@@ -2,10 +2,8 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user-schema');
 
-
-/* GET home page. */
-router.get('/', isLoggedIn, function(req, res, next) {
-  res.render('index', req.renderValues);
+router.get('/cart', isLoggedIn, function(req, res, next) {
+  res.render('order/cart', req.renderValues);
 });
 
 module.exports = router;
@@ -28,6 +26,6 @@ function isLoggedIn(req, res, next) {
     });
   }
   else {
-    res.render('index', {title: "Ballon"});
+    res.redirect('/');
   }
 }

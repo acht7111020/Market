@@ -14,23 +14,24 @@ router.get('/', isLoggedIn, function(req, res, next) {
 });
 
 router.get('/product/:id', isLoggedIn, function(req, res, next) {
-  Product.findById(req.params.id, function(err, docs) {
+  Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
     };
-    req.renderValues.product = docs;
+    req.renderValues.product = doc;
     res.render('store/product', req.renderValues);
   });
 });
 
 router.get('/add-to-cart/:id', isLoggedIn, function(req, res, next) {
-  Product.findById(req.params.id, function(err, docs) {
+  Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
     };
-    req.renderValues.product = docs;
+    req.renderValues.product = doc;
     var cartManager = new CartManager(req.renderValues.userEmail);
-    res.render('store/product', req.renderValues);
+    cartManager.add(doc);
+    res.redirect(`/store/product/${req.params.id}`);
   });
 });
 
