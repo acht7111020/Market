@@ -8,15 +8,15 @@
     {{# each stores}}
       {{#if this.available }}
       <div class="indexStore" style="background-image: url('{{this.coverImagePath}}')"
-      data-indexval={{@index}} data-content={{this.contentImagePath}}>
+      data-indexval={{@index}} data-content={{this.contentImagePath}} data-link={{this.detailedPath}}>
       </div>
       {{else}}
       <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"
-      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg" data-link="">
       </div>
       {{/if}}
     {{/each}}
-    <div class="highlight">
+    <div class="highlight" data-link="">
 
     </div>
   </div>

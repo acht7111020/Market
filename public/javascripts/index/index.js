@@ -21,12 +21,19 @@ $(document).ready(function(){
       img += `<img src=${images[i]}>`
     }
     $(".highlight").html(img);
+    $('.highlight').data('link', $($(this).context).data('link'));
     CircleMove(level, highlight_index);
     var div = $(".highlight");
     var left_start = (getLeftStart(level) - 18).toString() + '%';
     var top_start = (level > 2)? topping_parameters: '0%';
     div.css({left: left_start, top:top_start,  opacity: '0.1'});
     div.animate({top: highlight_top, left:highlight_left,  opacity: '1.0'}, 1000);
+
+  });
+
+  $(".highlight").click(function(evt){
+    var paths = $($(this).context).data('link');
+    window.location = paths;
 
   });
 
@@ -62,6 +69,8 @@ function setHighLightImage(tmpItem){
     img += `<img src=${images[i]}>`
   }
   $(".highlight").html(img);
+  //$(".highlight").data('link') = $($(tmpItem).context).data('link');
+  $('.highlight').data('link', $($(tmpItem).context).data('link'));
 }
 
 function GetLevel(left, top){
