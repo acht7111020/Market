@@ -1,5 +1,5 @@
 var center_left = '35%', center_top = '32.5%';
-var highlight_left = '13%', highlight_top = '32.5%';
+var highlight_left = '5%', highlight_top = '29%';
 var topping_parameters = '60%', leftting_parameters = 35;
 var highlight_index = 6;
 
