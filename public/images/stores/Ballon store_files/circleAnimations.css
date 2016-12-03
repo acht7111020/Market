@@ -1,0 +1,37 @@
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes circle0 {
+    0%   {background-color:red; left:0px; top:0px;}
+    33%  {background-color:yellow; left:70%; top:0px;}
+    50%  {background-color:blue; left:70%; top:70%;}
+    88%  {background-color:green; left:0px; top:70%;}
+    100% {background-color:red; left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes circle0 {
+  0%   {left:0px; top:0px;}
+  17%  {left:35%; top:0px;}
+  35%  {left:70%; top:0px;}
+  50%  {left:70%; top:70%;}
+  67%  {left:35%; top:70%;}
+  85%  {left:0px; top:70%;}
+  100% {left:0px; top:0px;}
+}
+@keyframes circle1{
+  0%   {left:0%; top:0%;}
+  17%  {left:35%; top:0px;}
+  32%  {left:35%; top:70%;}
+  50%  {left:0%; top:70%;}
+  67%  {left:-35%; top:70%;}
+  83% {left:-35%; top:0%;}
+  100% {left:0%; top:0%;}
+}
+@keyframes circle2 {
+  0%    {left:0%; top:0%;}
+  15%  {left:0%; top:70%;}
+  32%  {left:-35%; top:70%;}
+  50%  {left:-70%; top:70%;}
+  65%  {left:-70%; top:0%;}
+  83%  {left:-35%; top:0%;}
+  100%  {left:0%; top:0%;}
+}

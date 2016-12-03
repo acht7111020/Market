@@ -1,6 +1,5 @@
 <link rel='stylesheet' href='/stylesheets/index.css' />
-<script type="text/javascript" src="/javascripts/index/index.js"></script>
-
+<script type="text/javascript" src="/javascripts/purchase/purchase.js"></script>
 <div class="fullpage">
   <div class="block">
     {{# each stores}}
@@ -11,11 +10,13 @@
       {{else}}
       <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"
       data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.sellPrice}} </label>
+      <button class="waves-effect waves-light btn testclass" onclick="purchase('{{this._id}}')">purchase!</button>
       </div>
       {{/if}}
     {{/each}}
-    <div class="highlight">
-      
-    </div>
+    <!--div class="highlight">
+      <img src="/images/stores/puma-1.jpg"><img src="/images/stores/puma-2.jpg">
+    </div-->
   </div>
 </div>
