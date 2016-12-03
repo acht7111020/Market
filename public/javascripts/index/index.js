@@ -23,7 +23,7 @@ $(document).ready(function(){
     $(".highlight").html(img);
     CircleMove(level, highlight_index);
     var div = $(".highlight");
-    var left_start = getLeftStart(level);
+    var left_start = (getLeftStart(level) - 18).toString() + '%';
     var top_start = (level > 2)? topping_parameters: '0%';
     div.css({left: left_start, top:top_start,  opacity: '0.1'});
     div.animate({top: highlight_top, left:highlight_left,  opacity: '1.0'}, 1000);
@@ -47,7 +47,7 @@ function CircleMove(pre_index, highlight_index){
 
     level += 1;
     if(level > 5) level = 5;
-    var left_start = getLeftStart(level);
+    var left_start = getLeftStart(level).toString() + '%';
     var top_start = (level > 2)? topping_parameters: '0%';
     $($(".indexStore")[i]).css({left: left_start, top:top_start});
   }
@@ -82,8 +82,8 @@ function GetLevel(left, top){
 
 function getLeftStart(level){
   if(level > 2)
-    var left_start = leftting_parameters*(2-level%3).toString() + '%';
+    var left_start = leftting_parameters*(2-level%3);
   else
-    var left_start = leftting_parameters*(level%3).toString() + '%';
+    var left_start = leftting_parameters*(level%3);
   return left_start;
 }
