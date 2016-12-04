@@ -33,7 +33,8 @@ $(document).ready(function(){
 
   $(".highlight").click(function(evt){
     var paths = $($(this).context).data('link');
-    window.location = paths;
+    // console.log(paths);
+    window.location = `/store/${paths}`;
 
   });
 

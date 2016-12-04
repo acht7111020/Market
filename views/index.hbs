@@ -8,7 +8,7 @@
     {{# each stores}}
       {{#if this.available }}
       <div class="indexStore" style="background-image: url('{{this.coverImagePath}}')"
-      data-indexval={{@index}} data-content={{this.contentImagePath}} data-link={{this.detailedPath}}>
+      data-indexval={{@index}} data-content={{this.contentImagePath}} data-link={{this._id}}>
       </div>
       {{else}}
       <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"

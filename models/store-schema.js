@@ -9,7 +9,8 @@ var schema = new Schema({
   coverImagePath: {type: String, required: true},
   contentImagePath: {type: [String], required: true},
   detailedPath: {type: String, required: true},
-  position: {type: Number, required: true}
+  position: {type: Number, required: true},
+  products: Object
 });
 
 module.exports = mongoose.model('Store', schema);

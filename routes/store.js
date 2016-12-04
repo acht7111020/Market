@@ -4,11 +4,12 @@ var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
 var CartManager = require('../models/cart-manager');
 
-router.get('/', isLoggedIn, function(req, res, next) {
-  var findQuery = Product.find();
-  findQuery.sort('position').exec(function(productErr, productDocs){
+router.get('/:id', isLoggedIn, function(req, res, next) {
+  var findProductQuery = Product.find();
+  findProductQuery.sort('position').exec(function(productErr, productDocs){
     if(productErr) throw productErr;
     req.renderValues.products = productDocs;
+    req.renderValues.storeID = req.params.id;
     res.render('store/store', req.renderValues);
   });
 });
@@ -23,7 +24,7 @@ router.get('/product/:id', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/add-to-cart/:id', isLoggedIn, function(req, res, next) {
+router.get('/product/add-to-cart/:id', isLoggedIn, function(req, res, next) {
   Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
@@ -35,7 +36,7 @@ router.get('/add-to-cart/:id', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/modify', isLoggedIn, function(req, res, next) {
+router.get('/add-product/:storeID', isLoggedIn, function(req, res, next) {
   res.render('store/modify', req.renderValues);
 });
 
