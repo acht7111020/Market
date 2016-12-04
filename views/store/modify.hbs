@@ -1,26 +1,71 @@
+<link rel="stylesheet" href="/stylesheets/store/modify.css">
+<script type="text/javascript" src="/javascripts/store/modify.js"></script>
 <div class="row">
   <h4>Add new product</h4>
-  <form class="col s8">
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="title" type="text">
-        <label for="title">Add product's title</label>
+  <form>
+    <div class="col s8">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="title" type="text">
+          <label for="title">Add product's title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="price" type="text">
+          <label for="price">Add product's price</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="discription" class="materialize-textarea"></textarea>
+          <label for="discription">Add some discription about the product</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="grey lighten-2 uploadPic" id="mainPic">
+            <div id="mainPicAction" class="picContent">
+              <i class="material-icons actionItems" id="photoIcon">photo</i>
+              <h5 class="actionItems">Upload a photo</h5>
+              <p class="actionItems" id="annotation">(At least 1 and 5 max)</p>
+              <input type="file" id="mainFile" class="fileUpload" style="display: none;" />
+              <a id="chooseBtn" class="waves-effect waves-light btn grey lighten-3" onclick="document.getElementById('mainFile').click();">
+                Choose a file
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s3 m3">
+          <input type="file" id="minorFile1" class="fileUpload" style="display: none;" />
+          <div class="minorPic hoverable uploadPic" id="minorPic1" onclick="document.getElementById('minorFile1').click();">
+            <i class="material-icons center-align plusIcon picContent">add</i>
+          </div>
+        </div>
+        <div class="col s3 m3">
+          <input type="file" id="minorFile2" class="fileUpload" style="display: none;" />
+          <div class="minorPic hoverable uploadPic" id="minorPic2" onclick="document.getElementById('minorFile2').click();">
+            <i class="material-icons center-align plusIcon picContent">add</i>
+          </div>
+        </div>
+        <div class="col s3 m3">
+          <input type="file" id="minorFile3" class="fileUpload" style="display: none;" />
+          <div class="minorPic hoverable uploadPic" id="minorPic3" onclick="document.getElementById('minorFile3').click();">
+            <i class="material-icons center-align plusIcon picContent">add</i>
+          </div>
+        </div>
+        <div class="col s3 m3">
+          <input type="file" id="minorFile4" class="fileUpload" style="display: none;" />
+          <div class="minorPic hoverable uploadPic" id="minorPic4" onclick="document.getElementById('minorFile4').click();">
+            <i class="material-icons center-align plusIcon picContent">add</i>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="price" type="text">
-        <label for="price">Add product's price</label>
-      </div>
-    </div>
-    <div class="input-field col s12">
-      <textarea id="discription" class="materialize-textarea"></textarea>
-      <label for="discription">Add some discription about the product</label>
+    <div class="col s4">
+      <button class="btn-large waves-effect waves-light blue-grey right" type="submit" name="action">Save</button>
     </div>
   </form>
 </div>
-
-<form class="" action="modify" method="post">
-  <input type="file" name="myImage" />
-  <input type="submit" name="submit" value="submit">
-</form>

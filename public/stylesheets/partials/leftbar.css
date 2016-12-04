@@ -110,3 +110,7 @@
 .sendBtn{
   display: none;
 }
+
+#chooseBtn {
+  color: #6C6C6C;
+}

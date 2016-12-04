@@ -1,0 +1,40 @@
+#mainPic {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#mainPicAction {
+  padding: 8% 30%;
+}
+
+#photoIcon {
+  font-size: 100px;
+}
+
+.actionItems {
+  text-align: center;
+  display: block;
+}
+
+#annotation {
+  color: #BEBEBE;
+}
+
+#chooseBtn {
+  display: block;
+}
+
+.minorPic {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.plusIcon {
+  text-align: center;
+  display: block;
+  border: solid 1px #bdbdbd;
+  color: #bdbdbd;
+  cursor: pointer;
+}
