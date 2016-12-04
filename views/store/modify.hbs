@@ -2,24 +2,24 @@
 <script type="text/javascript" src="/javascripts/store/modify.js"></script>
 <div class="row">
   <h4>Add new product</h4>
-  <form>
+  <form method="post" enctype="multipart/form-data">
     <div class="col s8">
       <div class="row">
         <div class="input-field col s12">
-          <input id="title" type="text">
-          <label for="title">Add product's title</label>
+          <input id="title" type="text" name="title">
+          <label for="title">Title</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="price" type="text">
-          <label for="price">Add product's price</label>
+          <input id="price" type="text" name="price">
+          <label for="price">Price</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="discription" class="materialize-textarea"></textarea>
-          <label for="discription">Add some discription about the product</label>
+          <textarea id="discription" class="materialize-textarea" name="discription"></textarea>
+          <label for="discription">Discription about the product</label>
         </div>
       </div>
       <div class="row">
@@ -29,7 +29,7 @@
               <i class="material-icons actionItems" id="photoIcon">photo</i>
               <h5 class="actionItems">Upload a photo</h5>
               <p class="actionItems" id="annotation">(At least 1 and 5 max)</p>
-              <input type="file" id="mainFile" class="fileUpload" style="display: none;" />
+              <input type="file" id="mainFile" class="fileUpload" style="display: none;" name="photos"/>
               <a id="chooseBtn" class="waves-effect waves-light btn grey lighten-3" onclick="document.getElementById('mainFile').click();">
                 Choose a file
               </a>
@@ -39,25 +39,25 @@
       </div>
       <div class="row">
         <div class="col s3 m3">
-          <input type="file" id="minorFile1" class="fileUpload" style="display: none;" />
+          <input type="file" id="minorFile1" class="fileUpload" style="display: none;" name="photos"/>
           <div class="minorPic hoverable uploadPic" id="minorPic1" onclick="document.getElementById('minorFile1').click();">
             <i class="material-icons center-align plusIcon picContent">add</i>
           </div>
         </div>
         <div class="col s3 m3">
-          <input type="file" id="minorFile2" class="fileUpload" style="display: none;" />
+          <input type="file" id="minorFile2" class="fileUpload" style="display: none;" name="photos"/>
           <div class="minorPic hoverable uploadPic" id="minorPic2" onclick="document.getElementById('minorFile2').click();">
             <i class="material-icons center-align plusIcon picContent">add</i>
           </div>
         </div>
         <div class="col s3 m3">
-          <input type="file" id="minorFile3" class="fileUpload" style="display: none;" />
+          <input type="file" id="minorFile3" class="fileUpload" style="display: none;" name="photos"/>
           <div class="minorPic hoverable uploadPic" id="minorPic3" onclick="document.getElementById('minorFile3').click();">
             <i class="material-icons center-align plusIcon picContent">add</i>
           </div>
         </div>
         <div class="col s3 m3">
-          <input type="file" id="minorFile4" class="fileUpload" style="display: none;" />
+          <input type="file" id="minorFile4" class="fileUpload" style="display: none;" name="photos"/>
           <div class="minorPic hoverable uploadPic" id="minorPic4" onclick="document.getElementById('minorFile4').click();">
             <i class="material-icons center-align plusIcon picContent">add</i>
           </div>
