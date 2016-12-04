@@ -5,7 +5,7 @@ var User = require('../models/user-schema');
 var Store = require('../models/store-schema');
 var PurchaseManager = require('../models/purchase-manager');
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
   if (req.user){
     User.find(function(err, docs) {
       var index = docs.map(function(item) {
@@ -15,14 +15,8 @@ router.get('/', function(req, res, next) {
       var findQuery = Store.find();
       findQuery.sort('position').exec(function(storeErr, storeDocs){
         if(storeErr) throw storeErr;
-        console.log(storeDocs);
-        res.render('purchase/purchase', {
-          username: req.user.username,
-          useremail: req.user.email,
-          friends: docs,
-          title: "Ballon store purchase",
-          stores: storeDocs
-        });
+        req.renderValues.stores = storeDocs;
+        res.render('purchase/purchase', req.renderValues);
       });
     });
   }

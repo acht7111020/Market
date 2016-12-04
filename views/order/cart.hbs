@@ -20,6 +20,13 @@
           <td class="center total-td"><h5>${{this.price}}</h5></td>
         </tr>
       {{/ each}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="center"><h5>Total</h5></td>
+        <td class="center"><h5>{{cart.totalQty}}</h5></td>
+        <td class="center"><h5>${{cart.totalPrice}}</h5></td>
+      </tr>
     </tbody>
   </table>
   <a href="" class="waves-effect waves-light btn blue-grey" id="checkoutBtn">Checkout</a>
