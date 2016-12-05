@@ -1,8 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'public/uploads');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+var upload = multer({ storage: storage});
+
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
 var CartManager = require('../models/cart-manager');
+var ModifyProduct = require('../models/modify-product');
 
 router.get('/:id', isLoggedIn, function(req, res, next) {
   var findProductQuery = Product.find();
@@ -38,6 +50,12 @@ router.get('/product/add-to-cart/:id', isLoggedIn, function(req, res, next) {
 
 router.get('/add-product/:storeID', isLoggedIn, function(req, res, next) {
   res.render('store/modify', req.renderValues);
+});
+
+router.post('/add-product/:storeID', isLoggedIn, upload.array('photos', 5), function(req, res, next) {
+  var modifyProduct = new ModifyProduct();
+  modifyProduct.add(req.body, req.files, req.params.storeID, '');
+  res.redirect(`/store/${req.params.storeID}`);
 });
 
 module.exports = router;
