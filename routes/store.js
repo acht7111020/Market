@@ -17,12 +17,16 @@ var CartManager = require('../models/cart-manager');
 var ModifyProduct = require('../models/modify-product');
 
 router.get('/:id', isLoggedIn, function(req, res, next) {
-  var findProductQuery = Product.find();
+  var findProductQuery = Product.find({ownerStore: req.params.id});
   findProductQuery.sort('position').exec(function(productErr, productDocs){
-    if(productErr) throw productErr;
-    req.renderValues.products = productDocs;
-    req.renderValues.storeID = req.params.id;
-    res.render('store/store', req.renderValues);
+    if(productErr) {
+      res.redirect('/');
+    }
+    else {
+      req.renderValues.products = productDocs;
+      req.renderValues.storeID = req.params.id;
+      res.render('store/store', req.renderValues);
+    }
   });
 });
 
@@ -30,9 +34,11 @@ router.get('/product/:id', isLoggedIn, function(req, res, next) {
   Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
-    };
-    req.renderValues.product = doc;
-    res.render('store/product', req.renderValues);
+    }
+    else {
+      req.renderValues.product = doc;
+      res.render('store/product', req.renderValues);
+    }
   });
 });
 
@@ -54,8 +60,25 @@ router.get('/add-product/:storeID', isLoggedIn, function(req, res, next) {
 
 router.post('/add-product/:storeID', isLoggedIn, upload.array('photos', 5), function(req, res, next) {
   var modifyProduct = new ModifyProduct();
-  modifyProduct.add(req.body, req.files, req.params.storeID, '');
+  modifyProduct.modify(req.body, req.files, req.params.storeID, '');
   res.redirect(`/store/${req.params.storeID}`);
+});
+
+router.get('/modify-product/:productID', isLoggedIn, function(req, res) {
+  Product.findById(req.params.productID, function(err, doc) {
+    if (err) {
+      res.redirect('/');
+    }
+    else {
+      req.renderValues.product = doc;
+      res.render('store/modify', req.renderValues);
+    }
+  });
+});
+
+router.post('/modify-product/:productID', isLoggedIn, function(req, res) {
+  var modifyProduct = new ModifyProduct();
+  modifyProduct.modify(req.body, req.files, '', req.params.productID);
 });
 
 module.exports = router;
