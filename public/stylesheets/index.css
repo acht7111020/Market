@@ -25,7 +25,7 @@
 }
 
 .indexStore{
-
+  cursor: pointer;
   width:13%;
   height: 0;
   padding-bottom: 13%;
@@ -51,6 +51,7 @@
 }
 
 .highlight{
+  cursor: pointer;
   width:70%;
   height:25%;
   top:29%;
