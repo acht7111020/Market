@@ -60,7 +60,7 @@ router.get('/add-product/:storeID', isLoggedIn, function(req, res, next) {
 
 router.post('/add-product/:storeID', isLoggedIn, upload.array('photos', 5), function(req, res, next) {
   var modifyProduct = new ModifyProduct();
-  modifyProduct.modify(req.body, req.files, req.params.storeID, '');
+  modifyProduct.add(req.body, req.files, req.params.storeID);
   res.redirect(`/store/${req.params.storeID}`);
 });
 
@@ -76,9 +76,18 @@ router.get('/modify-product/:productID', isLoggedIn, function(req, res) {
   });
 });
 
-router.post('/modify-product/:productID', isLoggedIn, function(req, res) {
+router.post('/modify-product/:productID', isLoggedIn, upload.array('photos', 5), function(req, res) {
   var modifyProduct = new ModifyProduct();
-  modifyProduct.modify(req.body, req.files, '', req.params.productID);
+  var storeID = modifyProduct.modify(req.body, req.files, req.params.productID);
+  Product.findById(req.params.productID, function(err, doc) {
+    if (err) {
+      res.redirect('/');
+    }
+    else {
+      res.redirect(`/store/${doc.ownerStore}`);
+    }
+  })
+  // res.redirect
 });
 
 module.exports = router;

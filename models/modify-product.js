@@ -1,30 +1,38 @@
 module.exports = function ModifyProduct() {
   var Product = require('./product-schema');
 
-  this.modify = function(body, files, storeID, productID) {
-    var picPaths = files.map(function(item) {return item.path;});
-    console.log(body.description);
+  this.add = function(body, files, storeID) {
+    var uploadPathPrefix = '/uploads/';
+    var newProduct = new Product({
+      title: body.title,
+      coverImagePath: uploadPathPrefix + files[0].filename,
+      contentImagePath: files.map(function(item) {return uploadPathPrefix + item.filename;}),
+      price: body.price,
+      description: body.description,
+      ownerStore: storeID
+    });
+    newProduct.save(function(err, updatedProduct) {
+      if (err) throw err;
+      console.log(updatedProduct);
+    });
+  };
+
+  this.modify = function(body, files, productID) {
     Product.findById(productID, function(err, product) {
-      var imagePathPrefix = '/images/products/';
       var uploadPathPrefix = '/uploads/';
-      var newProduct = {
-        title: body.title,
-        coverImagePath: uploadPathPrefix + files[0].filename,
-        contentImagePath: files.map(function(item) {return uploadPathPrefix + item.filename;}),
-        price: body.price,
-        description: body.description,
-        ownerStore: storeID
-      };
-      if (!product) {
-        product = new Product(newProduct);
+      var picPaths = product.contentImagePath;
+      if (files.length > 0){
+        picPaths = picPaths.concat(files.map(function(item) {return uploadPathPrefix + item.filename}));
       }
-      else{
-        product = newProduct;
-      }
+      product.title = body.title;
+      product.coverImagePath = picPaths[0];
+      product.contentImagePath = picPaths;
+      product.price = body.price;
+      product.description = body.description;
       product.save(function(err, updatedProduct) {
         if (err) throw err;
         console.log(updatedProduct);
       });
     });
-  }
+  };
 };
