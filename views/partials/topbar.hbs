@@ -1,6 +1,5 @@
 <link rel='stylesheet' href='/stylesheets/partials/topbar.css' />
 <script type="text/javascript" src="/javascripts/topbar.js"></script>
-<!--<script type="text/javascript" src="/javascripts/facebook.js"></script>-->
 <!-- dropdown -->
 <ul id="dropdown1" class="dropdown-content">
   {{# if login}}
@@ -8,6 +7,9 @@
   {{ else}}
     <li><a href="/user/signin">Sign in</a></li>
     <li><a href="/user/signup">Sign up</a></li>
+    <li>
+      <fb:login-button  data-size="icon" scope="public_profile,email,user_friends" onlogin="checkLoginState();" data-auto-logout-link="true"></fb:login-button>
+    </li>
   {{/if}}
 </ul>
 <!-- /dropdown -->
