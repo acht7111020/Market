@@ -98,18 +98,19 @@ passport.use(new FacebookStrategy({
           return done(null, user);
         }
         else {
-          // console.log(profile);
           var newUser = new User();
           newUser.facebook.id = profile.id;
           newUser.facebook.token = accessToken;
           newUser.facebook.name = profile.displayName;
           newUser.facebook.profilePic = profile.photos[0].value;
           newUser.facebook.email = profile.emails[0].value;
+          newUser.facebook.friends = profile._json.friends.data;
 
           newUser.save(function(err) {
             if (err) {
               throw err;
             }
+            console.log(newUser.facebook.friends);
             return done(null, newUser);
           })
         }

@@ -8,7 +8,8 @@ var schema = new Schema({
     token: String,
     email: String,
     name: String,
-    profilePic: String
+    profilePic: String,
+    friends: []
   }
 });
 

@@ -5,9 +5,9 @@ $(document).ready(function(){
   var $chat;
   var $jqueryVars = $('#jqueryVars');
   var login = $jqueryVars.find('#loginVar').html();
-  var myEmail = $jqueryVars.find('#emailVar').html();
+  var myId = $jqueryVars.find('#idVar').html();
   var openingChat = '';
-  var friendsEmail;
+  var friendsId;
   var oldMessages = {};
   var titleNewMessageFunction;
 
@@ -18,17 +18,17 @@ $(document).ready(function(){
         $('title').html('Ballon');
       }
     });
-    socket.emit('new user', myEmail);
+    socket.emit('new user', myId);
 
     $('.chatCollapsible').click(function(e){
       var index = $(".chatCollapsible").index(this);
-      friendsEmail = $(".friendsEmail").eq(index).html();
+      friendsId = $(".friendsId").eq(index).html();
       $chat = $('.chatContent').eq(index);
       e.preventDefault();
-      if (openingChat != friendsEmail){
+      if (openingChat != friendsId){
         UpdateReadStat(index, 0);
-        socket.emit('open chat box', {friend: friendsEmail, self: myEmail});
-        openingChat = friendsEmail;
+        socket.emit('open chat box', {friend: friendsId, self: myId});
+        openingChat = friendsId;
       }
       else{
         openingChat = '';
@@ -43,7 +43,7 @@ $(document).ready(function(){
     function LoadOldMsg(){
       $chat.html('');
       for (var i = oldMessages[openingChat].history.length - 1; i >= 0; i--){
-        if (oldMessages[openingChat].history[i].fromUser == myEmail){
+        if (oldMessages[openingChat].history[i].fromUser == myId){
           if (oldMessages[openingChat].history[i].read){
             DisplayMsg(oldMessages[openingChat].history[i].msg, 'fromSelfRead');
           }
@@ -61,7 +61,7 @@ $(document).ready(function(){
       e.preventDefault();
       var index = $(".messageForm").index(this);
       $messageInput = $('.messageInput').eq(index);
-      socket.emit('send message', {content: $messageInput.val(), target: openingChat, origin: myEmail});
+      socket.emit('send message', {content: $messageInput.val(), target: openingChat, origin: myId});
       $chat.append(`<p class="messageText fromSelfUnread">${$messageInput.val()}</p>`);
       $chat.scrollTop($chat[0].scrollHeight);
       $messageInput.val('');
@@ -71,7 +71,7 @@ $(document).ready(function(){
       titleNewMessageFunction = setInterval(function(){ ChangeTitle() }, 1500);
       if(data.origin == openingChat){
           DisplayMsg(data.msg, 'fromOther');
-          socket.emit('message read', {friend: openingChat, self: myEmail});
+          socket.emit('message read', {friend: openingChat, self: myId});
       }
       else {
         var index = GetIndex(data.origin);
@@ -102,7 +102,7 @@ $(document).ready(function(){
 
     socket.on('highlight online user', function(data) {
       for(var i = 0; i < data.length; i++){
-        if (data[i] != myEmail){
+        if (data[i] != myId){
             var index = GetIndex(data[i]);
             HighlightOnlineUser(index, true);
         }

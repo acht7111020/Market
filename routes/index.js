@@ -16,20 +16,26 @@ module.exports = router;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    User.find(function(err, docs) {
-      if (err) res.redirect('/');
-      var index = docs.map(function(item) {
-        return item.username;
-      }).indexOf(req.user.username);
-      docs.splice(index, 1);
-      req.renderValues = {
-        title: "Ballon",
-        username: req.user.username,
-        userEmail: req.user.email,
-        friends: docs
-      };
-      return next();
-    });
+    console.log(req.user.facebook.friends);
+    req.renderValues = {
+      title: "Ballon",
+      fb_user: req.user.facebook
+    }
+    return next();
+    // User.find(function(err, docs) {
+    //   if (err) res.redirect('/');
+    //   var index = docs.map(function(item) {
+    //     return item.username;
+    //   }).indexOf(req.user.username);
+    //   docs.splice(index, 1);
+    //   req.renderValues = {
+    //     title: "Ballon",
+    //     username: req.user.username,
+    //     userEmail: req.user.email,
+    //     friends: docs
+    //   };
+    //   return next();
+    // });
   }
   else {
     res.render('index', {title: "Ballon"});

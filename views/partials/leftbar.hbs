@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/javascripts/friends-logic/chat-client.js"></script>
 <div id="jqueryVars" style="display:none;">
   <p id="loginVar">{{login}}</p>
-  <p id="emailVar">{{userEmail}}</p>
+  <p id="idVar">{{fb_user.id}}</p>
 </div>
 
 <ul id="leftbar" class="side-nav fixed #eeeeee grey lighten-3">
@@ -20,11 +20,11 @@
         <div class="collapsible-header"><i class="material-icons">chat</i>Chat</div>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
-            {{# each friends}}
+            {{# each fb_user.friends}}
               <li class="chatBox">
-                <div class="friendsEmail" style="display: none;">{{this.email}}</div>
+                <div class="friendsid" style="display: none;">{{this.id}}</div>
                 <div class="collapsible-header chatCollapsible">
-                  <i class="material-icons">perm_identity</i>{{this.username}}
+                  <i class="material-icons">perm_identity</i>{{this.name}}
                   <span class="unreadMessages"></span>
                 </div>
                 <div class="collapsible-body">
