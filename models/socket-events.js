@@ -13,7 +13,6 @@ function socket(server) {
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
       ]);
       aggregateQuery.exec(function(err, docs){
-        // console.log(docs);
         socket.emit('update unread status', docs);
       });
 
@@ -29,7 +28,6 @@ function socket(server) {
       delete users[socket.id];
       for (var id in users) {
         if (id != socket.id) {
-          console.log(id);
           users[id].emit('someone is online or offline', {friend: socket.id, online: false})
         }
       }
@@ -41,7 +39,6 @@ function socket(server) {
       newMsg.save(function(err) {
         if (err) throw err;
         if (users[data.toUser]) {
-          console.log(data);
           users[data.toUser].emit('new message', data)
         }
       });
@@ -64,14 +61,12 @@ function socket(server) {
     });
 
     function UpdateReadStat(data) {
-      console.log(data);
       var updateQuery = Chat.update(
         {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
         {$set: {read: true}},
         {multi: true}
       );
       updateQuery.exec(function(err, affected){
-        // console.log(`set ${affected.nModified} messages read`);
         if (users[data.friend])
           users[data.friend].emit('someone read message', {friend: data.me});
       });
