@@ -48,7 +48,7 @@ router.get('/product/add-to-cart/:id', isLoggedIn, function(req, res, next) {
       res.redirect('/');
     };
     req.renderValues.product = doc;
-    var cartManager = new CartManager(req.renderValues.userEmail);
+    var cartManager = new CartManager(req.renderValues.fb_user.id);
     cartManager.add(doc);
     res.redirect(`/store/product/${req.params.id}`);
   });
@@ -94,20 +94,11 @@ module.exports = router;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    User.find(function(err, docs) {
-      if (err) res.redirect('/');
-      var index = docs.map(function(item) {
-        return item.username;
-      }).indexOf(req.user.username);
-      docs.splice(index, 1);
-      req.renderValues = {
-        title: "Ballon",
-        username: req.user.username,
-        userEmail: req.user.email,
-        friends: docs
-      };
-      return next();
-    });
+    req.renderValues = {
+      title: "Ballon",
+      fb_user: req.user.facebook
+    }
+    return next();
   }
   else {
     res.redirect('/');
