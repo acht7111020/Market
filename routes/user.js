@@ -13,71 +13,26 @@ router.get('/logout', isLoggedIn, function(req, res, next){
   res.redirect('/');
 });
 
-router.use('/', notLoggedIn, function(req, res, next) {
-  next();
+router.get('/profile/:id', isLoggedIn, function(req, res) {
+  User.findOne({'facebook.id': req.params.id}, function(err, user) {
+    if(err) throw err;
+    // req.renderValues.leftbarImg = user.facebook.profilePic;
+    // req.renderValues.leftbarTitle = user.facebook.name;
+    res.render('user/profile', req.renderValues);
+  });
 });
-
-router.get('/signup', function(req, res, next) {
-  var messages = req.flash('error');
-  res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
-});
-
-router.post('/signup', passport.authenticate('local.signup', {
-  successRedirect: '/',
-  failureRedirect: '/user/signup',
-  failureFlash: true
-}));
-
-router.get('/signin', function(req, res, next) {
-  var messages = req.flash('error');
-  res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messages.length > 0, title: "Ballon"});
-});
-
-router.post('/signin', passport.authenticate('local.signin', {
-  successRedirect: '/',
-  failureRedirect: '/user/signin',
-  failureFlash: true
-}));
 
 module.exports = router;
 
-function findFriends(req, res, next) {
-  User.find(function(err, docs) {
-    if (err) res.redirect('/');
-    var index = docs.map(function(item) {
-      return item.username;
-    }).indexOf(req.user.username);
-    docs.splice(index, 1);
-    req.friends = docs;
-    return next();
-  });
-}
-
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    User.find(function(err, docs) {
-      if (err) res.redirect('/');
-      var index = docs.map(function(item) {
-        return item.username;
-      }).indexOf(req.user.username);
-      docs.splice(index, 1);
-      req.renderValues = {
-        title: "Ballon",
-        username: req.user.username,
-        userEmail: req.user.email,
-        friends: docs
-      };
-      return next();
-    });
+    req.renderValues = {
+      title: "Ballon",
+      fb_user: req.user.facebook
+    }
+    return next();
   }
   else {
     res.redirect('/');
   }
-}
-
-function notLoggedIn(req, res, next) {
-  if (!req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/');
 }

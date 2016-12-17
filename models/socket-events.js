@@ -1,6 +1,7 @@
 function socket(server) {
   var io = require('socket.io').listen(server);
   var Chat = require('../models/chat-schema');
+  var User = require('../models/user-schema');
   users = {};
 
   io.sockets.on('connection', function(socket) {
@@ -14,6 +15,11 @@ function socket(server) {
       ]);
       aggregateQuery.exec(function(err, docs){
         socket.emit('update unread status', docs);
+      });
+
+      User.findOne({'facebook.id': socket.id}, function(err, user) {
+        if (err) throw err;
+        console.log(user.facebook.friends);
       });
 
       for (var id in users) {

@@ -8,6 +8,8 @@ router.get('/', isLoggedIn, function(req, res, next) {
   var findQuery = Store.find();
   findQuery.sort('position').exec(function(storeErr, storeDocs) {
     req.renderValues.stores = storeDocs;
+    req.renderValues.leftbarTitle = 'G Floor';
+    req.renderValues.leftbarImg = '/images/online-store.png';
     res.render('index', req.renderValues);
   });
 });

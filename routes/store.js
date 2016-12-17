@@ -13,6 +13,7 @@ var upload = multer({ storage: storage});
 
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
+var Store = require('../models/store-schema');
 var CartManager = require('../models/cart-manager');
 var ModifyProduct = require('../models/modify-product');
 
@@ -23,9 +24,14 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
       res.redirect('/');
     }
     else {
-      req.renderValues.products = productDocs;
-      req.renderValues.storeID = req.params.id;
-      res.render('store/store', req.renderValues);
+      Store.findById(req.params.id, function(storeErr, store) {
+        if (storeErr) throw storeErr;
+        req.renderValues.products = productDocs;
+        req.renderValues.storeID = req.params.id;
+        req.renderValues.leftbarImg = store.coverImagePath;
+        req.renderValues.leftbarTitle = store.title;
+        res.render('store/store', req.renderValues);
+      });
     }
   });
 });
@@ -96,7 +102,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     req.renderValues = {
       title: "Ballon",
-      fb_user: req.user.facebook
+      fb_user: req.user.facebook,
     }
     return next();
   }

@@ -1,6 +1,14 @@
-#storeImg {
+#leftbarImg {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.3))
+            drop-shadow(0px 0px 10px rgba(0,0,0,.3));
+}
+
+#leftbarTitle {
+  margin-top: 20px;
+  text-align: center;
 }
 
 #ownerName {
