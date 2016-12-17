@@ -19,7 +19,6 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, function(req, email, password, done) {
-  // console.log(`over here: ${req.body.address}`);
   req.checkBody('email', 'Invalid email').notEmpty().isEmail();
   req.checkBody('password', 'Invalid password').notEmpty().isLength({min:4});
   req.checkBody('username', 'Username cannot be empty').notEmpty();
@@ -110,7 +109,6 @@ passport.use(new FacebookStrategy({
             if (err) {
               throw err;
             }
-            console.log(newUser.facebook.friends);
             return done(null, newUser);
           })
         }

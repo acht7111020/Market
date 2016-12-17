@@ -16,7 +16,6 @@ module.exports = router;
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log(req.user.facebook.friends);
     req.renderValues = {
       title: "Ballon",
       fb_user: req.user.facebook

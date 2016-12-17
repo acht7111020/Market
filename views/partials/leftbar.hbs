@@ -1,8 +1,9 @@
 <link rel='stylesheet' href='/stylesheets/partials/leftbar.css' />
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/javascripts/friends-logic/chat-client.js"></script>
+<script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script>
+<!-- <script type="text/javascript" src="/javascripts/friends-logic/chat-client.js"></script> -->
 <div id="jqueryVars" style="display:none;">
-  <p id="loginVar">{{login}}</p>
+  <!-- <p id="loginVar">{{login}}</p> -->
   <p id="idVar">{{fb_user.id}}</p>
 </div>
 
@@ -22,7 +23,7 @@
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
             {{# each fb_user.friends}}
               <li class="chatBox">
-                <div class="friendsid" style="display: none;">{{this.id}}</div>
+                <div class="friendsId" style="display: none;">{{this.id}}</div>
                 <div class="collapsible-header chatCollapsible">
                   <i class="material-icons">perm_identity</i>{{this.name}}
                   <span class="unreadMessages"></span>
