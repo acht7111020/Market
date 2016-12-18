@@ -19,7 +19,6 @@ function socket(server) {
 
       User.findOne({'facebook.id': socket.id}, function(err, user) {
         if (err) throw err;
-        console.log(user.facebook.friends);
       });
 
       for (var id in users) {

@@ -1,3 +1,7 @@
+#leftbar {
+  padding-top: 45px;
+}
+
 #leftbarImg {
   width: 100%;
   height: 100%;
@@ -11,31 +15,9 @@
   text-align: center;
 }
 
-#ownerName {
-  display: inline-block;
-}
-
-#ownerEmail {
-
-}
-
-#ownerImg {
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
-  display: inline-block;
-}
-
 .userView {
-  margin: 10% !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.ownerInfo {
-  font-weight: bold;
-  color: #3C3C3C!important;
-  margin: 3px;
+  margin: 0 10%;
+  padding: 0 !important;
 }
 
 .collapsible-body {
