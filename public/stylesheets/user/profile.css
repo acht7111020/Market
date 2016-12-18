@@ -1,0 +1,22 @@
+#fullname {
+  margin-top: 0 !important;
+  /*line-height: 100% !important;*/
+}
+
+#email {
+  color: #607d8b;
+}
+
+#friendChip {
+  color: white;
+}
+
+.stars {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+h6 {
+  color: #9e9e9e;
+}

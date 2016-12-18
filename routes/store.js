@@ -28,8 +28,8 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
         if (storeErr) throw storeErr;
         req.renderValues.products = productDocs;
         req.renderValues.storeID = req.params.id;
-        req.renderValues.leftbarImg = store.coverImagePath;
-        req.renderValues.leftbarTitle = store.title;
+        req.renderValues.leftbarImg = store.detail.coverImage;
+        req.renderValues.leftbarTitle = store.detail.title;
         res.render('store/store', req.renderValues);
       });
     }

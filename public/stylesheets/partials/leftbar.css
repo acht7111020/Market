@@ -1,5 +1,6 @@
 #leftbar {
   padding-top: 45px;
+  padding-bottom: 600px;
 }
 
 #leftbarImg {
@@ -69,8 +70,8 @@
   clear: both;
 }
 
-#chatArea {
-  padding-bottom: 200px;
+.chatCollapsible {
+  font-weight: bold;
 }
 
 .fromOther {
@@ -94,7 +95,6 @@
 .unreadMessages{
   float: right;
   color: #AE0000;
-  font-weight: bold;
 }
 
 .sendBtn{

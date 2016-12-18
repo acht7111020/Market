@@ -16,8 +16,10 @@ router.get('/logout', isLoggedIn, function(req, res, next){
 router.get('/profile/:id', isLoggedIn, function(req, res) {
   User.findOne({'facebook.id': req.params.id}, function(err, user) {
     if(err) throw err;
-    // req.renderValues.leftbarImg = user.facebook.profilePic;
-    // req.renderValues.leftbarTitle = user.facebook.name;
+    req.renderValues.buyerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
+    req.renderValues.sellerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd', '#bdbdbd'];
+    req.renderValues.profileUser = user.facebook;
+    console.log(user);
     res.render('user/profile', req.renderValues);
   });
 });

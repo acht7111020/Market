@@ -6,74 +6,116 @@ var imagePathPrefix = '/images/stores/'
 
 var stores = [
   new Store({
-    available: true,
-    sellPrice: '$300,000,000',
-    ownerEmail: '',
-    title: 'adidas',
-    coverImagePath: `${imagePathPrefix}adidas-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
-    detailedPath: "/store/adidas",
-    position: 1
+    status: {
+      rented: true,
+      price: 300000000,
+      level: 'G',
+      area: 'A',
+      position: 1
+    },
+    detail: {
+      title: 'Adidas',
+      owner: '1270063206384939',
+      coverImage: `${imagePathPrefix}adidas-1.jpg`,
+      contentImage: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
+      description: 'This is a Adidas store'
+    }
   }),
   new Store({
-    available: false,
-    sellPrice: '$300,000,000',
-    ownerEmail: '',
-    title: 'converse',
-    coverImagePath: `${imagePathPrefix}converse-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
-    detailedPath: "/store/converse",
-    position: 2
+    status: {
+      rented: false,
+      price: 300000000,
+      level: 'G',
+      area: 'A',
+      position: 2
+    },
+    // detail: {
+    //   title: 'Converse',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}converse-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
+    //   description: 'This is a Converse store'
+    // }
   }),
   new Store({
-    available: true,
-    sellPrice: '$300,000,000',
-    ownerEmail: '',
-    title: 'jordan',
-    coverImagePath: `${imagePathPrefix}jordan-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
-    detailedPath: "/store/jordan",
-    position: 3
+    status: {
+      rented: true,
+      price: 300000000,
+      level: 'G',
+      area: 'A',
+      position: 3
+    },
+    detail: {
+      title: 'Jordan',
+      owner: '1270063206384939',
+      coverImage: `${imagePathPrefix}jordan-1.jpg`,
+      contentImage: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
+      description: 'This is a Jordan store'
+    }
   }),
   new Store({
-    available: true,
-    sellPrice: '$100,000,000',
-    ownerEmail: '',
-    title: 'newbalance',
-    coverImagePath: `${imagePathPrefix}newbalance-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
-    detailedPath: "/store/newbalance",
-    position: 4
+    status: {
+      rented: true,
+      price: 100000000,
+      level: 'G',
+      area: 'A',
+      position: 4
+    },
+    detail: {
+      title: 'New Balance',
+      owner: '1270063206384939',
+      coverImage: `${imagePathPrefix}newbalance-1.jpg`,
+      contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
+      description: 'This is a New Balance store'
+    }
   }),
   new Store({
-    available: true,
-    sellPrice: '$200,000,000',
-    ownerEmail: '',
-    title: 'nike',
-    coverImagePath: `${imagePathPrefix}nike-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
-    detailedPath: "/store/nike",
-    position: 5
+    status: {
+      rented: true,
+      price: 20000000,
+      level: 'G',
+      area: 'A',
+      position: 5
+    },
+    detail: {
+      title: 'Nike',
+      owner: '1270063206384939',
+      coverImage: `${imagePathPrefix}nike-1.jpg`,
+      contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
+      description: 'This is a Nike store'
+    }
   }),
   new Store({
-    available: false,
-    sellPrice: '$100,000,000',
-    ownerEmail: '',
-    title: 'underarmour',
-    coverImagePath: `${imagePathPrefix}underarmour-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
-    detailedPath: "/store/underarmour",
-    position: 6
+    status: {
+      rented: false,
+      price: 100000000,
+      level: 'G',
+      area: 'A',
+      position: 6
+    },
+    // detail: {
+    //   title: 'Under Armour',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}underarmour-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
+    //   description: 'This is a Under Armour store'
+    // }
   }),
   new Store({
-    available: false,
-    sellPrice: '$400,000,000',
-    ownerEmail: '',
-    title: 'puma',
-    coverImagePath: `${imagePathPrefix}puma-1.jpg`,
-    contentImagePath: [`${imagePathPrefix}puma-1.jpg`,`${imagePathPrefix}puma-2.jpg`],
-    detailedPath: "/store/puma",
-    position: 7
+    status: {
+      rented: false,
+      price: 400000000,
+      level: 'G',
+      area: 'A',
+      position: 7
+    },
+    // detail: {
+    //   title: 'Puma',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}puma-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}puma-1.jpg`,`${imagePathPrefix}puma-2.jpg`],
+    //   description: 'This is a Puma store'
+    // }
   })
 ];
 var done = 0;
