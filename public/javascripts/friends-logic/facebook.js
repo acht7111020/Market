@@ -6,16 +6,11 @@ function statusChangeCallback(response) {
     document.getElementById('status').innerHTML = 'Please log ' +
       'into this app.';
   } else {
-    // The person is not logged into Facebook, so we're not sure if
-    // they are logged into this app or not.
     document.getElementById('status').innerHTML = 'Please log ' +
       'into Facebook.';
   }
 }
 
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
@@ -51,11 +46,6 @@ function testAPI() {
       var username = response.name;
       FB.api('/me/picture', function(response) {
         var url = response.data['url'];
-        document.getElementById('status').innerHTML +=
-        `
-          <div>Thanks for loggin in, ${username}</div>
-          <img src="${url}">
-        `
       });
   });
 }
@@ -93,10 +83,8 @@ function getFriendList() {
   FB.api('/me/friends',
     function (response) {
       if (response && !response.error) {
-        document.getElementById('status').innerHTML +="<div>Your friends:</div>";
         for(let friend of response.data){
           var name = friend['name'];
-          document.getElementById('status').innerHTML +=" "+name+" ";
           console.log(name);
         }
           return response.data;

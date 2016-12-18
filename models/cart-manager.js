@@ -1,13 +1,13 @@
-module.exports = function CartManager(userEmail) {
+module.exports = function CartManager(fb_id) {
   Cart = require('./cart-schema');
   this.add = function(item) {
-    Cart.findOne({userEmail: userEmail}, function(err, cart) {
+    Cart.findOne({fb_id: fb_id}, function(err, cart) {
       if (err) throw err;
       if (cart) {
 
       }
       else {
-        cart = new Cart({userEmail: userEmail, items: {}, totalQty: 0, totalPrice: 0});
+        cart = new Cart({fb_id: fb_id, items: {}, totalQty: 0, totalPrice: 0});
       }
       var storedItem = cart.items[item.id];
       if (!storedItem){

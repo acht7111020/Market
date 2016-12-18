@@ -1,6 +1,5 @@
 <link rel='stylesheet' href='/stylesheets/partials/topbar.css' />
-<script type="text/javascript" src="/javascripts/topbar.js"></script>
-<!--<script type="text/javascript" src="/javascripts/facebook.js"></script>-->
+<script type="text/javascript" src="/javascripts/partials/topbar.js"></script>
 <!-- dropdown -->
 <ul id="dropdown1" class="dropdown-content">
   {{# if login}}
@@ -8,14 +7,17 @@
   {{ else}}
     <li><a href="/user/signin">Sign in</a></li>
     <li><a href="/user/signup">Sign up</a></li>
+    <li>
+      <a href="/auth/facebook">Facebook</a>
+    </li>
   {{/if}}
 </ul>
 <!-- /dropdown -->
 <div class="navbar-fixed">
   <nav id="topbarNav">
     <div id = "topbar" class="nav-wrapper blue-grey">
-      <a href="#!" class="brand-logo">
-        <i class="material-icons">account_box</i>
+      <a href="/" class="brand-logo">
+        <i class="material-icons">home</i>
       </a>
       <ul class="right">
         <li>

@@ -1,56 +1,62 @@
-function socket(server){
+function socket(server) {
   var io = require('socket.io').listen(server);
   var Chat = require('../models/chat-schema');
+  var User = require('../models/user-schema');
   users = {};
 
-  io.sockets.on('connection', function(socket){
-    // when new user enter
+  io.sockets.on('connection', function(socket) {
     socket.on('new user', function(data, callback) {
-      socket.email = data;
-      users[socket.email] = socket;
+      socket.id = data;
+      users[socket.id] = socket;
       console.log(`[${data}] entered.`);
-      // label the number of unread messages from each friends
       var aggregateQuery = Chat.aggregate([
-          {$match: {read: false, toUser: socket.email}},
+          {$match: {read: false, toUser: socket.id}},
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
       ]);
       aggregateQuery.exec(function(err, docs){
         socket.emit('update unread status', docs);
       });
-      // update others view when online
-      for (var email in users){
-        if (email != socket.email)
-          users[email].emit('someone is online or offline', {email: socket.email, online: true});
+
+      User.findOne({'facebook.id': socket.id}, function(err, user) {
+        if (err) throw err;
+      });
+
+      for (var id in users) {
+        if (id != socket.id) {
+          users[id].emit('someone is online or offline', {friend: socket.id, online: true})
+        }
       }
-      // highlight online user
       socket.emit('highlight online user', Object.keys(users));
     });
-    // when user disconnect
-    socket.on('disconnect', function(data){
-      // pop out from online users pool
-      delete users[socket.email];
-      // update others view when offline
-      for (var email in users){
-        users[email].emit('someone is online or offline', {email: socket.email, online: false});
+
+    socket.on('disconnect', function(data) {
+      delete users[socket.id];
+      for (var id in users) {
+        if (id != socket.id) {
+          users[id].emit('someone is online or offline', {friend: socket.id, online: false})
+        }
       }
-      console.log(`[${socket.email}] leaved.`);
+      console.log(`[${socket.id}] entered.`);
     });
 
-    // send message
-    socket.on('send message', function(data){
-      var newMsg = new Chat({fromUser: data.origin, toUser: data.target, msg: data.content, read: false});
-      newMsg.save(function(err){
-        if(err) throw err;
-        if (users[data.target])
-          users[data.target].emit('new message', {msg: data.content, origin: data.origin});
+    socket.on('send message', function(data) {
+      var newMsg = new Chat(data);
+      newMsg.save(function(err) {
+        if (err) throw err;
+        if (users[data.toUser]) {
+          users[data.toUser].emit('new message', data)
+        }
       });
     });
 
-    socket.on('open chat box', function(data){
-      var findQuery = Chat.find({$or:[ {fromUser: data.self, toUser: data.friend}, {fromUser: data.friend, toUser: data.self} ]});
-      findQuery.sort('-created').limit(15).exec(function(err, docs){
-        if(err) throw err;
-        socket.emit('load old messages', {history: docs});
+    socket.on('open chat box', function(data) {
+      var findQuery = Chat.find({$or: [
+        {fromUser: data.me, toUser: data.friend},
+        {fromUser: data.friend, toUser: data.me}
+      ]});
+      findQuery.sort('-created').limit(15).exec(function(err, docs) {
+        if (err) throw err;
+        socket.emit('load history messages', {friend: data.friend, msgs: docs})
       });
       UpdateReadStat(data);
     });
@@ -59,16 +65,15 @@ function socket(server){
       UpdateReadStat(data);
     });
 
-    function UpdateReadStat(data){
+    function UpdateReadStat(data) {
       var updateQuery = Chat.update(
-        {$or:[{fromUser: data.friend, toUser: data.self, read: false} ]},
+        {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
         {$set: {read: true}},
         {multi: true}
       );
       updateQuery.exec(function(err, affected){
-        console.log(`set ${affected.nModified} messages read`);
         if (users[data.friend])
-          users[data.friend].emit('update message read', {friend: data.self});
+          users[data.friend].emit('someone read message', {friend: data.me});
       });
     }
   });
