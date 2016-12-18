@@ -53,7 +53,7 @@
       <h6>Owned store</h6>
       <table class="bordered">
         {{#each profileOwnedStores}}
-          <tr>
+          <tr onclick="document.location = '/store/about/{{this._id}}';">
             <td class="storePicTd"><div style="height: 5rem;"><img class="storePic" src="{{this.detail.coverImage}}" alt=""></div></td>
             <td class="storeNameTd center">{{this.detail.title}}</td>
             <td class="storeLocTd">{{this.status.level}} Level {{this.status.area}}{{this.status.position}}</td>

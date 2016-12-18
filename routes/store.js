@@ -100,14 +100,24 @@ router.post('/modify-product/:productID', RoutesLogic, upload.array('photos', 5)
 
 router.get('/about/:storeID', RoutesLogic, function(req, res) {
   Store.findById(req.params.storeID, function(storeErr, store) {
-    User.findOne({'facebook.id': store.detail.owner}, function(userErr, user) {
-      if (userErr) throw userErr;
-      req.renderValues.store = store;
-      req.renderValues.owner = user.facebook;
-      req.renderValues.rating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
-      res.render('store/about', req.renderValues);
-    });
     if (storeErr) throw storeErr;
+    if (store) {
+      User.findOne({'facebook.id': store.detail.owner}, function(userErr, user) {
+        if (userErr) throw userErr;
+        if (user) {
+          req.renderValues.store = store;
+          req.renderValues.owner = user.facebook;
+          req.renderValues.rating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
+          res.render('store/about', req.renderValues);
+        }
+        else {
+          res.redirect('/');
+        }
+      });
+    }
+    else {
+      res.redirect('/');
+    }
   });
 });
 
