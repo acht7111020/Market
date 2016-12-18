@@ -16,8 +16,9 @@ var Product = require('../models/product-schema');
 var Store = require('../models/store-schema');
 var CartManager = require('../models/cart-manager');
 var ModifyProduct = require('../models/modify-product');
+var RoutesLogic = require('../config/routes-logic');
 
-router.get('/:id', isLoggedIn, function(req, res, next) {
+router.get('/:id', RoutesLogic, function(req, res, next) {
   var findProductQuery = Product.find({ownerStore: req.params.id});
   findProductQuery.sort('position').exec(function(productErr, productDocs){
     if(productErr) {
@@ -36,7 +37,7 @@ router.get('/:id', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/product/:id', isLoggedIn, function(req, res, next) {
+router.get('/product/:id', RoutesLogic, function(req, res, next) {
   Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
@@ -48,7 +49,7 @@ router.get('/product/:id', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/product/add-to-cart/:id', isLoggedIn, function(req, res, next) {
+router.get('/product/add-to-cart/:id', RoutesLogic, function(req, res, next) {
   Product.findById(req.params.id, function(err, doc) {
     if (err) {
       res.redirect('/');
@@ -60,17 +61,17 @@ router.get('/product/add-to-cart/:id', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/add-product/:storeID', isLoggedIn, function(req, res, next) {
+router.get('/add-product/:storeID', RoutesLogic, function(req, res, next) {
   res.render('store/modify', req.renderValues);
 });
 
-router.post('/add-product/:storeID', isLoggedIn, upload.array('photos', 5), function(req, res, next) {
+router.post('/add-product/:storeID', RoutesLogic, upload.array('photos', 5), function(req, res, next) {
   var modifyProduct = new ModifyProduct();
   modifyProduct.add(req.body, req.files, req.params.storeID);
   res.redirect(`/store/${req.params.storeID}`);
 });
 
-router.get('/modify-product/:productID', isLoggedIn, function(req, res) {
+router.get('/modify-product/:productID', RoutesLogic, function(req, res) {
   Product.findById(req.params.productID, function(err, doc) {
     if (err) {
       res.redirect('/');
@@ -82,7 +83,7 @@ router.get('/modify-product/:productID', isLoggedIn, function(req, res) {
   });
 });
 
-router.post('/modify-product/:productID', isLoggedIn, upload.array('photos', 5), function(req, res) {
+router.post('/modify-product/:productID', RoutesLogic, upload.array('photos', 5), function(req, res) {
   var modifyProduct = new ModifyProduct();
   var storeID = modifyProduct.modify(req.body, req.files, req.params.productID);
   Product.findById(req.params.productID, function(err, doc) {
@@ -97,16 +98,3 @@ router.post('/modify-product/:productID', isLoggedIn, upload.array('photos', 5),
 });
 
 module.exports = router;
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    req.renderValues = {
-      title: "Ballon",
-      fb_user: req.user.facebook,
-    }
-    return next();
-  }
-  else {
-    res.redirect('/');
-  }
-}

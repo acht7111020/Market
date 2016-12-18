@@ -66,12 +66,10 @@ $(document).ready(function() {
 
     socket.on('someone is online or offline', function(data) {
       var index = GetIndex(data.friend);
-      console.log(data.friend);
       HighlightOnlineUser(index, data.online);
     });
 
     socket.on('highlight online user', function(data) {
-      console.log(data);
       for(var i = 0; i < data.length; i++){
         if (data[i] != myId){
             var index = GetIndex(data[i]);
@@ -88,7 +86,6 @@ $(document).ready(function() {
     }
 
     function DisplayMsg(msg) {
-      console.log(msg);
       var from = '';
       if (msg.fromUser == myId) {
         if (msg.read) {
@@ -117,7 +114,6 @@ $(document).ready(function() {
     }
 
     function UpdateReadStat(index, count){
-      console.log(index);
       if (count > 0){
         $('.unreadMessages').eq(index).html(count);
         // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
