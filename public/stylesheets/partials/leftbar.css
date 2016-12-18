@@ -1,33 +1,24 @@
-#storeImg {
+#leftbar {
+  padding-top: 45px;
+  padding-bottom: 600px;
+}
+
+#leftbarImg {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.3))
+            drop-shadow(0px 0px 10px rgba(0,0,0,.3));
 }
 
-#ownerName {
-  display: inline-block;
-}
-
-#ownerEmail {
-
-}
-
-#ownerImg {
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
-  display: inline-block;
+#leftbarTitle {
+  margin-top: 20px;
+  text-align: center;
 }
 
 .userView {
-  margin: 10% !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.ownerInfo {
-  font-weight: bold;
-  color: #3C3C3C!important;
-  margin: 3px;
+  margin: 0 10%;
+  padding: 0 !important;
 }
 
 .collapsible-body {
@@ -79,8 +70,8 @@
   clear: both;
 }
 
-#chatArea {
-  padding-bottom: 200px;
+.chatCollapsible {
+  font-weight: bold;
 }
 
 .fromOther {
@@ -104,7 +95,6 @@
 .unreadMessages{
   float: right;
   color: #AE0000;
-  font-weight: bold;
 }
 
 .sendBtn{
@@ -113,4 +103,8 @@
 
 #chooseBtn {
   color: #6C6C6C;
+}
+
+.collapsible li a {
+  padding: 0 32px !important;
 }

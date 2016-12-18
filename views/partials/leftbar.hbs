@@ -1,24 +1,29 @@
 <link rel='stylesheet' href='/stylesheets/partials/leftbar.css' />
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script>
-<!-- <script type="text/javascript" src="/javascripts/friends-logic/chat-client.js"></script> -->
+<script type="text/javascript" src="/javascripts/partials/leftbar.js"></script>
 <div id="jqueryVars" style="display:none;">
-  <!-- <p id="loginVar">{{login}}</p> -->
   <p id="idVar">{{fb_user.id}}</p>
 </div>
 
-<ul id="leftbar" class="side-nav fixed #eeeeee grey lighten-3">
+<ul id="leftbar" class="side-nav fixed grey lighten-3">
+  {{#if leftbarImg}}
   <li>
     <div class="userView">
-      <!-- <img id="storeImg" class="conta" src="/images/GAP.jpg">
-      <a ><img id="ownerImg" class="circle" src="/images/profile.jpg"><span id="ownerName" class="ownerInfo">簡紹安</span></a> -->
-      <!--<a ><span id="ownerEmail" class="ownerInfo">jdandturk@gmail.com</span></a>-->
+        <img id="leftbarImg" class="circle" src="{{leftbarImg}}">
+        <h4 id="leftbarTitle" class="card-panel grey lighten-3">{{leftbarTitle}}</h4>
     </div>
   </li>
+  {{/if}}
+  {{# if leftbarAbout}}
+    <li class="bold">
+      <a href="about/{{leftbarAbout}}"><i class="material-icons">details</i>About</a>
+    </li>
+  {{/if}}
   <li>
     <ul class="collapsible" data-collapsible="accordion">
-      <li class="disabled">
-        <div class="collapsible-header"><i class="material-icons">chat</i>Chat</div>
+      <li>
+        <a class="collapsible-header"><i class="material-icons">chat</i>Chat</a>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
             {{# each fb_user.friends}}
