@@ -15,10 +15,15 @@
     </div>
   </li>
   {{/if}}
+  {{# if leftbarAbout}}
+    <li class="bold">
+      <a href="about/{{leftbarAbout}}"><i class="material-icons">details</i>About</a>
+    </li>
+  {{/if}}
   <li>
     <ul class="collapsible" data-collapsible="accordion">
       <li>
-        <div class="collapsible-header"><i class="material-icons">chat</i>Chat</div>
+        <a class="collapsible-header"><i class="material-icons">chat</i>Chat</a>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
             {{# each fb_user.friends}}

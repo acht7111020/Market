@@ -31,6 +31,7 @@ router.get('/:id', RoutesLogic, function(req, res, next) {
         req.renderValues.storeID = req.params.id;
         req.renderValues.leftbarImg = store.detail.coverImage;
         req.renderValues.leftbarTitle = store.detail.title;
+        req.renderValues.leftbarAbout = req.params.id;
         res.render('store/store', req.renderValues);
       });
     }
@@ -95,6 +96,19 @@ router.post('/modify-product/:productID', RoutesLogic, upload.array('photos', 5)
     }
   })
   // res.redirect
+});
+
+router.get('/about/:storeID', RoutesLogic, function(req, res) {
+  Store.findById(req.params.storeID, function(storeErr, store) {
+    User.findOne({'facebook.id': store.detail.owner}, function(userErr, user) {
+      if (userErr) throw userErr;
+      req.renderValues.store = store;
+      req.renderValues.owner = user.facebook;
+      req.renderValues.rating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
+      res.render('store/about', req.renderValues);
+    });
+    if (storeErr) throw storeErr;
+  });
 });
 
 module.exports = router;

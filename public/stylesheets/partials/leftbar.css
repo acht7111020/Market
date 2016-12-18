@@ -104,3 +104,7 @@
 #chooseBtn {
   color: #6C6C6C;
 }
+
+.collapsible li a {
+  padding: 0 32px !important;
+}

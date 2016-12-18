@@ -4,6 +4,7 @@ var csrf = require('csurf');
 var passport = require('passport');
 var User = require('../models/user-schema');
 var RoutesLogic = require('../config/routes-logic');
+var Store = require('../models/store-schema');
 
 var csrfProtection = csrf();
 
@@ -15,13 +16,23 @@ router.get('/logout', RoutesLogic, function(req, res, next){
 });
 
 router.get('/profile/:id', RoutesLogic, function(req, res) {
-  User.findOne({'facebook.id': req.params.id}, function(err, user) {
-    if(err) throw err;
-    req.renderValues.buyerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
-    req.renderValues.sellerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd', '#bdbdbd'];
-    req.renderValues.profileUser = user.facebook;
-    console.log(user);
-    res.render('user/profile', req.renderValues);
+  User.findOne({'facebook.id': req.params.id}, function(userErr, user) {
+    if(userErr) throw userErr;
+    if (user) {
+      Store.find({'detail.owner': req.params.id}, function(storeErr, stores) {
+        if (storeErr) throw storeErr;
+        if (stores) {
+          req.renderValues.buyerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
+          req.renderValues.sellerRating = ['#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd', '#bdbdbd'];
+          req.renderValues.profileUser = user.facebook;
+          req.renderValues.profileOwnedStores = stores;
+          // console.log(user);
+          res.render('user/profile', req.renderValues);
+        }
+        else res.redirect('/');
+      });
+    }
+    else res.redirect('/');
   });
 });
 
