@@ -5,8 +5,6 @@
   {{# if login}}
     <li><a href="/user/logout">Logout</a></li>
   {{ else}}
-    <li><a href="/user/signin">Sign in</a></li>
-    <li><a href="/user/signup">Sign up</a></li>
     <li>
       <a href="/auth/facebook">Facebook</a>
     </li>
@@ -16,23 +14,21 @@
 <div class="navbar-fixed">
   <nav id="topbarNav">
     <div id = "topbar" class="nav-wrapper blue-grey">
-      <a href="/" class="brand-logo">
-        <i class="material-icons">home</i>
-      </a>
+      <a href="/" class="brand-logo"><img id="topbarLogo" src="/images/logo.png" alt=""></a>
       <ul class="right">
         <li>
           <a href="/purchase/">
-            <i class="material-icons">store</i>
+            <i class="material-icons" style="color: #37474f;">store</i>
           </a>
         </li>
         <li>
           <a href="/order/cart">
-            <i class="material-icons">shopping_cart</i>
+            <i class="material-icons" style="color: #37474f;">shopping_cart</i>
           </a>
         </li>
         <li>
           <a class="dropdown-button" href="#!" data-activates="dropdown1">
-            <i class="material-icons">account_box arrow_drop_down</i>
+            <i class="material-icons" style="color: #37474f;">account_box arrow_drop_down</i>
           </a>
         </li>
       </ul>
