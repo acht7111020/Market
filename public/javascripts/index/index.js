@@ -33,9 +33,8 @@ $(document).ready(function(){
 
   $(".highlight").click(function(evt){
     var paths = $($(this).context).data('link');
-    // console.log(paths);
-    window.location = `/store/${paths}`;
-
+    if (paths)
+      window.location = `/store/${paths}`;
   });
 
 });

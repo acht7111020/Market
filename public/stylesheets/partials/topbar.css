@@ -1,0 +1,6 @@
+#topbarLogo {
+  width: auto;
+  height: 100%;
+  max-height: 64px;
+  object-fit: contain;
+}
