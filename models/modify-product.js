@@ -31,7 +31,6 @@ module.exports = function ModifyProduct() {
       product.description = body.description;
       product.save(function(err, updatedProduct) {
         if (err) throw err;
-        console.log(updatedProduct);
       });
     });
   };
