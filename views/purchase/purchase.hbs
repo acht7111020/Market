@@ -3,20 +3,17 @@
 <div class="fullpage">
   <div class="block">
     {{# each stores}}
-      {{#if this.available }}
-      <div class="indexStore" style="background-image: url('{{this.coverImagePath}}')"
+      {{#if this.detail.owner }}
+      <div class="indexStore" style="background-image: url('{{this.detail.coverImage}}')"
       data-indexval={{@index}} data-content={{this.contentImagePath}}>
       </div>
       {{else}}
       <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"
       data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
-      <label for="first_name" class="priceLabel"> {{this.sellPrice}} </label>
-      <button class="waves-effect waves-light btn testclass" onclick="purchase('{{this._id}}')">purchase!</button>
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
       </div>
       {{/if}}
     {{/each}}
-    <!--div class="highlight">
-      <img src="/images/stores/puma-1.jpg"><img src="/images/stores/puma-2.jpg">
-    </div-->
   </div>
 </div>

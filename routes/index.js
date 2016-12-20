@@ -16,19 +16,3 @@ router.get('/', RoutesLogic, function(req, res, next) {
 });
 
 module.exports = router;
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    if (!req.session.level) {
-      req.session.level = 'G';
-    }
-    req.renderValues = {
-      title: "Ballon",
-      fb_user: req.user.facebook
-    }
-    return next();
-  }
-  else {
-    res.render('index', {title: "Ballon"});
-  }
-}

@@ -7,23 +7,14 @@ var PurchaseManager = require('../models/purchase-manager');
 var RoutesLogic = require('../config/routes-logic');
 /* GET home page. */
 router.get('/', RoutesLogic, function(req, res, next) {
-  if (req.user){
-    User.find(function(err, docs) {
-      var index = docs.map(function(item) {
-        return item.username;
-      }).indexOf(req.user.username);
-      docs.splice(index, 1);
-      var findQuery = Store.find();
-      findQuery.sort('position').exec(function(storeErr, storeDocs){
-        if(storeErr) throw storeErr;
-        req.renderValues.stores = storeDocs;
-        res.render('purchase/purchase', req.renderValues);
-      });
-    });
-  }
-  else {
-    res.render('index', {title: "Ballon_unlog"});
-  }
+  var findQuery = Store.find();
+  findQuery.sort('position').exec(function(storeErr, stores){
+    if(storeErr) throw storeErr;
+    req.renderValues.stores = stores;
+    req.renderValues.leftbarTitle = 'G Floor';
+    req.renderValues.leftbarImg = '/images/online-store.png';
+    res.render('purchase/purchase', req.renderValues);
+  });
 });
 
 router.get('/buying-store/:id', RoutesLogic, function(req, res, next) {
