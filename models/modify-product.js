@@ -19,7 +19,7 @@ module.exports = function ModifyProduct() {
 
   this.modify = function(body, files, productID) {
     Product.findById(productID, function(err, product) {
-      var uploadPathPrefix = '/uploads/';
+      var uploadPathPrefix = '/uploads/products/';
       var picPaths = product.contentImagePath;
       if (files.length > 0){
         picPaths = picPaths.concat(files.map(function(item) {return uploadPathPrefix + item.filename}));
@@ -30,7 +30,7 @@ module.exports = function ModifyProduct() {
       product.price = body.price;
       product.description = body.description;
       product.save(function(err, updatedProduct) {
-        if (err) throw err;
+        if (err) redirect('/');
       });
     });
   };

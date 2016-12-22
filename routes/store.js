@@ -59,7 +59,7 @@ router.get('/rent/:storeId', RoutesLogic, function(req, res) {
 });
 
 router.post('/rent/:storeId', RoutesLogic, upload.single('photos'), function(req, res) {
-  console.log(req.file);
+  console.log();
   res.redirect('/');
 });
 

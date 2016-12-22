@@ -5,13 +5,13 @@ function RoutesLogic (req, res, next) {
       req.session.level = 'G';
     }
     req.renderValues = {
-      title: "Ballon",
+      title: "GoodGoods",
       fb_user: req.user.facebook
     }
     return next();
   }
   else if(req.path == '/') {
-    res.render('index', {title: "Ballon"});
+    res.render('index', {title: "GoodGoods"});
   }
   else {
     res.redirect('/');
