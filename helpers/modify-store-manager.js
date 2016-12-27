@@ -1,5 +1,5 @@
 module.exports = function ModifyStore() {
-  var Store = require('./store-schema');
+  var Store = require('../models/store-schema');
 
   this.modify = function(body, files, storeId, owner) {
     Store.findById(storeId, function(err, store) {
@@ -9,11 +9,11 @@ module.exports = function ModifyStore() {
         store.status.rented = true;
         var coverImage = '';
         var contentImage = '';
-        if (files.mainImage.length > 0)
+        if (files.mainImage)
           coverImage = `/uploads/stores/${files.mainImage[0].filename}`;
         else
           coverImage = store.detail.coverImage;
-        if (files.minorImage.length > 0)
+        if (files.minorImage)
           contentImage = `/uploads/stores/${files.minorImage[0].filename}`;
         else
           contentImage = store.detail.contentImage;
