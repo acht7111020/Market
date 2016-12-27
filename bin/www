@@ -20,7 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var socket = require('../models/socket-events');
+var socket = require('../helpers/socket-manager');
 socket(server);
 
 /**

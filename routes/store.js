@@ -15,7 +15,7 @@ var RoutesLogic = require('../config/routes-logic');
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
 var Store = require('../models/store-schema');
-var ModifyStore = require('../models/modify-store');
+var ModifyStore = require('../helpers/modify-store-manager');
 
 router.get('/:storeId', RoutesLogic, function(req, res, next) {
   var findProductQuery = Product.find({ownerStore: req.params.storeId});
@@ -41,7 +41,7 @@ router.get('/about/:storeId', RoutesLogic, function(req, res) {
     if (storeErr) res.redirect('/');
     if (!store) res.redirect('/');
     else {
-      User.findOne({'facebook.id': store.detail.owner}, function(userErr, user) {
+      User.findById(store.detail.owner, function(userErr, user) {
         if (userErr) res.redirect('/');
         if (!user) res.redirect('/');
         else {

@@ -16,7 +16,7 @@ router.get('/logout', RoutesLogic, function(req, res, next){
 });
 
 router.get('/profile/:id', RoutesLogic, function(req, res) {
-  User.findOne({'facebook.id': req.params.id}, function(userErr, user) {
+  User.findById(req.params.id, function(userErr, user) {
     if(userErr) throw userErr;
     if (user) {
       Store.find({'detail.owner': req.params.id}, function(storeErr, stores) {

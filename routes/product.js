@@ -13,8 +13,8 @@ var upload = multer({ storage: storage});
 
 var RoutesLogic = require('../config/routes-logic');
 var Product = require('../models/product-schema');
-var CartManager = require('../models/cart-manager');
-var ModifyProduct = require('../models/modify-product');
+var CartManager = require('../helpers/cart-manager');
+var ModifyProduct = require('../helpers/modify-product-manager');
 
 router.get('/:productId', RoutesLogic, function(req, res) {
   Product.findById(req.params.productId, function(err, product) {
@@ -30,7 +30,8 @@ router.get('/add-to-cart/:productId', RoutesLogic, function(req, res, next) {
   Product.findById(req.params.productId, function(err, product) {
     if (err) res.redirect('/');
     else {
-      var cartManager = new CartManager(req.renderValues.fb_user.id);
+      // console.log(req.user._id);
+      var cartManager = new CartManager(req.user._id);
       cartManager.add(product);
       res.redirect(`/product/${req.params.productId}`);
     }
