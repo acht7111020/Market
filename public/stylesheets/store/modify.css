@@ -1,0 +1,35 @@
+#mainPicAction, #minorPicAction {
+  padding: 8% 30%;
+}
+
+#minorPicAction{
+  /*border: dashed 2px;*/
+}
+
+#photoIcon {
+  font-size: 100px;
+}
+
+.actionItems {
+  text-align: center;
+  display: block;
+}
+
+.chooseBtn {
+  display: block;
+}
+
+.minorPic {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.uploadPic {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.3))
+          drop-shadow(0px 0px 10px rgba(0,0,0,.3));
+}

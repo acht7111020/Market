@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
   status: {
-    rented: String,
+    rented: Boolean,
     level: String,
     area: String,
     position: Number,
@@ -13,7 +13,7 @@ var schema = new Schema({
     title: String,
     owner: String,
     coverImage: String,
-    contentImage: [String],
+    contentImage: String,
     description: String
   }
   // available :{type: Boolean, required: true},

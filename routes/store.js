@@ -15,6 +15,7 @@ var RoutesLogic = require('../config/routes-logic');
 var User = require('../models/user-schema');
 var Product = require('../models/product-schema');
 var Store = require('../models/store-schema');
+var ModifyStore = require('../models/modify-store');
 
 router.get('/:storeId', RoutesLogic, function(req, res, next) {
   var findProductQuery = Product.find({ownerStore: req.params.storeId});
@@ -58,8 +59,27 @@ router.get('/rent/:storeId', RoutesLogic, function(req, res) {
   res.render('store/modify', req.renderValues);
 });
 
-router.post('/rent/:storeId', RoutesLogic, upload.single('photos'), function(req, res) {
-  console.log();
+router.post('/rent/:storeId', RoutesLogic, upload.fields([{ name: 'mainImage', maxCount: 1}, { name: 'minorImage', maxCount: 1}]), function(req, res) {
+  var modifyStore = new ModifyStore();
+  modifyStore.modify(req.body, req.files, req.params.storeId, req.user);
+  res.redirect('/');
+});
+
+router.get('/modify/:storeId', RoutesLogic, function(req, res) {
+  Store.findById(req.params.storeId, function(err, store) {
+    if (err) res.redirect('/');
+    if (!store) res.redirect('/');
+    else {
+      req.renderValues.store = store;
+      res.render('store/modify', req.renderValues);
+    }
+  });
+});
+
+router.post('/modify/:storeId', RoutesLogic, upload.fields([{ name: 'mainImage', maxCount: 1}, { name: 'minorImage', maxCount: 1}]), function(req, res) {
+  // console.log(req.files);
+  var modifyStore = new ModifyStore();
+  modifyStore.modify(req.body, req.files, req.params.storeId, req.user);
   res.redirect('/');
 });
 

@@ -1,39 +1,63 @@
-<link rel="stylesheet" href="/stylesheets/product/modify.css">
-<script type="text/javascript" src="/javascripts/product/modify.js">
+<link rel="stylesheet" href="/stylesheets/store/modify.css">
+<script type="text/javascript" src="/javascripts/store/modify.js">
 </script>
 <div class="row">
   <h4>Rent a store</h4>
   <form method="post" enctype="multipart/form-data">
-    <div class="col s8">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="title" type="text" name="title" value="{{product.title}}">
-          <label for="title">Title</label>
+    <div class="row">
+      <div class="col s8">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="title" type="text" name="title" value="{{store.detail.title}}">
+            <label for="title">Title</label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="description" class="materialize-textarea" name="description">{{product.description}}</textarea>
-          <label for="description">Description about this store</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <div class="grey lighten-2" id="mainPicField">
-            <div id="mainPicAction" class="picContent">
-              <i class="material-icons actionItems" id="photoIcon">photo</i>
-              <h5 class="actionItems">Upload a cover photo</h5>
-              <input type="file" id="mainFile" class="fileUpload" style="display: none;" name="photos"/>
-              <a id="chooseBtn" class="waves-effect waves-light btn grey lighten-3" onclick="document.getElementById('mainFile').click();">
-                Choose a file
-              </a>
-            </div>
-            <img class="uploadPic" id="mainPic" src="{{product.coverImagePath}}" alt="">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="description" class="materialize-textarea" name="description">{{store.detail.description}}</textarea>
+            <label for="description">Description about this store</label>
           </div>
         </div>
       </div>
-      </div><div class="col s4">
+      <div class="col s4">
         <button class="btn-large waves-effect waves-light blue-grey right" type="submit" name="action">Save</button>
       </div>
+    </div>
+    <div class="row">
+      <div class="col s8">
+        <div class="row">
+          <div class="col s12">
+            <div class="grey lighten-2" id="mainPicField">
+              <div id="mainPicAction" class="picContent">
+                <i class="material-icons actionItems" id="photoIcon">photo</i>
+                <h5 class="actionItems">Upload a cover photo</h5>
+                <input type="file" id="mainFile" class="fileUpload" style="display: none;" name="mainImage"/>
+              </div>
+              <img class="uploadPic" id="mainPic" src="{{store.detail.coverImage}}" alt="">
+            </div>
+            <a class="waves-effect waves-light btn-large blue-grey chooseBtn" onclick="document.getElementById('mainFile').click();">
+              BROWSE FILES
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col s4">
+        <div class="row">
+          <div class="col s12">
+            <div class="grey lighten-2" id="minorPicField">
+              <div id="minorPicAction" class="picContent">
+                <i class="material-icons actionItems" style="font-size: 50px">photo</i>
+                <h6 class="actionItems">Upload a content photo</h6>
+                <input type="file" id="contentFile" class="fileUpload" style="display: none;" name="minorImage"/>
+              </div>
+              <img class="uploadPic" id="contentPic" src="{{store.detail.contentImage}}" alt="">
+            </div>
+            <a class="waves-effect waves-light btn blue-grey chooseBtn" onclick="document.getElementById('contentFile').click();">
+              BROWSE FILES
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>

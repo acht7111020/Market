@@ -2,7 +2,7 @@ module.exports = function ModifyProduct() {
   var Product = require('./product-schema');
 
   this.add = function(body, files, storeID) {
-    var uploadPathPrefix = '/uploads/';
+    var uploadPathPrefix = '/uploads/products/';
     var newProduct = new Product({
       title: body.title,
       coverImagePath: uploadPathPrefix + files[0].filename,

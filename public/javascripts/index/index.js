@@ -63,11 +63,12 @@ function CircleMove(pre_index, highlight_index){
 
 function setHighLightImage(tmpItem){
   var contextimage = $($(tmpItem).context).data('content');
-  var images = contextimage.split(',');
-  var img = "";
-  for (var i = 0 ; i < images.length; i++){
-    img += `<img src=${images[i]}>`
-  }
+  // var images = contextimage.split(',');
+  // var img = "";
+  // for (var i = 0 ; i < images.length; i++){
+  //   img += `<img src=${images[i]}>`
+  // }
+  var img = `<img src=${contextimage}>`
   $(".highlight").html(img);
   //$(".highlight").data('link') = $($(tmpItem).context).data('link');
   $('.highlight').data('link', $($(tmpItem).context).data('link'));
