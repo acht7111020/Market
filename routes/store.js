@@ -41,7 +41,7 @@ router.get('/about/:storeId', RoutesLogic, function(req, res) {
     if (storeErr) res.redirect('/');
     if (!store) res.redirect('/');
     else {
-      User.findOne({'facebook.id': store.detail.owner}, function(userErr, user) {
+      User.findById(store.detail.owner, function(userErr, user) {
         if (userErr) res.redirect('/');
         if (!user) res.redirect('/');
         else {

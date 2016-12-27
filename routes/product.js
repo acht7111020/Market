@@ -13,7 +13,7 @@ var upload = multer({ storage: storage});
 
 var RoutesLogic = require('../config/routes-logic');
 var Product = require('../models/product-schema');
-var CartManager = require('../models/cart-manager');
+var CartManager = require('../helpers/cart-manager');
 var ModifyProduct = require('../models/modify-product');
 
 router.get('/:productId', RoutesLogic, function(req, res) {

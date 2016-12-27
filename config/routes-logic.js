@@ -1,5 +1,4 @@
 function RoutesLogic (req, res, next) {
-  console.log(req.path);
   if (req.isAuthenticated()) {
     if (!req.session.level) {
       req.session.level = 'G';

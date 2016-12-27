@@ -11,7 +11,6 @@ router.get('/', RoutesLogic, function(req, res, next) {
     req.renderValues.stores = storeDocs;
     req.renderValues.leftbarTitle = 'G Floor';
     req.renderValues.leftbarImg = '/images/online-store.png';
-    console.log(req.session.level);
     res.render('index', req.renderValues);
   });
 });

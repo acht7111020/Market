@@ -7,7 +7,6 @@ var RoutesLogic = require('../config/routes-logic');
 router.get('/cart', RoutesLogic, function(req, res, next) {
   Cart.findOne({fb_id: req.renderValues.fb_user.id}, function(err, doc) {
     if (err) throw err;
-    // console.log(req.renderValues.userEmail);
     req.renderValues.cart = doc;
     console.log(req.renderValues.cart);
     res.render('order/cart', req.renderValues);

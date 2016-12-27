@@ -1,5 +1,5 @@
 module.exports = function CartManager(fb_id) {
-  Cart = require('./cart-schema');
+  Cart = require('../models/cart-schema');
   this.add = function(item) {
     Cart.findOne({fb_id: fb_id}, function(err, cart) {
       if (err) throw err;

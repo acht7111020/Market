@@ -1,5 +1,5 @@
 module.exports = function PurchaseManager(id, userEmail) {
-  Store = require('./store-schema');
+  Store = require('../models/store-schema');
   this.add = function(item) {
     //console.log("\n\n\n PURCHASE!!! \n\n\n");
     //console.log("EMAIL " + userEmail + "\n\n");

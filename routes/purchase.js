@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user-schema');
 var Store = require('../models/store-schema');
-var PurchaseManager = require('../models/purchase-manager');
+var PurchaseManager = require('../helpers/purchase-manager');
 var RoutesLogic = require('../config/routes-logic');
 /* GET home page. */
 router.get('/', RoutesLogic, function(req, res, next) {

@@ -94,23 +94,39 @@ passport.use(new FacebookStrategy({
           return done(err);
         }
         if (user) {
-          return done(null, user);
+          user.facebook = {
+            id: profile.id,
+            token: accessToken,
+            name: profile.displayName,
+            profilePic: profile.photos[0].value,
+            email: profile.emails[0].value,
+            friends: profile._json.friends.data
+          }
+          user.save(function(err, updatedUser) {
+            if (err) {
+              throw err;
+            }
+            return done(null, user);
+          });
         }
         else {
-          var newUser = new User();
-          newUser.facebook.id = profile.id;
-          newUser.facebook.token = accessToken;
-          newUser.facebook.name = profile.displayName;
-          newUser.facebook.profilePic = profile.photos[0].value;
-          newUser.facebook.email = profile.emails[0].value;
-          newUser.facebook.friends = profile._json.friends.data;
+          var newUser = new User({
+            facebook: {
+              id: profile.id,
+              token: accessToken,
+              name: profile.displayName,
+              profilePic: profile.photos[0].value,
+              email: profile.emails[0].value,
+              friends: profile._json.friends.data
+            }
+          });
 
           newUser.save(function(err) {
             if (err) {
               throw err;
             }
             return done(null, newUser);
-          })
+          });
         }
       });
     });
