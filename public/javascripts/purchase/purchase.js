@@ -16,10 +16,6 @@ $(document).ready(function(){
 
 function purchase(this_id){
   window.location = `/purchase/buying-store/${this_id}`;
-  /*var Store = require('/models/store-schema');
-  Store.findOne({position: thisPosition}, function(err, store) {
-      console.log(store.sellPrice);
-    });*/
 }
 function setHighLightImage(tmpItem){
   $(tmpItem).removeClass('indexStore');

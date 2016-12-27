@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  $('#mainPicField').height(parseInt($('#mainPicField').width()) * 1 / 2);
-  $('#minorPicField').height(parseInt($('#minorPicField').width()) * 1 / 2);
+  $('#mainPicField').height(parseInt($('#mainPicField').width()) * 3 / 5);
   $('.minorPic').height(parseInt($('.minorPic').eq(0).width()) * 3 / 5);
   console.log($('.minorPic').eq(0).height());
   $('.plusIcon').css('line-height', parseInt($('.minorPic').eq(0).height()) + 'px');

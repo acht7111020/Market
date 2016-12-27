@@ -7,19 +7,19 @@ var imagePathPrefix = '/images/stores/'
 var stores = [
   new Store({
     status: {
-      rented: true,
+      rented: false,
       price: 300000000,
       level: 'G',
       area: 'A',
       position: 1
     },
-    detail: {
-      title: 'Adidas',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}adidas-1.jpg`,
-      contentImage: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
-      description: 'This is a Adidas store'
-    }
+    // detail: {
+    //   title: 'Adidas',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}adidas-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
+    //   description: 'This is a Adidas store'
+    // }
   }),
   new Store({
     status: {
@@ -39,51 +39,51 @@ var stores = [
   }),
   new Store({
     status: {
-      rented: true,
+      rented: false,
       price: 300000000,
       level: 'G',
       area: 'A',
       position: 3
     },
-    detail: {
-      title: 'Jordan',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}jordan-1.jpg`,
-      contentImage: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
-      description: 'This is a Jordan store'
-    }
+    // detail: {
+    //   title: 'Jordan',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}jordan-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
+    //   description: 'This is a Jordan store'
+    // }
   }),
   new Store({
     status: {
-      rented: true,
+      rented: false,
       price: 100000000,
       level: 'G',
       area: 'A',
       position: 4
     },
-    detail: {
-      title: 'New Balance',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}newbalance-1.jpg`,
-      contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
-      description: 'This is a New Balance store'
-    }
+    // detail: {
+    //   title: 'New Balance',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}newbalance-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
+    //   description: 'This is a New Balance store'
+    // }
   }),
   new Store({
     status: {
-      rented: true,
+      rented: false,
       price: 20000000,
       level: 'G',
       area: 'A',
       position: 5
     },
-    detail: {
-      title: 'Nike',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}nike-1.jpg`,
-      contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
-      description: 'This is a Nike store'
-    }
+    // detail: {
+    //   title: 'Nike',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}nike-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
+    //   description: 'This is a Nike store'
+    // }
   }),
   new Store({
     status: {

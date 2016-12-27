@@ -4,6 +4,6 @@ $(document).ready(function(){
   $('.card-image').click(function(e){
     // console.log($(this).find('.productId').html());
     var productId = $(this).find('.productId').html();
-    window.location = `/store/product/${productId}`;
+    window.location = `/product/${productId}`;
   });
 });

@@ -1,9 +1,5 @@
-#mainPicAction, #minorPicAction {
+#mainPicAction {
   padding: 8% 30%;
-}
-
-#minorPicAction{
-  /*border: dashed 2px;*/
 }
 
 #photoIcon {
@@ -15,7 +11,11 @@
   display: block;
 }
 
-.chooseBtn {
+#annotation {
+  color: #BEBEBE;
+}
+
+#chooseBtn {
   display: block;
 }
 
@@ -23,6 +23,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.plusIcon {
+  text-align: center;
+  display: block;
+  border: solid 1px #bdbdbd;
+  color: #bdbdbd;
+  cursor: pointer;
 }
 
 .uploadPic {
