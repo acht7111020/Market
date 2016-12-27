@@ -1,33 +1,45 @@
-module.exports = function CartManager(fb_id) {
-  Cart = require('../models/cart-schema');
+module.exports = function CartManager(userId) {
+  var Cart = require('../models/cart-schema');
+  var Product = require('../models/product-schema');
   this.add = function(item) {
-    Cart.findOne({fb_id: fb_id}, function(err, cart) {
+    Cart.findOne({userId: userId}, function(err, cart) {
       if (err) throw err;
-      if (cart) {
-
-      }
-      else {
-        cart = new Cart({fb_id: fb_id, items: {}, totalQty: 0, totalPrice: 0});
+      if (!cart) {
+        cart = new Cart({userId: userId, items: {}, totalQty: 0});
       }
       var storedItem = cart.items[item.id];
       if (!storedItem){
-        storedItem = cart.items[item.id] = {item: item, qty: 0, price: 0};
+        storedItem = cart.items[item.id] = {item: item, qty: 0};
       }
       storedItem.qty ++;
-      storedItem.price = storedItem.item.price * storedItem.qty;
-      // console.log(storedItem);
       cart.items[item.id] = storedItem;
       cart.totalQty ++;
-      cart.totalPrice += storedItem.item.price;
       cart.markModified('items');
-      cart.save(function(err, updatedChart) {
+      cart.save(function(err, updatedCart) {
         if (err) throw err;
-        console.log(updatedChart);
+        console.log(updatedCart);
       });
     });
   }
 
-
+  this.updatePrices = function() {
+    Cart.findOne({userId: userId}, function(err, cart) {
+      if (err) throw err;
+      var itemIds = [];
+      for (var item in cart.items){
+        itemIds.push({_id: item});
+      }
+      console.log(itemIds);
+      Product.find({$or: itemIds}, function(err, products) {
+        cart.totalPrice = 0;
+        for (i = 0; i < products.length; i++) {
+          cart.items[products[i]._id].item = products[i];
+          cart.items[products[i]._id].price = products[i].price * cart.items[products[i]._id].qty;
+          cart.totalPrice += cart.items[products[i]._id].price;
+        }
+      });
+    });
+  }
 
   // if (docs.length > 0){
   //   this.items = docs.items;

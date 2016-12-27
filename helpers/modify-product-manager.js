@@ -1,5 +1,5 @@
 module.exports = function ModifyProduct() {
-  var Product = require('./product-schema');
+  var Product = require('../models/product-schema');
 
   this.add = function(body, files, storeID) {
     var uploadPathPrefix = '/uploads/products/';
