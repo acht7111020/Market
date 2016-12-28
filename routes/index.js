@@ -9,7 +9,7 @@ router.get('/', RoutesLogic, function(req, res, next) {
   var findQueryA = Store.find({"status.level":"G", "status.area":"A"});
   var findQueryB = Store.find({"status.level":"G", "status.area":"B"});
   var findQueryC = Store.find({"status.level":"G", "status.area":"C"});
-  var allstores;
+
   //db.stores.find({"status.area":"A"})
   findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
     findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
@@ -27,11 +27,11 @@ router.get('/', RoutesLogic, function(req, res, next) {
 
 });
 
-router.get('/:level/', RoutesLogic, function(req, res, next) {
+router.get('/floor/:level/', RoutesLogic, function(req, res, next) {
+
   var findQueryA = Store.find({"status.level":req.params.level, "status.area":"A"});
   var findQueryB = Store.find({"status.level":req.params.level, "status.area":"B"});
   var findQueryC = Store.find({"status.level":req.params.level, "status.area":"C"});
-  var allstores;
   //db.stores.find({"status.area":"A"})
   findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
     findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
@@ -49,5 +49,16 @@ router.get('/:level/', RoutesLogic, function(req, res, next) {
   });
 
 });
+
+router.get('/loading/:type/:level', RoutesLogic, function(req, res, next) {
+  req.renderValues.level = req.params.level;
+  req.renderValues.type = req.params.type;
+  req.session.level = req.params.level;
+  req.renderValues.leftbarTitle = 'loading';
+  req.renderValues.leftbarImg = '/images/online-store.png';
+  res.render('load/loading', req.renderValues);
+});
+
+
 
 module.exports = router;

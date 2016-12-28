@@ -7,9 +7,13 @@ var PurchaseManager = require('../helpers/purchase-manager');
 var RoutesLogic = require('../config/routes-logic');
 /* GET home page. */
 router.get('/', RoutesLogic, function(req, res, next) {
-  var findQueryA = Store.find({"status.area":"A"});
-  var findQueryB = Store.find({"status.area":"B"});
-  var findQueryC = Store.find({"status.area":"C"});
+  res.redirect('/purchase/G');
+});
+
+router.get('/:level', RoutesLogic, function(req, res, next) {
+  var findQueryA = Store.find({"status.level":req.params.level, "status.area":"A"});
+  var findQueryB = Store.find({"status.level":req.params.level, "status.area":"B"});
+  var findQueryC = Store.find({"status.level":req.params.level, "status.area":"C"});
   var allstores;
   //db.stores.find({"status.area":"A"})
   findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
@@ -19,7 +23,7 @@ router.get('/', RoutesLogic, function(req, res, next) {
         req.renderValues.storesA = storeDocsA;
         req.renderValues.storesB = storeDocsB;
         req.renderValues.storesC = storeDocsC;
-        req.renderValues.leftbarTitle = req.session.level;
+        req.renderValues.leftbarTitle = req.params.level;
         req.renderValues.leftbarImg = '/images/online-store.png';
         res.render('purchase/purchase', req.renderValues);
       });
