@@ -2,17 +2,29 @@
 <script type="text/javascript" src="/javascripts/index/index.js"></script>
 <!-- <fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();"></fb:login-button>
 <div id="status"></div> -->
-
-<div class="fullpage">
-  <div class="block">
-    {{# each stores}}
+<div class="fixed-action-btn center">
+    <a class="btn-floating btn-large blue">
+      <i class="large "><img src="/images/elevator_icon.png" class='elevator_icon'></i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red" href="/5">5</a></li>
+      <li><a class="btn-floating yellow darken-1" href="/4">4</a></li>
+      <li><a class="btn-floating green" href="/3">3</a></li>
+      <li><a class="btn-floating blue" href="/2">2</a></li>
+      <li><a class="btn-floating grey darken-1" href="/G">1</a></li>
+    </ul>
+</div>
+{{# if storesA}}
+<div class="page-wrapper">
+  <div class="main-box boxA" >
+    {{# each storesA}}
       {{#if this.detail.owner }}
-      <div class="indexStore" style="background-image: url('{{this.detail.coverImage}}')"
-      data-indexval={{@index}} data-content={{this.detail.contentImage}} data-link={{this._id}}>
+      <div class="indexStore partA" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-part={{this.status.area}} data-content={{this.detail.contentImage}} data-link={{this._id}}>
       </div>
       {{else}}
-      <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"
-      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg" data-link="">
+      <div class="indexStore partA" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-part={{this.status.area}}  data-content="/images/stores/empty-1.jpg" data-link="">
       </div>
       {{/if}}
     {{/each}}
@@ -21,3 +33,46 @@
     </div>
   </div>
 </div>
+{{/if}}
+
+{{# if storesB}}
+<div class="page-wrapper">
+  <div class="main-box boxB" >
+    {{# each storesB}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partB" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-part={{this.status.area}} data-content={{this.detail.contentImage}} data-link={{this._id}}>
+      </div>
+      {{else}}
+      <div class="indexStore partB" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-part={{this.status.area}}  data-content="/images/stores/empty-1.jpg" data-link="">
+      </div>
+      {{/if}}
+    {{/each}}
+    <div class="highlight" data-link="">
+
+    </div>
+  </div>
+</div>
+{{/if}}
+
+{{# if storesC}}
+<div class="page-wrapper">
+  <div class="main-box boxC" >
+    {{# each storesC}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partC" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-part={{this.status.area}} data-content={{this.detail.contentImage}} data-link={{this._id}}>
+      </div>
+      {{else}}
+      <div class="indexStore partC" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-part={{this.status.area}}  data-content="/images/stores/empty-1.jpg" data-link="">
+      </div>
+      {{/if}}
+    {{/each}}
+    <div class="highlight" data-link="">
+
+    </div>
+  </div>
+</div>
+{{/if}}

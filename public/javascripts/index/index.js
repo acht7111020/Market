@@ -1,34 +1,24 @@
-var center_left = '35%', center_top = '32.5%';
-var highlight_left = '5%', highlight_top = '29%';
-var topping_parameters = '60%', leftting_parameters = 35;
+var center_left = '40%', center_top = '35.5%';
+var highlight_left = '13%', highlight_top = '33%';
+var topping_parameters = '70%', leftting_parameters = 40;
 var highlight_index = 6;
 
 $(document).ready(function(){
-  $($(".indexStore")[$(".indexStore").length-1]).css({left: center_left, top:center_top, opacity:'0.0'});
-  setHighLightImage($(".indexStore")[$(".indexStore").length-1]);
-  for(var i = 0 ; i < ($(".indexStore").length-1); i++){
-    var left_start = leftting_parameters*(i%3).toString() + '%';
-    var top_start = (i > 2)? topping_parameters: '0%';
-    $($(".indexStore")[i]).css({left: left_start, top:top_start});
-  }
+  setinit(".partA", 0);
+  setinit(".partB", 1);
+  setinit(".partC", 2);
 
-  $(".indexStore").click(function(evt){
-    var level = GetLevel($(this).context.style.left, $(this).context.style.top);
-    var contextimage = $($(this).context).data('content');
-    var images = contextimage.split(',');
-    var img = "";
-    for (var i = 0 ; i < images.length; i++){
-      img += `<img src=${images[i]}>`
-    }
-    $(".highlight").html(img);
-    $('.highlight').data('link', $($(this).context).data('link'));
-    CircleMove(level, highlight_index);
-    var div = $(".highlight");
-    var left_start = (getLeftStart(level) - 18).toString() + '%';
-    var top_start = (level > 2)? topping_parameters: '0%';
-    div.css({left: left_start, top:top_start,  opacity: '0.1'});
-    div.animate({top: highlight_top, left:highlight_left,  opacity: '1.0'}, 1000);
 
+  $(".partA").click(function(evt){
+      storeClick(this, ".partA", 0)
+  });
+
+  $(".partB").click(function(evt){
+      storeClick(this, ".partB", 1)
+  });
+
+  $(".partC").click(function(evt){
+      storeClick(this, ".partC", 2)
   });
 
   $(".highlight").click(function(evt){
@@ -39,15 +29,45 @@ $(document).ready(function(){
 
 });
 
-function CircleMove(pre_index, highlight_index){
+function setinit(part, index){
 
-  for(var i = 0 ; i < $(".indexStore").length; i++){
-    var level = GetLevel($(".indexStore")[i].style.left, $(".indexStore")[i].style.top);
+  $($(part)[$(part).length-1]).css({left: center_left, top:center_top, opacity:'0.0'});
+  setHighLightImage($(part)[$(part).length-1], index);
+  for(var i = 0 ; i < ($(part).length-1); i++){
+    var left_start = leftting_parameters*(i%3).toString() + '%';
+    var top_start = (i > 2)? topping_parameters: '0%';
+    $($(part)[i]).css({left: left_start, top:top_start});
+  }
+}
+
+function storeClick(mythis, part, index){
+  var level = GetLevel($(mythis).context.style.left, $(mythis).context.style.top);
+  var contextimage = $($(mythis).context).data('content');
+  var images = contextimage.split(',');
+  var img = "";
+  for (var i = 0 ; i < images.length; i++){
+    img += `<img src=${images[i]}>`
+  }
+  $($(".highlight")[index]).html(img);
+  $($(".highlight")[index]).data('link', $($(mythis).context).data('link'));
+  CircleMove(level, highlight_index, part);
+  var div = $($(".highlight")[index]);
+  var left_start = (getLeftStart(level) - 18).toString() + '%';
+  var top_start = (level > 2)? topping_parameters: '0%';
+  div.css({left: left_start, top:top_start,  opacity: '0.1'});
+  div.animate({top: highlight_top, left:highlight_left,  opacity: '1.0'}, 1000);
+
+}
+
+function CircleMove(pre_index, highlight_index, part){
+
+  for(var i = 0 ; i < $(part).length; i++){
+    var level = GetLevel($(part)[i].style.left, $(part)[i].style.top);
     if(level == pre_index){
-      $($(".indexStore")[i]).css({left: center_left, top:center_top, opacity:'0.0'});
+      $($(part)[i]).css({left: center_left, top:center_top, opacity:'0.0'});
       continue;
     }else if (level == highlight_index){
-      $($(".indexStore")[i]).css({left: '0%', top:'0%', opacity:'1.0'});
+      $($(part)[i]).css({left: '0%', top:'0%', opacity:'1.0'});
       continue;
     }else if (level >= pre_index)
       continue;
@@ -56,22 +76,24 @@ function CircleMove(pre_index, highlight_index){
     if(level > 5) level = 5;
     var left_start = getLeftStart(level).toString() + '%';
     var top_start = (level > 2)? topping_parameters: '0%';
-    $($(".indexStore")[i]).css({left: left_start, top:top_start});
+    $($(part)[i]).css({left: left_start, top:top_start});
   }
 
 }
 
-function setHighLightImage(tmpItem){
+function setHighLightImage(tmpItem, index){
+  console.log(index);
   var contextimage = $($(tmpItem).context).data('content');
-  // var images = contextimage.split(',');
-  // var img = "";
-  // for (var i = 0 ; i < images.length; i++){
-  //   img += `<img src=${images[i]}>`
-  // }
-  var img = `<img src=${contextimage}>`
-  $(".highlight").html(img);
+  console.log(contextimage);
+  var images = contextimage.split(',');
+  var img = "";
+  for (var i = 0 ; i < images.length; i++){
+    img += `<img src=${images[i]}>`
+  }
+  //var img = `<img src=${contextimage}>`
+  $($(".highlight")[index]).html(img);
   //$(".highlight").data('link') = $($(tmpItem).context).data('link');
-  $('.highlight').data('link', $($(tmpItem).context).data('link'));
+  $($(".highlight")[index]).data('link', $($(tmpItem).context).data('link'));
 }
 
 function GetLevel(left, top){

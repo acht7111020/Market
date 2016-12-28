@@ -7,13 +7,23 @@ var PurchaseManager = require('../helpers/purchase-manager');
 var RoutesLogic = require('../config/routes-logic');
 /* GET home page. */
 router.get('/', RoutesLogic, function(req, res, next) {
-  var findQuery = Store.find();
-  findQuery.sort('position').exec(function(storeErr, stores){
-    if(storeErr) throw storeErr;
-    req.renderValues.stores = stores;
-    req.renderValues.leftbarTitle = 'G Floor';
-    req.renderValues.leftbarImg = '/images/online-store.png';
-    res.render('purchase/purchase', req.renderValues);
+  var findQueryA = Store.find({"status.area":"A"});
+  var findQueryB = Store.find({"status.area":"B"});
+  var findQueryC = Store.find({"status.area":"C"});
+  var allstores;
+  //db.stores.find({"status.area":"A"})
+  findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
+    findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
+      findQueryC.sort('position').exec(function(storeErr, storeDocsC) {
+        //allstores = [storeDocsA, storeDocsB, storeDocsC];
+        req.renderValues.storesA = storeDocsA;
+        req.renderValues.storesB = storeDocsB;
+        req.renderValues.storesC = storeDocsC;
+        req.renderValues.leftbarTitle = req.session.level;
+        req.renderValues.leftbarImg = '/images/online-store.png';
+        res.render('purchase/purchase', req.renderValues);
+      });
+    });
   });
 });
 

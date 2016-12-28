@@ -1,14 +1,15 @@
 <link rel='stylesheet' href='/stylesheets/index.css' />
 <script type="text/javascript" src="/javascripts/purchase/purchase.js"></script>
-<div class="fullpage">
-  <div class="block">
-    {{# each stores}}
+{{# if storesA}}
+<div class="page-wrapper">
+  <div class="main-box boxA">
+    {{# each storesA}}
       {{#if this.detail.owner }}
-      <div class="indexStore" style="background-image: url('{{this.detail.coverImage}}')"
-      data-indexval={{@index}} data-content={{this.contentImagePath}}>
+      <div class="indexStore partA" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
       </div>
       {{else}}
-      <div class="indexStore" style="background-image: url('/images/stores/empty-1.jpg')"
+      <div class="indexStore partA" style="background-image: url('/images/stores/empty-1.jpg')"
       data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
       <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
       <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
@@ -17,3 +18,44 @@
     {{/each}}
   </div>
 </div>
+{{/if}}
+
+{{# if storesB}}
+<div class="page-wrapper">
+  <div class="main-box boxB">
+    {{# each storesB}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partB" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
+      </div>
+      {{else}}
+      <div class="indexStore partB" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+{{# if storesC}}
+<div class="page-wrapper">
+  <div class="main-box boxC">
+    {{# each storesC}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partC" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
+      </div>
+      {{else}}
+      <div class="indexStore partC" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}
