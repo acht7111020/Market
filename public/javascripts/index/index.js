@@ -43,8 +43,7 @@ function setinit(part, index){
 function storeClick(mythis, part, index){
   var level = GetLevel($(mythis).context.style.left, $(mythis).context.style.top);
   var contextimage = $($(mythis).context).data('content');
-  var images;
-  images= contextimage.split(',');
+  var images = contextimage.split(',');
   var img = "";
   for (var i = 0 ; i < images.length; i++){
     img += `<img src=${images[i]}>`
@@ -86,8 +85,7 @@ function setHighLightImage(tmpItem, index){
   console.log(index);
   var contextimage = $($(tmpItem).context).data('content');
   console.log(contextimage);
-  var images;
-  images = contextimage.split(',');
+  var images = contextimage.split(',');
   var img = "";
   for (var i = 0 ; i < images.length; i++){
     img += `<img src=${images[i]}>`
