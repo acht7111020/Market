@@ -7,7 +7,8 @@ var PurchaseManager = require('../helpers/purchase-manager');
 var RoutesLogic = require('../config/routes-logic');
 /* GET home page. */
 router.get('/', RoutesLogic, function(req, res, next) {
-  res.redirect('/purchase/G');
+  var path = "/purchase/" + req.session.level;
+  res.redirect(path);
 });
 
 router.get('/:level', RoutesLogic, function(req, res, next) {
@@ -23,6 +24,7 @@ router.get('/:level', RoutesLogic, function(req, res, next) {
         req.renderValues.storesA = storeDocsA;
         req.renderValues.storesB = storeDocsB;
         req.renderValues.storesC = storeDocsC;
+        req.session.level = req.params.level;
         req.renderValues.leftbarTitle = req.params.level;
         req.renderValues.leftbarImg = '/images/online-store.png';
         res.render('purchase/purchase', req.renderValues);

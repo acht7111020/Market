@@ -6,9 +6,9 @@ var expressHbs = require('express-handlebars');
 var RoutesLogic = require('../config/routes-logic');
 
 router.get('/', RoutesLogic, function(req, res, next) {
-  var findQueryA = Store.find({"status.level":"G", "status.area":"A"});
-  var findQueryB = Store.find({"status.level":"G", "status.area":"B"});
-  var findQueryC = Store.find({"status.level":"G", "status.area":"C"});
+  var findQueryA = Store.find({"status.level":req.session.level, "status.area":"A"});
+  var findQueryB = Store.find({"status.level":req.session.level, "status.area":"B"});
+  var findQueryC = Store.find({"status.level":req.session.level, "status.area":"C"});
 
   //db.stores.find({"status.area":"A"})
   findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
