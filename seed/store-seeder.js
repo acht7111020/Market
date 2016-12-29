@@ -61,13 +61,13 @@ var stores = [
       area: 'A',
       position: 4
     },
-    detail: {
-      title: 'New Balance',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}newbalance-1.jpg`,
-      contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
-      description: 'This is a New Balance store'
-    }
+    // detail: {
+    //   title: 'New Balance',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}newbalance-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
+    //   description: 'This is a New Balance store'
+    // }
   }),
   new Store({
     status: {
@@ -77,13 +77,13 @@ var stores = [
       area: 'A',
       position: 5
     },
-    detail: {
-      title: 'Nike',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}nike-1.jpg`,
-      contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
-      description: 'This is a Nike store'
-    }
+    // detail: {
+    //   title: 'Nike',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}nike-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
+    //   description: 'This is a Nike store'
+    // }
   }),
   new Store({
     status: {
@@ -93,13 +93,13 @@ var stores = [
       area: 'A',
       position: 6
     },
-    detail: {
-      title: 'Under Armour',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}underarmour-1.jpg`,
-      contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
-      description: 'This is a Under Armour store'
-    }
+    // detail: {
+    //   title: 'Under Armour',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}underarmour-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
+    //   description: 'This is a Under Armour store'
+    // }
   }),
   new Store({
     status: {
@@ -109,13 +109,13 @@ var stores = [
       area: 'A',
       position: 7
     },
-    detail: {
-      title: 'Puma',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}puma-1.jpg`,
-      contentImage: [`${imagePathPrefix}puma-1.jpg`,`${imagePathPrefix}puma-2.jpg`],
-      description: 'This is a Puma store'
-    }
+    // detail: {
+    //   title: 'Puma',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}puma-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}puma-1.jpg`,`${imagePathPrefix}puma-2.jpg`],
+    //   description: 'This is a Puma store'
+    // }
   }),
   new Store({
     status: {
@@ -173,13 +173,13 @@ var stores = [
       area: 'B',
       position: 4
     },
-    detail: {
-      title: 'New Balance',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}newbalance-1.jpg`,
-      contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
-      description: 'This is a New Balance store'
-    }
+    // detail: {
+    //   title: 'New Balance',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}newbalance-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
+    //   description: 'This is a New Balance store'
+    // }
   }),
   new Store({
     status: {
@@ -189,13 +189,13 @@ var stores = [
       area: 'B',
       position: 5
     },
-    detail: {
-      title: 'Nike',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}nike-1.jpg`,
-      contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
-      description: 'This is a Nike store'
-    }
+    // detail: {
+    //   title: 'Nike',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}nike-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
+    //   description: 'This is a Nike store'
+    // }
   }),
   new Store({
     status: {
@@ -205,13 +205,13 @@ var stores = [
       area: 'B',
       position: 6
     },
-    detail: {
-      title: 'Under Armour',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}underarmour-1.jpg`,
-      contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
-      description: 'This is a Under Armour store'
-    }
+    // detail: {
+    //   title: 'Under Armour',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}underarmour-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
+    //   description: 'This is a Under Armour store'
+    // }
   }),
   new Store({
     status: {
@@ -221,13 +221,13 @@ var stores = [
       area: 'B',
       position: 7
     },
-    detail: {
-      title: 'Converse',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}converse-1.jpg`,
-      contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
-      description: 'This is a Converse store'
-    }
+    // detail: {
+    //   title: 'Converse',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}converse-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
+    //   description: 'This is a Converse store'
+    // }
   }),
   new Store({
     status: {
@@ -429,13 +429,13 @@ var stores = [
       area: 'A',
       position: 6
     },
-    detail: {
-      title: 'Under Armour',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}underarmour-1.jpg`,
-      contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
-      description: 'This is a Under Armour store'
-    }
+    // detail: {
+    //   title: 'Under Armour',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}underarmour-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}underarmour-1.jpg`,`${imagePathPrefix}underarmour-2.jpg`],
+    //   description: 'This is a Under Armour store'
+    // }
   }),
   new Store({
     status: {
@@ -445,13 +445,13 @@ var stores = [
       area: 'A',
       position: 7
     },
-    detail: {
-      title: 'Adidas',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}adidas-1.jpg`,
-      contentImage: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
-      description: 'This is a Adidas store'
-    }
+    // detail: {
+    //   title: 'Adidas',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}adidas-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}adidas-1.jpg`,`${imagePathPrefix}adidas-2.jpg`],
+    //   description: 'This is a Adidas store'
+    // }
   }),
   new Store({
     status: {
@@ -493,13 +493,13 @@ var stores = [
       area: 'B',
       position: 3
     },
-    detail: {
-      title: 'Jordan',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}jordan-1.jpg`,
-      contentImage: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
-      description: 'This is a Jordan store'
-    }
+    // detail: {
+    //   title: 'Jordan',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}jordan-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}jordan-1.jpg`,`${imagePathPrefix}jordan-2.jpg`],
+    //   description: 'This is a Jordan store'
+    // }
   }),
   new Store({
     status: {
@@ -509,13 +509,13 @@ var stores = [
       area: 'B',
       position: 4
     },
-    detail: {
-      title: 'New Balance',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}newbalance-1.jpg`,
-      contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
-      description: 'This is a New Balance store'
-    }
+    // detail: {
+    //   title: 'New Balance',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}newbalance-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}newbalance-1.jpg`,`${imagePathPrefix}newbalance-2.jpg`],
+    //   description: 'This is a New Balance store'
+    // }
   }),
   new Store({
     status: {
@@ -525,13 +525,13 @@ var stores = [
       area: 'B',
       position: 5
     },
-    detail: {
-      title: 'Nike',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}nike-1.jpg`,
-      contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
-      description: 'This is a Nike store'
-    }
+    // detail: {
+    //   title: 'Nike',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}nike-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}nike-1.jpg`,`${imagePathPrefix}nike-2.jpg`],
+    //   description: 'This is a Nike store'
+    // }
   }),
   new Store({
     status: {
@@ -813,13 +813,13 @@ var stores = [
       area: 'B',
       position: 2
     },
-    detail: {
-      title: 'Converse',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}converse-1.jpg`,
-      contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
-      description: 'This is a Converse store'
-    }
+    // detail: {
+    //   title: 'Converse',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}converse-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
+    //   description: 'This is a Converse store'
+    // }
   }),
   new Store({
     status: {
@@ -1149,13 +1149,13 @@ var stores = [
       area: 'B',
       position: 2
     },
-    detail: {
-      title: 'Converse',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}converse-1.jpg`,
-      contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
-      description: 'This is a Converse store'
-    }
+    // detail: {
+    //   title: 'Converse',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}converse-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
+    //   description: 'This is a Converse store'
+    // }
   }),
   new Store({
     status: {
@@ -1485,13 +1485,13 @@ var stores = [
       area: 'B',
       position: 2
     },
-    detail: {
-      title: 'Converse',
-      owner: '1270063206384939',
-      coverImage: `${imagePathPrefix}converse-1.jpg`,
-      contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
-      description: 'This is a Converse store'
-    }
+    // detail: {
+    //   title: 'Converse',
+    //   owner: '1270063206384939',
+    //   coverImage: `${imagePathPrefix}converse-1.jpg`,
+    //   contentImage: [`${imagePathPrefix}converse-1.jpg`,`${imagePathPrefix}converse-2.jpg`],
+    //   description: 'This is a Converse store'
+    // }
   }),
   new Store({
     status: {
