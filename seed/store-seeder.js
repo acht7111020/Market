@@ -9,7 +9,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 1
     },
@@ -25,7 +25,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 2
     },
@@ -41,7 +41,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 3
     },
@@ -57,7 +57,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 4
     },
@@ -73,7 +73,7 @@ var stores = [
     status: {
       rented: false,
       price: '20000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 5
     },
@@ -89,7 +89,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 6
     },
@@ -105,7 +105,7 @@ var stores = [
     status: {
       rented: false,
       price: '400000000',
-      level: 'G',
+      level: '1',
       area: 'A',
       position: 7
     },
@@ -121,7 +121,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 1
     },
@@ -137,7 +137,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 2
     },
@@ -153,7 +153,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 3
     },
@@ -169,7 +169,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 4
     },
@@ -185,7 +185,7 @@ var stores = [
     status: {
       rented: false,
       price: '20000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 5
     },
@@ -201,7 +201,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 6
     },
@@ -217,7 +217,7 @@ var stores = [
     status: {
       rented: false,
       price: '400000000',
-      level: 'G',
+      level: '1',
       area: 'B',
       position: 7
     },
@@ -233,7 +233,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 1
     },
@@ -249,7 +249,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 2
     },
@@ -265,7 +265,7 @@ var stores = [
     status: {
       rented: false,
       price: '300000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 3
     },
@@ -281,7 +281,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 4
     },
@@ -297,7 +297,7 @@ var stores = [
     status: {
       rented: false,
       price: '20000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 5
     },
@@ -313,7 +313,7 @@ var stores = [
     status: {
       rented: false,
       price: '100000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 6
     },
@@ -329,7 +329,7 @@ var stores = [
     status: {
       rented: false,
       price: '400000000',
-      level: 'G',
+      level: '1',
       area: 'C',
       position: 7
     },
