@@ -1,0 +1,74 @@
+<link rel='stylesheet' href='/stylesheets/index.css' />
+<script type="text/javascript" src="/javascripts/purchase/purchase.js"></script>
+<div class="fixed-action-btn center">
+    <a class="btn-floating btn-large blue">
+      <i class="large "><img src="/images/elevator_icon.png" class='elevator_icon'></i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red" href="/loading/purchase/5">5</a></li>
+      <li><a class="btn-floating yellow darken-1" href="/loading/purchase/4">4</a></li>
+      <li><a class="btn-floating green" href="/loading/purchase/3">3</a></li>
+      <li><a class="btn-floating blue" href="/loading/purchase/2">2</a></li>
+      <li><a class="btn-floating grey darken-1" href="/loading/purchase/G">1</a></li>
+    </ul>
+</div>
+
+{{# if storesA}}
+<div class="page-wrapper">
+  <div class="main-box boxA">
+    {{# each storesA}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partA" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
+      </div>
+      {{else}}
+      <div class="indexStore partA" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+{{# if storesB}}
+<div class="page-wrapper">
+  <div class="main-box boxB">
+    {{# each storesB}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partB" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
+      </div>
+      {{else}}
+      <div class="indexStore partB" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+{{# if storesC}}
+<div class="page-wrapper">
+  <div class="main-box boxC">
+    {{# each storesC}}
+      {{#if this.detail.owner }}
+      <div class="indexStore partC" style="background-image: url('{{this.detail.coverImage}}')"
+      data-indexval={{@index}} data-content={{this.detail.contentImage}}>
+      </div>
+      {{else}}
+      <div class="indexStore partC" style="background-image: url('/images/stores/empty-1.jpg')"
+      data-indexval={{@index}} data-content="/images/stores/empty-1.jpg">
+      <label for="first_name" class="priceLabel"> {{this.status.price}} </label>
+      <a class="waves-effect waves-light btn" href="/store/rent/{{this._id}}">PURCHASE!</a>
+      </div>
+      {{/if}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}

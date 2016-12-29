@@ -1,0 +1,46 @@
+body {
+  font-family: 'PT Sans', sans-serif;
+}
+
+#topbar{
+  padding-left: 20px;
+  z-index: 1;
+}
+
+#leftbar {
+  /*width: 20%;*/
+  overflow-y: scroll !important;
+  display: block !important;
+  /*padding: 0 !important;*/
+  /*margin-top: 3%;*/
+  z-index: 0;
+  background-color: transparent !important;
+}
+
+main {
+  padding-left: 300px;
+  margin: 3%;
+}
+
+/*#mainArea {
+  width: 80%;
+  margin-left: 20%;
+}
+
+#mainAreaBody > .signForm {
+  padding: 0 30%;
+}
+
+#mainArea > #mainAreaBody{
+  margin: 2% 7%;
+}
+
+.signupBtn {
+  float: right;
+  margin: 30px 0px 0px 30px;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 20px;
+}*/

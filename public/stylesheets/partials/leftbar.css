@@ -1,0 +1,110 @@
+#leftbar {
+  padding-top: 45px;
+  padding-bottom: 600px;
+}
+
+#leftbarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.3))
+            drop-shadow(0px 0px 10px rgba(0,0,0,.3));
+}
+
+#leftbarTitle {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.userView {
+  margin: 0 10%;
+  padding: 0 !important;
+}
+
+.collapsible-body {
+  background-color: transparent !important;
+}
+
+.messageForm > .inputField {
+  width: 100%;
+  border-bottom: solid 2.5px;
+  padding: 0;
+  margin-top: 0 !important;
+  border-color: #9D9D9D;
+}
+
+.messageInput {
+  width: 90% !important;
+  margin: 0 5% 0 5% !important;
+  border-bottom: none !important;
+  font-size: 15px !important;
+}
+
+.messageInput:focus {
+  box-shadow: none !important;
+}
+
+.chatContent {
+  width: 100%;
+  height: 35vmin;
+  border-top: solid 2.5px;
+  border-bottom: solid 2.5px;
+  border-color: #9D9D9D;
+  font-weight: bold;
+  overflow-y: scroll;
+  padding-top: 10px;
+}
+
+.chatBox {
+  background-color: transparent !important;
+}
+
+.messageText {
+  margin: 5px !important;
+  padding: 5px 10px 5px 10px !important;
+  font-size: 15px;
+  max-width: 80% !important;
+  word-wrap: break-word; !important;
+  border-radius: 10px;
+  line-height: 17px;
+  clear: both;
+}
+
+.chatCollapsible {
+  font-weight: bold;
+}
+
+.fromOther {
+  float: left;
+  background-color: #c5d5d9;
+  color: #336699;
+}
+
+.fromSelfRead {
+  float: right;
+  background-color: #003D79;
+  color: #c5d5d9;
+}
+
+.fromSelfUnread {
+  float: right;
+  background-color: #0066CC;
+  color: #c5d5d9;
+}
+
+.unreadMessages{
+  float: right;
+  color: #AE0000;
+}
+
+.sendBtn{
+  display: none;
+}
+
+#chooseBtn {
+  color: #6C6C6C;
+}
+
+.collapsible li a {
+  padding: 0 32px !important;
+}
