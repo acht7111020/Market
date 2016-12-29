@@ -5,9 +5,5 @@ $(document).ready(function(){
 });
 
 function redirect(){
-  //alert("redirect");
-  var type = $("#thistype").val();
-  var level = $("#thislevel").val();
-  window.location = `/${type}/${level}`;
-
+  window.location = `/`;
 }

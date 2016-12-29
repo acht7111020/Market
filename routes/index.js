@@ -24,36 +24,15 @@ router.get('/', RoutesLogic, function(req, res, next) {
       });
     });
   });
-
 });
 
-router.get('/floor/:level/', RoutesLogic, function(req, res, next) {
-
-  var findQueryA = Store.find({"status.level":req.params.level, "status.area":"A"});
-  var findQueryB = Store.find({"status.level":req.params.level, "status.area":"B"});
-  var findQueryC = Store.find({"status.level":req.params.level, "status.area":"C"});
-  //db.stores.find({"status.area":"A"})
-  findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
-    findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
-      findQueryC.sort('position').exec(function(storeErr, storeDocsC) {
-        //allstores = [storeDocsA, storeDocsB, storeDocsC];
-        req.renderValues.storesA = storeDocsA;
-        req.renderValues.storesB = storeDocsB;
-        req.renderValues.storesC = storeDocsC;
-        req.session.level = req.params.level;
-        req.renderValues.leftbarTitle = req.params.level;
-        req.renderValues.leftbarImg = '/images/online-store.png';
-        res.render('index', req.renderValues);
-      });
-    });
-  });
-
+router.post('/', RoutesLogic, function(req, res, next) {
+  req.session.level = req.body.level;
+  res.redirect('/loading');
 });
 
-router.get('/loading/:type/:level', RoutesLogic, function(req, res, next) {
-  req.renderValues.level = req.params.level;
-  req.renderValues.type = req.params.type;
-  req.session.level = req.params.level;
+router.get('/loading', RoutesLogic, function(req, res, next) {
+  req.renderValues.level = req.session.level;
   req.renderValues.leftbarTitle = 'loading';
   req.renderValues.leftbarImg = '/images/online-store.png';
   res.render('load/loading', req.renderValues);
