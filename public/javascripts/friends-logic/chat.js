@@ -71,7 +71,6 @@ $(document).ready(function() {
 
     socket.on('highlight online user', function(data) {
       for(var i = 0; i < data.length; i++){
-        console.log(data[i]);
         if (data[i] != myId){
             var index = GetIndex(data[i]);
             HighlightOnlineUser(index, true);
@@ -79,78 +78,10 @@ $(document).ready(function() {
       }
     });
 
-    function LoadHistoryMsgs() {
-      $openingChatContent.html('');
-      for (var i = historyMsgs[chooseId].length - 1; i >= 0; i--) {
-        DisplayMsg(historyMsgs[chooseId][i]);
-      }
-    }
-
-    function DisplayMsg(msg) {
-      var from = '';
-      if (msg.fromUser == myId) {
-        if (msg.read) {
-          from = 'fromSelfRead';
-        }
-        else {
-          from = 'fromSelfUnread';
-        }
-      }
-      else {
-        from = 'fromOther';
-      }
-      $openingChatContent.append(`<p class="messageText ${from}">${msg.msg}</p>`);
-      $openingChatContent.scrollTop($openingChatContent[0].scrollHeight);
-    }
-
-    function GetIndex (id) {
-      var index = -1;
-      $('.friendsId').each(function() {
-        if ($(this).html() == id) {
-          index = $('.friendsId').index(this)
-          return false;
-        }
-      });
-      return index;
-    }
-
-    function UpdateReadStat(index, count){
-      if (count > 0){
-        $('.unreadMessages').eq(index).html(count);
-        // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
-      }
-      else if(count == -1){
-        var unreadNum;
-        if ($('.unreadMessages').eq(index).html() != ''){
-            unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
-        }
-        else{
-          unreadNum = 1;
-        }
-        $('.unreadMessages').eq(index).html(unreadNum);
-      }
-      else{
-        $('.unreadMessages').eq(index).html('');
-      }
-    }
-
-    function HighlightOnlineUser(index, online){
-      if (online && index >= 0){
-        $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
-      }
-      else{
-        $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
-      }
-    }
-
-    function ChangeTitle(){
-      if ($('title').html() == 'new message'){
-        $('title').html('Ballon');
-      }
-      else{
-        $('title').html('new message');
-      }
-    }
+    socket.on('invited', function(invitation) {
+      console.log(invitation);
+      $('#consent').modal('open');
+    });
 
     $(window).focus(function(){
       if (titleNewMessageFunction){
@@ -158,5 +89,78 @@ $(document).ready(function() {
         $('title').html('Ballon');
       }
     });
+  }
+
+  function LoadHistoryMsgs() {
+    $openingChatContent.html('');
+    for (var i = historyMsgs[chooseId].length - 1; i >= 0; i--) {
+      DisplayMsg(historyMsgs[chooseId][i]);
+    }
+  }
+
+  function DisplayMsg(msg) {
+    var from = '';
+    if (msg.fromUser == myId) {
+      if (msg.read) {
+        from = 'fromSelfRead';
+      }
+      else {
+        from = 'fromSelfUnread';
+      }
+    }
+    else {
+      from = 'fromOther';
+    }
+    $openingChatContent.append(`<p class="messageText ${from}">${msg.msg}</p>`);
+    $openingChatContent.scrollTop($openingChatContent[0].scrollHeight);
+  }
+
+  function GetIndex (id) {
+    var index = -1;
+    $('.friendsId').each(function() {
+      if ($(this).html() == id) {
+        index = $('.friendsId').index(this)
+        return false;
+      }
+    });
+    return index;
+  }
+
+  function UpdateReadStat(index, count){
+    if (count > 0){
+      $('.unreadMessages').eq(index).html(count);
+      // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
+    }
+    else if(count == -1){
+      var unreadNum;
+      if ($('.unreadMessages').eq(index).html() != ''){
+          unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
+      }
+      else{
+        unreadNum = 1;
+      }
+      $('.unreadMessages').eq(index).html(unreadNum);
+    }
+    else{
+      $('.unreadMessages').eq(index).html('');
+    }
+  }
+
+  function HighlightOnlineUser(index, online){
+    if (online && index >= 0){
+      $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
+    }
+    else{
+      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
+    }
+  }
+
+  function ChangeTitle(){
+    if ($('title').html() == 'new message'){
+      $('title').html('Ballon');
+    }
+    else{
+      $('title').html('new message');
+    }
   }
 });

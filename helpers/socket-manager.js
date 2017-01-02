@@ -4,6 +4,7 @@ function socket(server) {
   var User = require('../models/user-schema');
   users = {};
 
+  // ------------------------------ chat part ------------------------------
   io.sockets.on('connection', function(socket) {
     socket.on('new user', function(data, callback) {
       socket.id = data;
@@ -65,18 +66,31 @@ function socket(server) {
       UpdateReadStat(data);
     });
 
-    function UpdateReadStat(data) {
-      var updateQuery = Chat.update(
-        {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
-        {$set: {read: true}},
-        {multi: true}
-      );
-      updateQuery.exec(function(err, affected){
-        if (users[data.friend])
-          users[data.friend].emit('someone read message', {friend: data.me});
-      });
-    }
+
+    // ------------------------------ shop together part ------------------------------
+    socket.on('new invitation', function(invitation) {
+      console.log(invitation.invitee);
+      users[invitation.invitee].emit('invited', invitation);
+      // User.findOne({'facebook.id': friendsId}, function(err, user) {
+      //   if (err) throw err;
+      //   console.log(user);
+      // });
+    });
+
+
   });
+
+  function UpdateReadStat(data) {
+    var updateQuery = Chat.update(
+      {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
+      {$set: {read: true}},
+      {multi: true}
+    );
+    updateQuery.exec(function(err, affected){
+      if (users[data.friend])
+        users[data.friend].emit('someone read message', {friend: data.me});
+    });
+  }
 }
 
 module.exports = socket;
