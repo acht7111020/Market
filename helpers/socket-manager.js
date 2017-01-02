@@ -36,7 +36,7 @@ function socket(server) {
           users[id].emit('someone is online or offline', {friend: socket.id, online: false})
         }
       }
-      console.log(`[${socket.id}] entered.`);
+      console.log(`[${socket.id}] leaved.`);
     });
 
     socket.on('send message', function(data) {

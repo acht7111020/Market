@@ -5,8 +5,8 @@ $(document).ready(function() {
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
-  socket.emit('new user', myId);
   if (myId) {
+    socket.emit('new user', myId);
     $('.chatCollapsible').click(function() {
       var index = $('.chatCollapsible').index(this);
       $openingChatContent = $('.chatContent').eq(index);
@@ -71,6 +71,7 @@ $(document).ready(function() {
 
     socket.on('highlight online user', function(data) {
       for(var i = 0; i < data.length; i++){
+        console.log(data[i]);
         if (data[i] != myId){
             var index = GetIndex(data[i]);
             HighlightOnlineUser(index, true);
@@ -134,11 +135,11 @@ $(document).ready(function() {
     }
 
     function HighlightOnlineUser(index, online){
-      if (online){
+      if (online && index >= 0){
         $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
       }
       else{
-        $(".chatCollapsible").eq(index).find('i').css('color', 'black');
+        $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
       }
     }
 

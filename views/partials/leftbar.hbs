@@ -1,6 +1,7 @@
 <link rel='stylesheet' href='/stylesheets/partials/leftbar.css' />
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script>
+<script type="text/javascript" src="/javascripts/friends-logic/multi-shopping.js"></script>
 <script type="text/javascript" src="/javascripts/partials/leftbar.js"></script>
 <div id="jqueryVars" style="display:none;">
   <p id="idVar">{{fb_user.id}}</p>
@@ -29,14 +30,22 @@
             {{# each fb_user.friends}}
               <li class="chatBox">
                 <div class="friendsId" style="display: none;">{{this.id}}</div>
-                <div class="collapsible-header chatCollapsible">
+                <a class="collapsible-header chatCollapsible">
                   <i class="material-icons">perm_identity</i>{{this.name}}
                   <span class="unreadMessages"></span>
-                </div>
+                </a>
                 <div class="collapsible-body">
-                  <div class="chatContent">
-                  </div>
+                  <form class="chatMenuForm">
+                    <div class="chatMenu">
+                      <button class="btn-floating btn waves-effect waves-light red right orange accent-3">
+                        <i class="material-icons">face</i>
+                      </button>
+                    </div>
+                  </form>
                   <form class="messageForm">
+
+                    <div class="chatContent">
+                    </div>
                     <div class="inputField">
                       <input type="text" class="messageInput" placeholder="Input message..."/>
                     </div>
