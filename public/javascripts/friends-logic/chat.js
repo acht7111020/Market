@@ -114,13 +114,16 @@ $(document).ready(function() {
     $('.consentAccDec').click(function() {
       socket.emit('accept or decline invitation',
        {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
+      if ($(this).data('accept')) {
+        ShowNavbarStatus('invitee', $('#inviterName').html());
+      }
     });
 
-    socket.on('invitation accepted', function(invitee) {
-      console.log(invitee);
+    socket.on('invitation accepted', function(inviteeName) {
       $('#waitingHeader').html('Invitation accepted');
-      $('#waitingContent').html(`<span id="inviteeName">${invitee} </span>just accepted your invitation`);
+      $('#waitingContent').html(`<span id="inviteeName">${inviteeName} </span>just accepted your invitation`);
       $('#waitingPreloader').css('display', 'none');
+      ShowNavbarStatus('inviter', inviteeName);
     });
   }
 
@@ -194,6 +197,18 @@ $(document).ready(function() {
     }
     else{
       $('title').html('new message');
+    }
+  }
+
+  function ShowNavbarStatus(identity, friendsName) {
+    if (identity == 'inviter') {
+      $('#shoppingStatus').html(`Leading ${friendsName}`);
+    }
+    else if (identity == 'invitee') {
+      $('#shoppingStatus').html(`Following ${friendsName}`);
+    }
+    else {
+      $('#shoppingStatus').html('');
     }
   }
 });

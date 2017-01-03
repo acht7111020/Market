@@ -4,3 +4,7 @@
   max-height: 64px;
   object-fit: contain;
 }
+
+#shoppingStatus {
+  color: #ff8a80;
+}
