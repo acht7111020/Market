@@ -1,7 +1,8 @@
 <link rel='stylesheet' href='/stylesheets/index.css' />
 <script type="text/javascript" src="/javascripts/index/index.js"></script>
-<!-- <fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();"></fb:login-button>
-<div id="status"></div> -->
+<script type="text/javascript">
+    history.pushState("", document.title, window.location.pathname);
+</script>
 <div class="fixed-action-btn center">
     <a class="btn-floating btn-large blue">
       <i class="large "><img src="/images/elevator_icon.png" class='elevator_icon'></i>
@@ -41,7 +42,6 @@
   </div>
 </div>
 {{/if}}
-
 {{# if storesB}}
 <div class="page-wrapper">
   <div class="main-box boxB" >

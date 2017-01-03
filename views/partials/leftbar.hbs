@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='/stylesheets/partials/leftbar.css' />
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script>
+<!-- <script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script> -->
 <script type="text/javascript" src="/javascripts/partials/leftbar.js"></script>
 <div id="jqueryVars" style="display:none;">
   <p id="idVar">{{fb_user.id}}</p>
@@ -29,14 +29,22 @@
             {{# each fb_user.friends}}
               <li class="chatBox">
                 <div class="friendsId" style="display: none;">{{this.id}}</div>
-                <div class="collapsible-header chatCollapsible">
+                <a class="collapsible-header chatCollapsible">
                   <i class="material-icons">perm_identity</i>{{this.name}}
                   <span class="unreadMessages"></span>
-                </div>
+                </a>
                 <div class="collapsible-body">
-                  <div class="chatContent">
-                  </div>
+                  <form class="chatMenuForm">
+                    <div class="chatMenu">
+                      <button class="btn-floating btn waves-effect waves-light red right orange accent-3">
+                        <i class="material-icons">face</i>
+                      </button>
+                    </div>
+                  </form>
                   <form class="messageForm">
+
+                    <div class="chatContent">
+                    </div>
                     <div class="inputField">
                       <input type="text" class="messageInput" placeholder="Input message..."/>
                     </div>
@@ -54,3 +62,65 @@
     </ul>
   </li>
 </ul>
+
+<div id="consent" class="modal">
+  <div class="modal-content">
+    <h3>Shop together invitation</h3>
+    <h5 id="modalP" style="color: #607d8b;"></h5>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat consentAccDec" data-accept=false>Decline</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat consentAccDec" data-accept=true>Accept</a>
+  </div>
+</div>
+
+<div id="waiting" class="modal">
+  <div class="modal-content">
+    <h3 id="waitingHeader">Waiting for response</h3>
+    <h5 id="waitingContent" style="color: #4caf50;"></h5>
+    <div class="preloader-wrapper big active" id="waitingPreloader">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat center">Done</a>
+  </div>
+</div>

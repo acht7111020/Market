@@ -4,6 +4,7 @@ function socket(server) {
   var User = require('../models/user-schema');
   users = {};
 
+  // ------------------------------ chat part ------------------------------
   io.sockets.on('connection', function(socket) {
     socket.on('new user', function(data, callback) {
       socket.id = data;
@@ -36,7 +37,7 @@ function socket(server) {
           users[id].emit('someone is online or offline', {friend: socket.id, online: false})
         }
       }
-      console.log(`[${socket.id}] entered.`);
+      console.log(`[${socket.id}] leaved.`);
     });
 
     socket.on('send message', function(data) {
@@ -65,18 +66,41 @@ function socket(server) {
       UpdateReadStat(data);
     });
 
-    function UpdateReadStat(data) {
-      var updateQuery = Chat.update(
-        {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
-        {$set: {read: true}},
-        {multi: true}
-      );
-      updateQuery.exec(function(err, affected){
-        if (users[data.friend])
-          users[data.friend].emit('someone read message', {friend: data.me});
-      });
-    }
+
+    // ------------------------------ shop together part ------------------------------
+    socket.on('new invitation', function(invitation) {
+      if (invitation.invitee in users) {
+        User.findOne({'facebook.id': invitation.inviter}, function(err, user) {
+          if (err) throw err;
+          users[invitation.invitee].emit('invited', user);
+        });
+      }
+    });
+
+    socket.on('accept or decline invitation', function(data) {
+      if (data.accept) {
+        User.findOne({'facebook.id': data.inviteeFbId}, function(err, user) {
+          users[data.inviter].emit('invitation accepted', user.facebook.name);
+        });
+      }
+      else {
+
+      }
+    });
+
   });
+
+  function UpdateReadStat(data) {
+    var updateQuery = Chat.update(
+      {$or:[{fromUser: data.friend, toUser: data.me, read: false} ]},
+      {$set: {read: true}},
+      {multi: true}
+    );
+    updateQuery.exec(function(err, affected){
+      if (users[data.friend])
+        users[data.friend].emit('someone read message', {friend: data.me});
+    });
+  }
 }
 
 module.exports = socket;

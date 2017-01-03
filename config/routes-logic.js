@@ -1,7 +1,7 @@
 function RoutesLogic (req, res, next) {
   if (req.isAuthenticated()) {
     if (!req.session.level) {
-      req.session.level = 'G';
+      req.session.level = 1;
     }
     req.renderValues = {
       title: "GoodGoods",

@@ -1,12 +1,16 @@
 $(document).ready(function() {
+  $('#consent').modal();
+  $('#waiting').modal({
+    dismissible: false,
+  });
   var socket = io.connect();
   var myId = $('#idVar').html();
   var chooseId;
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
-  socket.emit('new user', myId);
   if (myId) {
+    socket.emit('new user', myId);
     $('.chatCollapsible').click(function() {
       var index = $('.chatCollapsible').index(this);
       $openingChatContent = $('.chatContent').eq(index);
@@ -78,84 +82,133 @@ $(document).ready(function() {
       }
     });
 
-    function LoadHistoryMsgs() {
-      $openingChatContent.html('');
-      for (var i = historyMsgs[chooseId].length - 1; i >= 0; i--) {
-        DisplayMsg(historyMsgs[chooseId][i]);
-      }
-    }
-
-    function DisplayMsg(msg) {
-      var from = '';
-      if (msg.fromUser == myId) {
-        if (msg.read) {
-          from = 'fromSelfRead';
-        }
-        else {
-          from = 'fromSelfUnread';
-        }
-      }
-      else {
-        from = 'fromOther';
-      }
-      $openingChatContent.append(`<p class="messageText ${from}">${msg.msg}</p>`);
-      $openingChatContent.scrollTop($openingChatContent[0].scrollHeight);
-    }
-
-    function GetIndex (id) {
-      var index = -1;
-      $('.friendsId').each(function() {
-        if ($(this).html() == id) {
-          index = $('.friendsId').index(this)
-          return false;
-        }
-      });
-      return index;
-    }
-
-    function UpdateReadStat(index, count){
-      if (count > 0){
-        $('.unreadMessages').eq(index).html(count);
-        // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
-      }
-      else if(count == -1){
-        var unreadNum;
-        if ($('.unreadMessages').eq(index).html() != ''){
-            unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
-        }
-        else{
-          unreadNum = 1;
-        }
-        $('.unreadMessages').eq(index).html(unreadNum);
-      }
-      else{
-        $('.unreadMessages').eq(index).html('');
-      }
-    }
-
-    function HighlightOnlineUser(index, online){
-      if (online){
-        $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
-      }
-      else{
-        $(".chatCollapsible").eq(index).find('i').css('color', 'black');
-      }
-    }
-
-    function ChangeTitle(){
-      if ($('title').html() == 'new message'){
-        $('title').html('Ballon');
-      }
-      else{
-        $('title').html('new message');
-      }
-    }
-
     $(window).focus(function(){
       if (titleNewMessageFunction){
         clearInterval(titleNewMessageFunction);
         $('title').html('Ballon');
       }
     });
+
+    // ------------------------------ shop together part ------------------------------
+
+    $('.chatMenuForm').submit(function(e) {
+      e.preventDefault();
+      var index = $('.chatMenuForm').index(this);
+      var friendsId = $('.friendsId').eq(index).html();
+      $('#waiting').modal('open');
+
+      var invitation = {
+        inviter: myId,
+        invitee: friendsId
+      }
+      socket.emit('new invitation', invitation);
+
+    });
+
+    socket.on('invited', function(inviter) {
+      $('#modalP').data('inviterFbId', inviter.facebook.id);
+      $('#modalP').html(`You have been invited by <span id="inviterName">${inviter.facebook.name}</span>`);
+      $('#consent').modal('open');
+    });
+
+    $('.consentAccDec').click(function() {
+      socket.emit('accept or decline invitation',
+       {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
+      if ($(this).data('accept')) {
+        ShowNavbarStatus('invitee', $('#inviterName').html());
+      }
+    });
+
+    socket.on('invitation accepted', function(inviteeName) {
+      $('#waitingHeader').html('Invitation accepted');
+      $('#waitingContent').html(`<span id="inviteeName">${inviteeName} </span>just accepted your invitation`);
+      $('#waitingPreloader').css('display', 'none');
+      ShowNavbarStatus('inviter', inviteeName);
+    });
+  }
+
+  function LoadHistoryMsgs() {
+    $openingChatContent.html('');
+    for (var i = historyMsgs[chooseId].length - 1; i >= 0; i--) {
+      DisplayMsg(historyMsgs[chooseId][i]);
+    }
+  }
+
+  function DisplayMsg(msg) {
+    var from = '';
+    if (msg.fromUser == myId) {
+      if (msg.read) {
+        from = 'fromSelfRead';
+      }
+      else {
+        from = 'fromSelfUnread';
+      }
+    }
+    else {
+      from = 'fromOther';
+    }
+    $openingChatContent.append(`<p class="messageText ${from}">${msg.msg}</p>`);
+    $openingChatContent.scrollTop($openingChatContent[0].scrollHeight);
+  }
+
+  function GetIndex (id) {
+    var index = -1;
+    $('.friendsId').each(function() {
+      if ($(this).html() == id) {
+        index = $('.friendsId').index(this)
+        return false;
+      }
+    });
+    return index;
+  }
+
+  function UpdateReadStat(index, count){
+    if (count > 0){
+      $('.unreadMessages').eq(index).html(count);
+      // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
+    }
+    else if(count == -1){
+      var unreadNum;
+      if ($('.unreadMessages').eq(index).html() != ''){
+          unreadNum = parseInt($('.unreadMessages').eq(index).html()) + 1;
+      }
+      else{
+        unreadNum = 1;
+      }
+      $('.unreadMessages').eq(index).html(unreadNum);
+    }
+    else{
+      $('.unreadMessages').eq(index).html('');
+    }
+  }
+
+  function HighlightOnlineUser(index, online){
+    if (online && index >= 0){
+      $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
+    }
+    else{
+      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
+    }
+  }
+
+  function ChangeTitle(){
+    if ($('title').html() == 'new message'){
+      $('title').html('Ballon');
+    }
+    else{
+      $('title').html('new message');
+    }
+  }
+
+  function ShowNavbarStatus(identity, friendsName) {
+    if (identity == 'inviter') {
+      $('#shoppingStatus').html(`Leading ${friendsName}`);
+    }
+    else if (identity == 'invitee') {
+      $('#shoppingStatus').html(`Following ${friendsName}`);
+    }
+    else {
+      $('#shoppingStatus').html('');
+    }
   }
 });
