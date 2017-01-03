@@ -89,13 +89,18 @@ function socket(server) {
 
     socket.on('accept or decline invitation', function(data) {
       if (data.accept) {
-        User.findOne({'facebook.id': data.inviteeFbId}, function(err, user) {
-          socket.request.session.together = {
-            company: data.inviteeFbId,
-            status: 'leading'
-          };
-          console.log(socket.request.session.together.company);
-          users[data.inviter].emit('invitation accepted', user.facebook.name);
+        User.findOne({'facebook.id': data.inviteeFbId}, function(err, invitee) {
+          User.findOne({'facebook.id': data.inviterFbId}, function(err, inviter) {
+            socket.request.session.together = {
+              company: {
+                name: inviter.facebook.name,
+                facebookId: data.inviterFbId,
+              },
+              status: 'following'
+            };
+            socket.request.session.save();
+            users[data.inviterFbId].emit('invitation accepted', invitee);
+          });
         });
       }
       else {
@@ -103,8 +108,20 @@ function socket(server) {
       }
     });
 
-    socket.on('create connection', function() {
+    socket.on('invitation accepted', function(invitee) {
+      socket.request.session.together = {
+        company: {
+          name: invitee.facebook.name,
+          facebookId: invitee.facebook.id,
+        },
+        status: 'leading'
+      };
+      socket.request.session.save();
+    });
 
+    socket.on('get together status', function() {
+      console.log(socket.request.session.together);
+      socket.emit('show together status', socket.request.session.together);
     });
   });
 

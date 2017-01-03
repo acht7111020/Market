@@ -14,9 +14,14 @@
 <!-- color: #37474f grey darken-3 -->
 <div class="navbar-fixed">
   <nav id="topbarNav">
-    <div id = "topbar" class="nav-wrapper blue-grey darken-3">
+    <div id = "topbar" class="nav-wrapper blue-grey darken-2">
       <a href="/" class="brand-logo"><img id="topbarLogo" src="/images/logo.png" alt=""></a>
-      <h4 id="shoppingStatus" class="brand-logo center"></h4>
+      <a id="statusArea" class="brand-logo center" style="display: none;">
+        <span id="shoppingStatus"></span>
+        <button class="btn-floating btn waves-effect waves-light blue-grey darken-3" id="disconnectBtn">
+          <i class="material-icons" style="line-height: 40px;">stop</i>
+        </button>
+      </a>
       <ul class="right">
         <li>
           <a href="/purchase/">

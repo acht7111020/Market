@@ -3,7 +3,6 @@ $(document).ready(function() {
   $('#waiting').modal({
     dismissible: false,
   });
-  var socket = io.connect();
   var myId = $('#idVar').html();
   var chooseId;
   var historyMsgs = {};
@@ -11,6 +10,7 @@ $(document).ready(function() {
   var titleNewMessageFunction;
 
   if (myId) {
+    var socket = io.connect();
     socket.emit('new user', myId);
     $('.chatCollapsible').click(function() {
       var index = $('.chatCollapsible').index(this);
@@ -114,9 +114,9 @@ $(document).ready(function() {
 
     $('.consentAccDec').click(function() {
       socket.emit('accept or decline invitation',
-       {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
+       {accept: $(this).data('accept'), inviterFbId: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
       if ($(this).data('accept')) {
-        ShowNavbarStatus('invitee', $('#inviterName').html());
+        // ShowNavbarStatus('invitee', $('#inviterName').html());
         together = {
           company: {
             name: $('#inviterName').html(),
@@ -124,16 +124,27 @@ $(document).ready(function() {
           },
           status: 'following'
         }
+        location.reload();
       }
     });
 
-    socket.on('invitation accepted', function(inviteeName) {
+    socket.on('invitation accepted', function(invitee) {
       $('#waitingHeader').html('Invitation accepted');
-      $('#waitingContent').html(`<span id="inviteeName">${inviteeName} </span>just accepted your invitation`);
+      $('#waitingContent').html(`<span id="inviteeName">${invitee.facebook.name} </span>just accepted your invitation`);
       $('#waitingPreloader').css('display', 'none');
-      ShowNavbarStatus('inviter', inviteeName);
+      // ShowNavbarStatus('inviter', invitee.facebook.name);
+      socket.emit('invitation accepted', invitee);
+      location.reload();
     });
 
+    socket.emit('get together status');
+    socket.on('show together status', function(together) {
+      ShowNavbarStatus(together);
+    });
+
+    $('#disconnectBtn').click(function() {
+      
+    });
   }
 
   function LoadHistoryMsgs() {
@@ -209,15 +220,10 @@ $(document).ready(function() {
     }
   }
 
-  function ShowNavbarStatus(identity, friendsName) {
-    if (identity == 'inviter') {
-      $('#shoppingStatus').html(`Leading ${friendsName}`);
-    }
-    else if (identity == 'invitee') {
-      $('#shoppingStatus').html(`Following ${friendsName}`);
-    }
-    else {
-      $('#shoppingStatus').html('');
+  function ShowNavbarStatus(together) {
+    if (together) {
+      $('#statusArea').css('display', 'block');
+      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
     }
   }
 });
