@@ -96,7 +96,7 @@ function socket(server) {
                 name: inviter.facebook.name,
                 facebookId: data.inviterFbId,
               },
-              status: 'following'
+              status: 'Following'
             };
             socket.request.session.save();
             users[data.inviterFbId].emit('invitation accepted', invitee);
@@ -114,14 +114,22 @@ function socket(server) {
           name: invitee.facebook.name,
           facebookId: invitee.facebook.id,
         },
-        status: 'leading'
+        status: 'Leading'
       };
       socket.request.session.save();
     });
 
     socket.on('get together status', function() {
-      console.log(socket.request.session.together);
+      // console.log(socket.request.session.together);
       socket.emit('show together status', socket.request.session.together);
+    });
+
+    socket.on('scrolling', function(scrollTop) {
+      together = socket.request.session.together;
+      if (together.status == 'Leading') {
+        if (users[together.company.facebookId])
+          users[together.company.facebookId].emit('scroll', scrollTop);
+      }
     });
   });
 

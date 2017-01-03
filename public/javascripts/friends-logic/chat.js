@@ -8,6 +8,7 @@ $(document).ready(function() {
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
+  var together = {};
 
   if (myId) {
     var socket = io.connect();
@@ -115,35 +116,31 @@ $(document).ready(function() {
     $('.consentAccDec').click(function() {
       socket.emit('accept or decline invitation',
        {accept: $(this).data('accept'), inviterFbId: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
-      if ($(this).data('accept')) {
-        // ShowNavbarStatus('invitee', $('#inviterName').html());
-        together = {
-          company: {
-            name: $('#inviterName').html(),
-            facebookId: $('#modalP').data('inviterFbId')
-          },
-          status: 'following'
-        }
-        location.reload();
-      }
+       location.reload();
     });
 
     socket.on('invitation accepted', function(invitee) {
       $('#waitingHeader').html('Invitation accepted');
       $('#waitingContent').html(`<span id="inviteeName">${invitee.facebook.name} </span>just accepted your invitation`);
       $('#waitingPreloader').css('display', 'none');
-      // ShowNavbarStatus('inviter', invitee.facebook.name);
       socket.emit('invitation accepted', invitee);
       location.reload();
     });
 
     socket.emit('get together status');
     socket.on('show together status', function(together) {
+      together = together;
+      console.log(together);
       ShowNavbarStatus(together);
     });
 
-    $('#disconnectBtn').click(function() {
-      
+    $(window).scroll(function() {
+      socket.emit('scrolling', $(window).scrollTop());
+    });
+
+    socket.on('scroll', function(scrollTop) {
+      $(window).scrollTop(scrollTop);
+      // $(window).animate({ scrollTop: scrollTop }, "slow");
     });
   }
 
