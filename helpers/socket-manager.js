@@ -129,9 +129,13 @@ function socket(server) {
     });
 
     socket.on('page load', function(url) {
-      console.log(url);
       NoticeInvitee('page load', url);
-      // }
+    });
+
+    socket.on('disconnect hang out', function() {
+      NoticeInvitee('disconnect hang out', {});
+      socket.request.session.together = {};
+      socket.request.session.save();
     });
 
     function NoticeInvitee(emitName, emitData) {

@@ -145,6 +145,18 @@ $(document).ready(function() {
     socket.on('page load', function(url) {
       window.location.href = url;
     });
+
+    $('#disconnectBtn').click(function() {
+      socket.emit('disconnect hang out');
+      $('#statusArea').css('display', 'none');
+      location.reload();
+    });
+
+    socket.on('disconnect hang out', function() {
+      socket.emit('disconnect hang out');
+      $('#statusArea').css('display', 'none');
+      location.reload();
+    });
   }
 
   function LoadHistoryMsgs() {
@@ -221,7 +233,7 @@ $(document).ready(function() {
   }
 
   function ShowNavbarStatus(together) {
-    if (together) {
+    if (together.status) {
       $('#statusArea').css('display', 'block');
       $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
     }
