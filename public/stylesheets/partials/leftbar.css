@@ -117,3 +117,13 @@
 .chatMenu button {
   margin: 5px;
 }
+
+#inviterName {
+   color: #455a64;
+   font-weight: bold;
+}
+
+#inviteeName {
+  color: #2e7d32;
+  font-weight: bold;
+}

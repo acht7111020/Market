@@ -69,14 +69,24 @@ function socket(server) {
 
     // ------------------------------ shop together part ------------------------------
     socket.on('new invitation', function(invitation) {
-      console.log(invitation.invitee);
-      users[invitation.invitee].emit('invited', invitation);
-      // User.findOne({'facebook.id': friendsId}, function(err, user) {
-      //   if (err) throw err;
-      //   console.log(user);
-      // });
+      if (invitation.invitee in users) {
+        User.findOne({'facebook.id': invitation.inviter}, function(err, user) {
+          if (err) throw err;
+          users[invitation.invitee].emit('invited', user);
+        });
+      }
     });
 
+    socket.on('accept or decline invitation', function(data) {
+      if (data.accept) {
+        User.findOne({'facebook.id': data.inviteeFbId}, function(err, user) {
+          users[data.inviter].emit('invitation accepted', user.facebook.name);
+        });
+      }
+      else {
+
+      }
+    });
 
   });
 

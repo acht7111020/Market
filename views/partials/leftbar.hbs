@@ -1,7 +1,7 @@
 <link rel='stylesheet' href='/stylesheets/partials/leftbar.css' />
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script>
-<script type="text/javascript" src="/javascripts/friends-logic/multi-shopping.js"></script>
+<!-- <script type="text/javascript" src="/javascripts/friends-logic/multi-shopping.js"></script> -->
 <script type="text/javascript" src="/javascripts/partials/leftbar.js"></script>
 <div id="jqueryVars" style="display:none;">
   <p id="idVar">{{fb_user.id}}</p>
@@ -66,11 +66,62 @@
 
 <div id="consent" class="modal">
   <div class="modal-content">
-    <h4>Shop together invitation</h4>
-    <p id="modalP">You have been invited by </p>
+    <h3>Shop together invitation</h3>
+    <h5 id="modalP" style="color: #607d8b;"></h5>
   </div>
   <div class="modal-footer">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat ">Disagree</a>
-    <a class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat consentAccDec" data-accept=false>Decline</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat consentAccDec" data-accept=true>Accept</a>
+  </div>
+</div>
+
+<div id="waiting" class="modal">
+  <div class="modal-content">
+    <h3 id="waitingHeader">Waiting for response</h3>
+    <h5 id="waitingContent" style="color: #4caf50;"></h5>
+    <div class="preloader-wrapper big active" id="waitingPreloader">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat center">Done</a>
   </div>
 </div>

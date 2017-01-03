@@ -15,9 +15,9 @@ $(document).ready(function() {
 
   });
 
-  socket.on('invited', function(invitation) {
-    console.log(invitation);
-    $('#modalP').html('hello');
-    $('#consent').modal('open');
-  });
+  // socket.on('invited', function(invitation) {
+  //   console.log(invitation);
+  //   $('#modalP').append('hello');
+  //   $('#consent').modal('open');
+  // });
 });

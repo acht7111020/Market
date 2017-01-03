@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  $('#consent').modal();
+  $('#waiting').modal({
+    dismissible: false,
+  });
   var socket = io.connect();
   var myId = $('#idVar').html();
   var chooseId;
@@ -78,16 +82,45 @@ $(document).ready(function() {
       }
     });
 
-    socket.on('invited', function(invitation) {
-      console.log(invitation);
-      $('#consent').modal('open');
-    });
-
     $(window).focus(function(){
       if (titleNewMessageFunction){
         clearInterval(titleNewMessageFunction);
         $('title').html('Ballon');
       }
+    });
+
+    // ------------------------------ shop together part ------------------------------
+
+    $('.chatMenuForm').submit(function(e) {
+      e.preventDefault();
+      var index = $('.chatMenuForm').index(this);
+      var friendsId = $('.friendsId').eq(index).html();
+      $('#waiting').modal('open');
+
+      var invitation = {
+        inviter: myId,
+        invitee: friendsId
+      }
+      socket.emit('new invitation', invitation);
+
+    });
+
+    socket.on('invited', function(inviter) {
+      $('#modalP').data('inviterFbId', inviter.facebook.id);
+      $('#modalP').html(`You have been invited by <span id="inviterName">${inviter.facebook.name}</span>`);
+      $('#consent').modal('open');
+    });
+
+    $('.consentAccDec').click(function() {
+      socket.emit('accept or decline invitation',
+       {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
+    });
+
+    socket.on('invitation accepted', function(invitee) {
+      console.log(invitee);
+      $('#waitingHeader').html('Invitation accepted');
+      $('#waitingContent').html(`<span id="inviteeName">${invitee} </span>just accepted your invitation`);
+      $('#waitingPreloader').css('display', 'none');
     });
   }
 
