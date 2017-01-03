@@ -125,12 +125,22 @@ function socket(server) {
     });
 
     socket.on('scrolling', function(scrollTop) {
+      NoticeInvitee('scroll', scrollTop);
+    });
+
+    socket.on('page load', function(url) {
+      console.log(url);
+      NoticeInvitee('page load', url);
+      // }
+    });
+
+    function NoticeInvitee(emitName, emitData) {
       together = socket.request.session.together;
       if (together.status == 'Leading') {
         if (users[together.company.facebookId])
-          users[together.company.facebookId].emit('scroll', scrollTop);
+          users[together.company.facebookId].emit(emitName, emitData);
       }
-    });
+    }
   });
 
   function UpdateReadStat(data) {
@@ -144,6 +154,7 @@ function socket(server) {
         users[data.friend].emit('someone read message', {friend: data.me});
     });
   }
+
 }
 
 module.exports = socket;

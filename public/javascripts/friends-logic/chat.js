@@ -130,7 +130,6 @@ $(document).ready(function() {
     socket.emit('get together status');
     socket.on('show together status', function(together) {
       together = together;
-      console.log(together);
       ShowNavbarStatus(together);
     });
 
@@ -140,7 +139,11 @@ $(document).ready(function() {
 
     socket.on('scroll', function(scrollTop) {
       $(window).scrollTop(scrollTop);
-      // $(window).animate({ scrollTop: scrollTop }, "slow");
+    });
+
+    socket.emit('page load', window.location.href);
+    socket.on('page load', function(url) {
+      window.location.href = url;
     });
   }
 
