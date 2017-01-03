@@ -140,9 +140,11 @@ function socket(server) {
 
     function NoticeInvitee(emitName, emitData) {
       together = socket.request.session.together;
-      if (together.status == 'Leading') {
-        if (users[together.company.facebookId])
-          users[together.company.facebookId].emit(emitName, emitData);
+      if (together) {
+        if (together.status == 'Leading') {
+          if (users[together.company.facebookId])
+            users[together.company.facebookId].emit(emitName, emitData);
+        }
       }
     }
   });
