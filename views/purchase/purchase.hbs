@@ -5,11 +5,18 @@
       <i class="large "><img src="/images/elevator_icon.png" class='elevator_icon'></i>
     </a>
     <ul>
-      <li><a class="btn-floating red" href="/loading/purchase/5">5</a></li>
-      <li><a class="btn-floating yellow darken-1" href="/loading/purchase/4">4</a></li>
-      <li><a class="btn-floating green" href="/loading/purchase/3">3</a></li>
-      <li><a class="btn-floating blue" href="/loading/purchase/2">2</a></li>
-      <li><a class="btn-floating grey darken-1" href="/loading/purchase/G">1</a></li>
+      <form action = "" method = "post" style="display: none;">
+        <input type="submit" name="level" id="firstFloorBtn" value="1"/>
+        <input type="submit" name="level" id="secondFloorBtn" value="2"/>
+        <input type="submit" name="level" id="thirdFloorBtn" value="3"/>
+        <input type="submit" name="level" id="fourthFloorBtn" value="4"/>
+        <input type="submit" name="level" id="fifthFloorBtn" value="5"/>
+      </form>
+      <li><a class="btn-floating red" onclick="document.getElementById('fifthFloorBtn').click();">5</a></li>
+      <li><a class="btn-floating yellow darken-1" onclick="document.getElementById('fourthFloorBtn').click();">4</a></li>
+      <li><a class="btn-floating green" onclick="document.getElementById('thirdFloorBtn').click();">3</a></li>
+      <li><a class="btn-floating blue" onclick="document.getElementById('secondFloorBtn').click();">2</a></li>
+      <li><a class="btn-floating grey darken-1" onclick="document.getElementById('firstFloorBtn').click();">1</a></li>
     </ul>
 </div>
 

@@ -5,5 +5,10 @@ $(document).ready(function(){
 });
 
 function redirect(){
-  window.location = `/`;
+  //alert( $("#LoadingType").val());
+  if($("#LoadingType").val() == "purchase")
+    window.location = `/purchase/`;
+  else
+    window.location = `/`;
+
 }
