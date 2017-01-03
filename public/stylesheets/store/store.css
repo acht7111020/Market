@@ -3,3 +3,12 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.UserIcon{
+  float: right;
+  z-index: 21;
+  position: fixed;
+  text-align: right;
+  right: 2%;
+  top: 12%;
+}

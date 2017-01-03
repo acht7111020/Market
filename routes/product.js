@@ -21,6 +21,8 @@ router.get('/:productId', RoutesLogic, function(req, res) {
     if (err) res.redirect('/');
     else {
       req.renderValues.product = product;
+      req.renderValues.storeState = "in"; 
+      req.renderValues.storeId = req.session.storeId;
       res.render('product/product', req.renderValues);
     }
   });
