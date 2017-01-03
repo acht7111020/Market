@@ -2,6 +2,16 @@ function socket(server) {
   var io = require('socket.io').listen(server);
   var Chat = require('../models/chat-schema');
   var User = require('../models/user-schema');
+  var session = require('express-session');
+  var MongoStore = require('connect-mongo')(session);
+  var mongoose = require('mongoose');
+  var sessionMiddleware = session({
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    secret: "hellosirandy",
+  });
+  io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+  });
   users = {};
 
   // ------------------------------ chat part ------------------------------
@@ -79,8 +89,18 @@ function socket(server) {
 
     socket.on('accept or decline invitation', function(data) {
       if (data.accept) {
-        User.findOne({'facebook.id': data.inviteeFbId}, function(err, user) {
-          users[data.inviter].emit('invitation accepted', user.facebook.name);
+        User.findOne({'facebook.id': data.inviteeFbId}, function(err, invitee) {
+          User.findOne({'facebook.id': data.inviterFbId}, function(err, inviter) {
+            socket.request.session.together = {
+              company: {
+                name: inviter.facebook.name,
+                facebookId: data.inviterFbId,
+              },
+              status: 'Following'
+            };
+            socket.request.session.save();
+            users[data.inviterFbId].emit('invitation accepted', invitee);
+          });
         });
       }
       else {
@@ -88,6 +108,43 @@ function socket(server) {
       }
     });
 
+    socket.on('invitation accepted', function(invitee) {
+      socket.request.session.together = {
+        company: {
+          name: invitee.facebook.name,
+          facebookId: invitee.facebook.id,
+        },
+        status: 'Leading'
+      };
+      socket.request.session.save();
+    });
+
+    socket.on('get together status', function() {
+      // console.log(socket.request.session.together);
+      socket.emit('show together status', socket.request.session.together);
+    });
+
+    socket.on('scrolling', function(scrollTop) {
+      NoticeInvitee('scroll', scrollTop);
+    });
+
+    socket.on('page load', function(url) {
+      NoticeInvitee('page load', url);
+    });
+
+    socket.on('disconnect hang out', function() {
+      NoticeInvitee('disconnect hang out', {});
+      socket.request.session.together = {};
+      socket.request.session.save();
+    });
+
+    function NoticeInvitee(emitName, emitData) {
+      together = socket.request.session.together;
+      if (together.status == 'Leading') {
+        if (users[together.company.facebookId])
+          users[together.company.facebookId].emit(emitName, emitData);
+      }
+    }
   });
 
   function UpdateReadStat(data) {
@@ -101,6 +158,7 @@ function socket(server) {
         users[data.friend].emit('someone read message', {friend: data.me});
     });
   }
+
 }
 
 module.exports = socket;

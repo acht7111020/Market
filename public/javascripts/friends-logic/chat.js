@@ -3,13 +3,15 @@ $(document).ready(function() {
   $('#waiting').modal({
     dismissible: false,
   });
-  var socket = io.connect();
   var myId = $('#idVar').html();
   var chooseId;
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
+  var together = {};
+
   if (myId) {
+    var socket = io.connect();
     socket.emit('new user', myId);
     $('.chatCollapsible').click(function() {
       var index = $('.chatCollapsible').index(this);
@@ -113,17 +115,47 @@ $(document).ready(function() {
 
     $('.consentAccDec').click(function() {
       socket.emit('accept or decline invitation',
-       {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
-      if ($(this).data('accept')) {
-        ShowNavbarStatus('invitee', $('#inviterName').html());
-      }
+       {accept: $(this).data('accept'), inviterFbId: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
+       location.reload();
     });
 
-    socket.on('invitation accepted', function(inviteeName) {
+    socket.on('invitation accepted', function(invitee) {
       $('#waitingHeader').html('Invitation accepted');
-      $('#waitingContent').html(`<span id="inviteeName">${inviteeName} </span>just accepted your invitation`);
+      $('#waitingContent').html(`<span id="inviteeName">${invitee.facebook.name} </span>just accepted your invitation`);
       $('#waitingPreloader').css('display', 'none');
-      ShowNavbarStatus('inviter', inviteeName);
+      socket.emit('invitation accepted', invitee);
+      location.reload();
+    });
+
+    socket.emit('get together status');
+    socket.on('show together status', function(together) {
+      together = together;
+      ShowNavbarStatus(together);
+    });
+
+    $(window).scroll(function() {
+      socket.emit('scrolling', $(window).scrollTop());
+    });
+
+    socket.on('scroll', function(scrollTop) {
+      $(window).scrollTop(scrollTop);
+    });
+
+    socket.emit('page load', window.location.href);
+    socket.on('page load', function(url) {
+      window.location.href = url;
+    });
+
+    $('#disconnectBtn').click(function() {
+      socket.emit('disconnect hang out');
+      $('#statusArea').css('display', 'none');
+      location.reload();
+    });
+
+    socket.on('disconnect hang out', function() {
+      socket.emit('disconnect hang out');
+      $('#statusArea').css('display', 'none');
+      location.reload();
     });
   }
 
@@ -200,15 +232,10 @@ $(document).ready(function() {
     }
   }
 
-  function ShowNavbarStatus(identity, friendsName) {
-    if (identity == 'inviter') {
-      $('#shoppingStatus').html(`Leading ${friendsName}`);
-    }
-    else if (identity == 'invitee') {
-      $('#shoppingStatus').html(`Following ${friendsName}`);
-    }
-    else {
-      $('#shoppingStatus').html('');
+  function ShowNavbarStatus(together) {
+    if (together.status) {
+      $('#statusArea').css('display', 'block');
+      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
     }
   }
 });
