@@ -2,6 +2,16 @@ function socket(server) {
   var io = require('socket.io').listen(server);
   var Chat = require('../models/chat-schema');
   var User = require('../models/user-schema');
+  var session = require('express-session');
+  var MongoStore = require('connect-mongo')(session);
+  var mongoose = require('mongoose');
+  var sessionMiddleware = session({
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    secret: "hellosirandy",
+  });
+  io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+  });
   users = {};
 
   // ------------------------------ chat part ------------------------------
@@ -80,6 +90,11 @@ function socket(server) {
     socket.on('accept or decline invitation', function(data) {
       if (data.accept) {
         User.findOne({'facebook.id': data.inviteeFbId}, function(err, user) {
+          socket.request.session.together = {
+            company: data.inviteeFbId,
+            status: 'leading'
+          };
+          console.log(socket.request.session.together.company);
           users[data.inviter].emit('invitation accepted', user.facebook.name);
         });
       }
@@ -88,6 +103,9 @@ function socket(server) {
       }
     });
 
+    socket.on('create connection', function() {
+
+    });
   });
 
   function UpdateReadStat(data) {

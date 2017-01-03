@@ -9,6 +9,7 @@ $(document).ready(function() {
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
+
   if (myId) {
     socket.emit('new user', myId);
     $('.chatCollapsible').click(function() {
@@ -116,6 +117,13 @@ $(document).ready(function() {
        {accept: $(this).data('accept'), inviter: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
       if ($(this).data('accept')) {
         ShowNavbarStatus('invitee', $('#inviterName').html());
+        together = {
+          company: {
+            name: $('#inviterName').html(),
+            facebookId: $('#modalP').data('inviterFbId')
+          },
+          status: 'following'
+        }
       }
     });
 
@@ -125,6 +133,7 @@ $(document).ready(function() {
       $('#waitingPreloader').css('display', 'none');
       ShowNavbarStatus('inviter', inviteeName);
     });
+
   }
 
   function LoadHistoryMsgs() {
