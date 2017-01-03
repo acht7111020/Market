@@ -233,9 +233,9 @@ $(document).ready(function() {
   }
 
   function ShowNavbarStatus(together) {
-    if (together.status) {
-      $('#statusArea').css('display', 'block');
-      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
-    }
+    // if (together.status) {
+    //   $('#statusArea').css('display', 'block');
+    //   $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
+    // }
   }
 });

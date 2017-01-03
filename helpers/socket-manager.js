@@ -13,6 +13,7 @@ function socket(server) {
     sessionMiddleware(socket.request, socket.request.res, next);
   });
   users = {};
+  var storeState = {};
 
   // ------------------------------ chat part ------------------------------
   io.sockets.on('connection', function(socket) {
@@ -47,7 +48,22 @@ function socket(server) {
           users[id].emit('someone is online or offline', {friend: socket.id, online: false})
         }
       }
-      console.log(`[${socket.id}] leaved.`);
+
+      // for(var prod in storeState){
+      //   if(storeState[prod].indexOf(socket.id) != -1){
+      //     index = storeState[prod].indexOf(socket.id);
+      //     delete storeState[prod][index];
+      //     break;
+      //   }
+      // }
+      //
+      // for (var id in users) {
+      //   if (id != socket.id) {
+      //     users[id].emit('remove person icon', socket.id);
+      //   }
+      // }
+       console.log(`[${socket.id}] leaved.`);
+
     });
 
     socket.on('send message', function(data) {
@@ -137,6 +153,64 @@ function socket(server) {
       socket.request.session.together = {};
       socket.request.session.save();
     });
+
+
+    // ------------------------------ run into friends part ------------------------------
+    socket.on('run into friends', function(info) {
+      socket.id = info.myId;
+      //if( !users[socket.id] ){
+        users[socket.id] = socket;
+      //}
+
+      if( !storeState[info.productId] ){
+        storeState[info.productId] = [];
+      }
+      if(storeState[info.productId].indexOf(info.myId) == -1){
+        storeState[info.productId].push(info.myId);
+        User.findOne({'facebook.id': info.myId}, function(err, user) {
+          if (err) throw err;
+          var returninfo = {};
+          returninfo.user = user;
+          returninfo.productId = info.productId;
+          for (var id in users) {
+            if (id != socket.id) {
+              users[id].emit('someone is shopping', returninfo);
+            }
+          }
+        });
+      }
+    });
+
+    socket.on('update shopping list', function(productId) {
+      var storeList = storeState[productId];
+      var userlist = [];
+      for(var i in storeList){
+        User.findOne({'facebook.id': storeList[i]}, function(err, user) {
+          if (err) throw err;
+          userlist.push(user);
+          socket.emit('updating person icon', userlist);
+        });
+      }
+
+    });
+
+    socket.on('leave this store', function(info) {
+      if(!storeState[info.productId])
+        return;
+      console.log(info);
+      var index = storeState[info.productId].indexOf(info.myId);
+      if(index != -1){
+        delete storeState[info.productId][index];
+        for (var id in users) {
+          if (id != socket.id) {
+            users[id].emit('remove this person icon', info.myId);
+          }
+        }
+      }
+
+    });
+
+
 
     function NoticeInvitee(emitName, emitData) {
       together = socket.request.session.together;
