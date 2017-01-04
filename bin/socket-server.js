@@ -182,16 +182,16 @@ function socket(server) {
         users[socket.id] = socket;
       //}
 
-      if( !storeState[info.productId] ){
-        storeState[info.productId] = [];
+      if( !storeState[info.positionId] ){
+        storeState[info.positionId] = [];
       }
-      if(storeState[info.productId].indexOf(info.myId) == -1){
-        storeState[info.productId].push(info.myId);
+      if(storeState[info.positionId].indexOf(info.myId) == -1){
+        storeState[info.positionId].push(info.myId);
         User.findOne({'facebook.id': info.myId}, function(err, user) {
           if (err) throw err;
           var returninfo = {};
           returninfo.user = user;
-          returninfo.productId = info.productId;
+          returninfo.positionId = info.positionId;
           for (var id in users) {
             if (id != socket.id) {
               users[id].emit('someone is shopping', returninfo);
@@ -201,8 +201,8 @@ function socket(server) {
       }
     });
 
-    socket.on('update shopping list', function(productId) {
-      var storeList = storeState[productId];
+    socket.on('update shopping list', function(positionId) {
+      var storeList = storeState[positionId];
       var userlist = [];
       for(var i in storeList){
         User.findOne({'facebook.id': storeList[i]}, function(err, user) {
@@ -215,12 +215,12 @@ function socket(server) {
     });
 
     socket.on('leave this store', function(info) {
-      if(!storeState[info.productId])
+      if(!storeState[info.positionId])
         return;
       //console.log(info);
-      var index = storeState[info.productId].indexOf(info.myId);
+      var index = storeState[info.positionId].indexOf(info.myId);
       if(index != -1){
-        delete storeState[info.productId][index];
+        delete storeState[info.positionId][index];
         User.findOne({'facebook.id': info.myId}, function(err, user) {
           if (err) throw err;
           for (var id in users) {
