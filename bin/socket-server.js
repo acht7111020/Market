@@ -171,6 +171,10 @@ function socket(server) {
       NoticeInvitee('enter product', productIndex);
     });
 
+    socket.on('about button clicked', function() {
+      NoticeInvitee('about button clicked', {});
+    });
+
     // ------------------------------ run into friends part ------------------------------
     socket.on('run into friends', function(info) {
       socket.id = info.myId;

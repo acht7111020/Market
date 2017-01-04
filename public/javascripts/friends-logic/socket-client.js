@@ -192,6 +192,13 @@ $(document).ready(function() {
     socket.on('enter product', function(productIndex) {
       $('.productCard').eq(productIndex).click();
     });
+
+    $('#aboutBtn').click(function() {
+      socket.emit('about button clicked');
+    });
+    socket.on('about button clicked', function() {
+      window.location = $('#aboutBtn').attr('href');
+    });
   }
 
   function LoadHistoryMsgs() {
