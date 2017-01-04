@@ -27,3 +27,12 @@ td {
   width: 20px;
   height: 20px;
 }
+
+.UserIcon{
+  float: right;
+  z-index: 21;
+  position: fixed;
+  text-align: right;
+  right: 2%;
+  top: 12%;
+}
