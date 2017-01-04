@@ -71,6 +71,7 @@ $(document).ready(function() {
     });
 
     socket.on('someone is online or offline', function(data) {
+      console.log(data);
       var index = GetIndex(data.friend);
       HighlightOnlineUser(index, data.online);
     });
@@ -215,11 +216,16 @@ $(document).ready(function() {
   }
 
   function HighlightOnlineUser(index, online){
+    console.log(index);
     if (online && index >= 0){
+      console.log('online');
       $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
     }
     else{
-      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
+      console.log('offline');
+      // console.log();
+      // $(".chatCollapsible").eq(index).find('i').css('color', 'red')
+      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54)');
     }
   }
 
@@ -233,9 +239,9 @@ $(document).ready(function() {
   }
 
   function ShowNavbarStatus(together) {
-    // if (together.status) {
-    //   $('#statusArea').css('display', 'block');
-    //   $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
-    // }
+    if (together.status) {
+      $('#statusArea').css('display', 'block');
+      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
+    }
   }
 });

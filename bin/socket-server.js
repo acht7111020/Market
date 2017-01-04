@@ -22,6 +22,12 @@ function socket(server) {
       users[socket.id] = socket;
       User.findOne({'facebook.id': data}, function(err, user) {
         if (user) {
+          var friends = user.facebook.friends;
+          for (var i = 0; i < friends.length; i++) {
+            if (friends[i].id in users) {
+              users[friends[i].id].emit('someone is online or offline', {friend: socket.id, online: true})
+            }
+          }
           console.log(`[${user.facebook.name}] entered.`);
         }
         else {
@@ -35,28 +41,19 @@ function socket(server) {
       aggregateQuery.exec(function(err, docs){
         socket.emit('update unread status', docs);
       });
-
-      User.findOne({'facebook.id': socket.id}, function(err, user) {
-        if (err) throw err;
-      });
-
-      for (var id in users) {
-        if (id != socket.id) {
-          users[id].emit('someone is online or offline', {friend: socket.id, online: true})
-        }
-      }
       socket.emit('highlight online user', Object.keys(users));
     });
 
     socket.on('disconnect', function(data) {
       delete users[socket.id];
-      for (var id in users) {
-        if (id != socket.id) {
-          users[id].emit('someone is online or offline', {friend: socket.id, online: false})
-        }
-      }
       User.findOne({'facebook.id': socket.id}, function(err, user) {
         if (user) {
+          var friends = user.facebook.friends;
+          for (var i = 0; i < friends.length; i++) {
+            if (friends[i].id in users) {
+              users[friends[i].id].emit('someone is online or offline', {friend: socket.id, online: false})
+            }
+          }
           console.log(`[${user.facebook.name}] leaved.`);
         }
         else {
