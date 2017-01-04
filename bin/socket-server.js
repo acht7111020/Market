@@ -132,7 +132,6 @@ function socket(server) {
     });
 
     socket.on('get together status', function() {
-      // console.log(socket.request.session.together);
       if (socket.request.session.together) {
         socket.emit('show together status', socket.request.session.together);
       }
@@ -148,7 +147,7 @@ function socket(server) {
 
     socket.on('disconnect hang out', function() {
       NoticeInvitee('disconnect hang out', {});
-      socket.request.session.together = {};
+      socket.request.session.together = null;
       socket.request.session.save();
     });
 
@@ -208,12 +207,10 @@ function socket(server) {
 
     });
 
-
-
     function NoticeInvitee(emitName, emitData) {
       together = socket.request.session.together;
       if (together) {
-        if (together.status == 'Leading') {
+        if (together.status == 'Leading' || emitName == 'disconnect hang out') {
           if (users[together.company.facebookId])
             users[together.company.facebookId].emit(emitName, emitData);
         }
