@@ -32,9 +32,9 @@ $(document).ready(function() {
       }
     });
 
-    socket.on('remove this person icon', function(id) {
-      console.log(id);
-      //removeThisIcon(id);
+    socket.on('remove this person icon', function(user) {
+      console.log(user);
+      removeThisIcon(user.facebook.id);
     });
 
 
@@ -42,8 +42,9 @@ $(document).ready(function() {
       if(friendlist.indexOf(id) != -1)
         return;
       friendlist.push(id);
-      console.log(pic);
-      console.log(name);
+      console.log(id);
+      console.log(friendlist);
+      console.log(friendlist.indexOf(id));
       var users = $(".UserIcon").html();
       users += `<div class="chip" data-id=${id}><img src=${pic} alt="head photo">${name}</div>`;
       $(".UserIcon").html(users);
@@ -61,12 +62,11 @@ $(document).ready(function() {
       if(index != -1){
         delete friendlist[index];
         var chips = $(".chip");
-        for(var i in chips){
+        for(var i = 0; i < chips.length; i++){
           console.log($(chips[i]).context);
-          // if($($(chips[i]).context).data('id') == id){
-          //
-          // }
-            //$(chips[i]).remove();
+          if($($(chips[i]).context).data('id') == id){
+            $(chips[i]).remove();
+          }
         }
       }
     }

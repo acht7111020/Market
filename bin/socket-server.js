@@ -217,15 +217,18 @@ function socket(server) {
     socket.on('leave this store', function(info) {
       if(!storeState[info.productId])
         return;
-      console.log(info);
+      //console.log(info);
       var index = storeState[info.productId].indexOf(info.myId);
       if(index != -1){
         delete storeState[info.productId][index];
-        for (var id in users) {
-          if (id != socket.id) {
-            users[id].emit('remove this person icon', info.myId);
+        User.findOne({'facebook.id': info.myId}, function(err, user) {
+          if (err) throw err;
+          for (var id in users) {
+            if (id != socket.id) {
+              users[id].emit('remove this person icon', user);
+            }
           }
-        }
+        });
       }
 
     });
