@@ -206,7 +206,6 @@ $(document).ready(function() {
     var positionId = $("#jqueryVars").data("storeid");
     var status = $("#jqueryVars").data("storestatus");
     var friendlist = [];
-
     var info = {};
     if (positionId) {
       if(status == "out"){
@@ -222,7 +221,6 @@ $(document).ready(function() {
         socket.emit('update shopping list', positionId);
       }
       socket.on('someone is shopping', function(data) {
-        console.log(data);
         if(data.positionId == positionId && data.user.facebook.id != myId){
           addIcon(data.user.facebook.profilePic, data.user.facebook.name, data.user.facebook.id);
         }
@@ -236,7 +234,6 @@ $(document).ready(function() {
       });
 
       socket.on('remove this person icon', function(user) {
-        console.log(user);
         removeThisIcon(user.facebook.id);
       });
 
@@ -244,9 +241,6 @@ $(document).ready(function() {
         if(friendlist.indexOf(id) != -1)
           return;
         friendlist.push(id);
-        console.log(id);
-        console.log(friendlist);
-        console.log(friendlist.indexOf(id));
         var users = $(".UserIcon").html();
         users += `<div class="chip" data-id=${id}><img src=${pic} alt="head photo">${name}</div>`;
         $(".UserIcon").html(users);
