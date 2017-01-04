@@ -18,6 +18,8 @@ router.get('/', RoutesLogic, function(req, res, next) {
         req.renderValues.storesA = storeDocsA;
         req.renderValues.storesB = storeDocsB;
         req.renderValues.storesC = storeDocsC;
+        req.renderValues.storeId = req.session.storeId;
+        req.renderValues.storeState = "out";
         req.renderValues.leftbarTitle = req.session.level;
         req.renderValues.leftbarImg = '/images/online-store.png';
         res.render('index', req.renderValues);

@@ -26,7 +26,9 @@ router.get('/:storeId', RoutesLogic, function(req, res, next) {
       Store.findById(req.params.storeId, function(storeErr, store) {
         if (storeErr) throw storeErr;
         req.renderValues.products = products;
-        req.renderValues.storeId = req.params.storeId;
+        req.session.storeId = req.params.storeId;
+        req.renderValues.storeId = req.session.storeId;
+        req.renderValues.storeState = "in";
         req.renderValues.leftbarImg = store.detail.coverImage;
         req.renderValues.leftbarTitle = store.detail.title;
         req.renderValues.leftbarAbout = req.params.storeId;
