@@ -2,13 +2,10 @@
 <script src="/socket.io/socket.io.js"></script>
 <!-- <script type="text/javascript" src="/javascripts/friends-logic/chat.js"></script> -->
 <script type="text/javascript" src="/javascripts/partials/leftbar.js"></script>
-<script type="text/javascript" src="/javascripts/store/showfriends.js"></script>
+<!-- <script type="text/javascript" src="/javascripts/store/showfriends.js"></script> -->
 <input type="hidden" id="storeId" value="{{storeId}}">
 <input type="hidden" id="storeStatus" value="{{storeState}}">
-<!-- <div id="jqueryVars" style="display:none;">
-  <p id="idVar">{{fb_user.id}}</p>
-</div> -->
-<span id="jqueryVars" data-userid={{fb_user.id}}>123</span>
+<span id="jqueryVars" data-userid={{fb_user.id}} data-storeid={{storeId}} data-storestatus={{storeState}}>123</span>
 
 <ul id="leftbar" class="side-nav fixed grey lighten-1">
   {{#if leftbarImg}}

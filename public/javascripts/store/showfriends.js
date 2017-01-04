@@ -1,26 +1,26 @@
 var friendlist = [];
 $(document).ready(function() {
   var myId = $("#jqueryVars").data("userid");
-  var productId = $("#storeId").val();
-  var status = $("#storeStatus").val();
+  var positionId = $("#jqueryVars").data("storeid");
+  var status = $("#jqueryVars").data("storestatus");
   var info = {};
-  if (myId && productId) {
+  if (myId && positionId) {
     var socket = io.connect();
     if(status == "out"){
       //alert("out and emit");
       info.myId = myId;
-      info.productId = productId;
+      info.positionId = positionId;
       socket.emit('leave this store', info);
     }
     else {
       info.myId = myId;
-      info.productId = productId;
+      info.positionId = positionId;
       socket.emit('run into friends', info);
-      socket.emit('update shopping list', productId);
+      socket.emit('update shopping list', positionId);
     }
     socket.on('someone is shopping', function(data) {
       console.log(data);
-      if(data.productId == productId && data.user.facebook.id != myId){
+      if(data.positionId == positionId && data.user.facebook.id != myId){
         addIcon(data.user.facebook.profilePic, data.user.facebook.name, data.user.facebook.id);
       }
     });
