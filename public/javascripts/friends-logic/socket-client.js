@@ -3,7 +3,7 @@ $(document).ready(function() {
   $('#waiting').modal({
     dismissible: false,
   });
-  var myId = $('#idVar').html();
+  var myId = $("#jqueryVars").data("userid");
   var chooseId;
   var historyMsgs = {};
   var $openingChatContent;
@@ -141,9 +141,9 @@ $(document).ready(function() {
       $(window).scrollTop(scrollTop);
     });
 
-    socket.emit('page load', window.location.href);
+    // socket.emit('page load', window.location.href);
     socket.on('page load', function(url) {
-      window.location.href = url;
+      // window.location.href = url;
     });
 
     $('#disconnectBtn').click(function() {
@@ -156,6 +156,48 @@ $(document).ready(function() {
       socket.emit('disconnect hang out');
       $('#statusArea').css('display', 'none');
       location.reload();
+    });
+
+    $('.floorBtn').click(function() {
+      socket.emit('floor button clicked', $(this).attr('id'));
+    });
+    socket.on('floor button clicked', function(btnId) {
+      $(`#${btnId}`).click();
+    });
+
+    $('.indexStore').click(function() {
+      socket.emit('highlight store', $('.indexStore').index(this));
+    });
+    socket.on('highlight store', function(storeIndex) {
+      $('.indexStore').eq(storeIndex).click();
+    });
+
+    $('.highlight').click(function() {
+      socket.emit('enter store', $('.highlight').index(this));
+    });
+    socket.on('enter store', function(highlightIndex) {
+      $('.highlight').eq(highlightIndex).click();
+    });
+
+    $('#topbarLogo').click(function() {
+      socket.emit('back to mall');
+    });
+    socket.on('back to mall', function(nothing) {
+      window.location = '/';
+    });
+
+    $('.productCard').click(function() {
+      socket.emit('enter product', $('productCard').index(this));
+    });
+    socket.on('enter product', function(productIndex) {
+      $('.productCard').eq(productIndex).click();
+    });
+
+    $('#aboutBtn').click(function() {
+      socket.emit('about button clicked');
+    });
+    socket.on('about button clicked', function() {
+      window.location = $('#aboutBtn').attr('href');
     });
   }
 
@@ -197,7 +239,6 @@ $(document).ready(function() {
   function UpdateReadStat(index, count){
     if (count > 0){
       $('.unreadMessages').eq(index).html(count);
-      // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
     }
     else if(count == -1){
       var unreadNum;
@@ -219,7 +260,7 @@ $(document).ready(function() {
       $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
     }
     else{
-      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54);');
+      $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54)');
     }
   }
 
@@ -233,9 +274,9 @@ $(document).ready(function() {
   }
 
   function ShowNavbarStatus(together) {
-    // if (together.status) {
-    //   $('#statusArea').css('display', 'block');
-    //   $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
-    // }
+    if (together.status) {
+      $('#statusArea').css('display', 'block');
+      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
+    }
   }
 });

@@ -13,9 +13,7 @@
   {{# each products}}
     <div class="col s12 m4">
       <div class="card">
-        <div class="card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2" style="background-image: url('{{this.coverImagePath}}')">
-          <p class="productId" style="display: none;">{{this._id}}</p>
-        </div>
+        <div data-productid={{this._id}} class="productCard card-image waves-effect waves-block waves-light #e0e0e0 grey lighten-2" style="background-image: url('{{this.coverImagePath}}')"></div>
         <div class="card-content #eeeeee grey lighten-3">
           <span class="card-title activator grey-text text-darken-4">{{this.title}}<i class="material-icons right">more_vert</i></span>
           <p>${{this.price}}</p>

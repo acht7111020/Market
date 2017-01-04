@@ -22,6 +22,12 @@ function socket(server) {
       users[socket.id] = socket;
       User.findOne({'facebook.id': data}, function(err, user) {
         if (user) {
+          var friends = user.facebook.friends;
+          for (var i = 0; i < friends.length; i++) {
+            if (friends[i].id in users) {
+              users[friends[i].id].emit('someone is online or offline', {friend: socket.id, online: true})
+            }
+          }
           console.log(`[${user.facebook.name}] entered.`);
         }
         else {
@@ -35,28 +41,19 @@ function socket(server) {
       aggregateQuery.exec(function(err, docs){
         socket.emit('update unread status', docs);
       });
-
-      User.findOne({'facebook.id': socket.id}, function(err, user) {
-        if (err) throw err;
-      });
-
-      for (var id in users) {
-        if (id != socket.id) {
-          users[id].emit('someone is online or offline', {friend: socket.id, online: true})
-        }
-      }
       socket.emit('highlight online user', Object.keys(users));
     });
 
     socket.on('disconnect', function(data) {
       delete users[socket.id];
-      for (var id in users) {
-        if (id != socket.id) {
-          users[id].emit('someone is online or offline', {friend: socket.id, online: false})
-        }
-      }
       User.findOne({'facebook.id': socket.id}, function(err, user) {
         if (user) {
+          var friends = user.facebook.friends;
+          for (var i = 0; i < friends.length; i++) {
+            if (friends[i].id in users) {
+              users[friends[i].id].emit('someone is online or offline', {friend: socket.id, online: false})
+            }
+          }
           console.log(`[${user.facebook.name}] leaved.`);
         }
         else {
@@ -135,7 +132,6 @@ function socket(server) {
     });
 
     socket.on('get together status', function() {
-      // console.log(socket.request.session.together);
       if (socket.request.session.together) {
         socket.emit('show together status', socket.request.session.together);
       }
@@ -151,10 +147,33 @@ function socket(server) {
 
     socket.on('disconnect hang out', function() {
       NoticeInvitee('disconnect hang out', {});
-      socket.request.session.together = {};
+      socket.request.session.together = null;
       socket.request.session.save();
     });
 
+    socket.on('floor button clicked', function(btnId) {
+      NoticeInvitee('floor button clicked', btnId)
+    });
+
+    socket.on('highlight store', function(storeIndex) {
+      NoticeInvitee('highlight store', storeIndex);
+    });
+
+    socket.on('enter store', function(highlightIndex) {
+      NoticeInvitee('enter store', highlightIndex);
+    });
+
+    socket.on('back to mall', function() {
+      NoticeInvitee('back to mall', {});
+    });
+
+    socket.on('enter product', function(productIndex) {
+      NoticeInvitee('enter product', productIndex);
+    });
+
+    socket.on('about button clicked', function() {
+      NoticeInvitee('about button clicked', {});
+    });
 
     // ------------------------------ run into friends part ------------------------------
     socket.on('run into friends', function(info) {
@@ -211,12 +230,10 @@ function socket(server) {
 
     });
 
-
-
     function NoticeInvitee(emitName, emitData) {
       together = socket.request.session.together;
       if (together) {
-        if (together.status == 'Leading') {
+        if (together.status == 'Leading' || emitName == 'disconnect hang out') {
           if (users[together.company.facebookId])
             users[together.company.facebookId].emit(emitName, emitData);
         }

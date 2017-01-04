@@ -1,6 +1,6 @@
 var friendlist = [];
 $(document).ready(function() {
-  var myId = $('#idVar').html();
+  var myId = $("#jqueryVars").data("userid");
   var productId = $("#storeId").val();
   var status = $("#storeStatus").val();
   var info = {};
