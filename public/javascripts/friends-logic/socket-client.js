@@ -240,9 +240,21 @@ $(document).ready(function() {
       function addIcon(pic, name, id){
         if(friendlist.indexOf(id) != -1)
           return;
+
         friendlist.push(id);
+        var fbFriends = $(".friendsId");
         var users = $(".UserIcon").html();
-        users += `<div class="chip" data-id=${id}><img src=${pic} alt="head photo">${name}</div>`;
+        var greenColor = "chip green lighten-2";
+        var subclass = "chip"
+        for(var i = 0; i < fbFriends.length; i++){
+          if($(fbFriends[i]).html() == id ){
+            subclass = greenColor;
+            console.log(subclass);
+            break;
+          }
+        }
+        users += `<div class='${subclass}' data-id=${id}><img src=${pic} alt="head photo">${name}</div>`;
+
         $(".UserIcon").html(users);
       }
 

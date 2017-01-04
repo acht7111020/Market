@@ -51,6 +51,8 @@ router.get('/about/:storeId', RoutesLogic, function(req, res) {
         if (!user) res.redirect('/');
         else {
           req.renderValues.store = store;
+          req.renderValues.storeId = req.session.storeId;
+          req.renderValues.storeState = "in";
           req.renderValues.owner = user.facebook;
           req.renderValues.rating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
           res.render('store/about', req.renderValues);
