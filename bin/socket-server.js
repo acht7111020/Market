@@ -164,8 +164,11 @@ function socket(server) {
     });
 
     socket.on('back to mall', function() {
-      console.log('hi');
       NoticeInvitee('back to mall', {});
+    });
+
+    socket.on('enter product', function(productIndex) {
+      NoticeInvitee('enter product', productIndex);
     });
 
     // ------------------------------ run into friends part ------------------------------

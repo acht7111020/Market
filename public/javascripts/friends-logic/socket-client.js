@@ -183,7 +183,14 @@ $(document).ready(function() {
       socket.emit('back to mall');
     });
     socket.on('back to mall', function(nothing) {
-      window.location.href = window.location.origin;
+      window.location = '/';
+    });
+
+    $('.productCard').click(function() {
+      socket.emit('enter product', $('productCard').index(this));
+    });
+    socket.on('enter product', function(productIndex) {
+      $('.productCard').eq(productIndex).click();
     });
   }
 
@@ -225,7 +232,6 @@ $(document).ready(function() {
   function UpdateReadStat(index, count){
     if (count > 0){
       $('.unreadMessages').eq(index).html(count);
-      // $(".chatCollapsible").eq(index).find('i').css('color', 'black');
     }
     else if(count == -1){
       var unreadNum;
