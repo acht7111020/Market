@@ -20,7 +20,14 @@ function socket(server) {
     socket.on('new user', function(data, callback) {
       socket.id = data;
       users[socket.id] = socket;
-      console.log(`[${data}] entered.`);
+      User.findOne({'facebook.id': data}, function(err, user) {
+        if (user) {
+          console.log(`[${user.facebook.name}] entered.`);
+        }
+        else {
+          console.log('unknown entered.');
+        }
+      });
       var aggregateQuery = Chat.aggregate([
           {$match: {read: false, toUser: socket.id}},
           {$group : {_id : "$fromUser", numSend : {$sum : 1}}}
@@ -48,22 +55,14 @@ function socket(server) {
           users[id].emit('someone is online or offline', {friend: socket.id, online: false})
         }
       }
-
-      // for(var prod in storeState){
-      //   if(storeState[prod].indexOf(socket.id) != -1){
-      //     index = storeState[prod].indexOf(socket.id);
-      //     delete storeState[prod][index];
-      //     break;
-      //   }
-      // }
-      //
-      // for (var id in users) {
-      //   if (id != socket.id) {
-      //     users[id].emit('remove person icon', socket.id);
-      //   }
-      // }
-       console.log(`[${socket.id}] leaved.`);
-
+      User.findOne({'facebook.id': socket.id}, function(err, user) {
+        if (user) {
+          console.log(`[${user.facebook.name}] leaved.`);
+        }
+        else {
+          console.log('unknown leaved.');
+        }
+      });
     });
 
     socket.on('send message', function(data) {
@@ -137,7 +136,9 @@ function socket(server) {
 
     socket.on('get together status', function() {
       // console.log(socket.request.session.together);
-      socket.emit('show together status', socket.request.session.together);
+      if (socket.request.session.together) {
+        socket.emit('show together status', socket.request.session.together);
+      }
     });
 
     socket.on('scrolling', function(scrollTop) {
