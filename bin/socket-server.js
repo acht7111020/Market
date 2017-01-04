@@ -151,6 +151,22 @@ function socket(server) {
       socket.request.session.save();
     });
 
+    socket.on('floor button clicked', function(btnId) {
+      NoticeInvitee('floor button clicked', btnId)
+    });
+
+    socket.on('highlight store', function(storeIndex) {
+      NoticeInvitee('highlight store', storeIndex);
+    });
+
+    socket.on('enter store', function(highlightIndex) {
+      NoticeInvitee('enter store', highlightIndex);
+    });
+
+    socket.on('back to mall', function() {
+      console.log('hi');
+      NoticeInvitee('back to mall', {});
+    });
 
     // ------------------------------ run into friends part ------------------------------
     socket.on('run into friends', function(info) {

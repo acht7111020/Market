@@ -8,7 +8,6 @@ $(document).ready(function() {
   var historyMsgs = {};
   var $openingChatContent;
   var titleNewMessageFunction;
-  var together = {};
 
   if (myId) {
     var socket = io.connect();
@@ -71,6 +70,7 @@ $(document).ready(function() {
     });
 
     socket.on('someone is online or offline', function(data) {
+      console.log(data);
       var index = GetIndex(data.friend);
       HighlightOnlineUser(index, data.online);
     });
@@ -93,98 +93,7 @@ $(document).ready(function() {
 
     // ------------------------------ shop together part ------------------------------
 
-    $('.chatMenuForm').submit(function(e) {
-      e.preventDefault();
-      var index = $('.chatMenuForm').index(this);
-      var friendsId = $('.friendsId').eq(index).html();
-      $('#waiting').modal('open');
 
-      var invitation = {
-        inviter: myId,
-        invitee: friendsId
-      }
-      socket.emit('new invitation', invitation);
-
-    });
-
-    socket.on('invited', function(inviter) {
-      $('#modalP').data('inviterFbId', inviter.facebook.id);
-      $('#modalP').html(`You have been invited by <span id="inviterName">${inviter.facebook.name}</span>`);
-      $('#consent').modal('open');
-    });
-
-    $('.consentAccDec').click(function() {
-      socket.emit('accept or decline invitation',
-       {accept: $(this).data('accept'), inviterFbId: $('#modalP').data('inviterFbId'), inviteeFbId: myId});
-       location.reload();
-    });
-
-    socket.on('invitation accepted', function(invitee) {
-      $('#waitingHeader').html('Invitation accepted');
-      $('#waitingContent').html(`<span id="inviteeName">${invitee.facebook.name} </span>just accepted your invitation`);
-      $('#waitingPreloader').css('display', 'none');
-      socket.emit('invitation accepted', invitee);
-      location.reload();
-    });
-
-    socket.emit('get together status');
-    socket.on('show together status', function(together) {
-      together = together;
-      ShowNavbarStatus(together);
-    });
-
-    $(window).scroll(function() {
-      socket.emit('scrolling', $(window).scrollTop());
-    });
-
-    socket.on('scroll', function(scrollTop) {
-      $(window).scrollTop(scrollTop);
-    });
-
-    // socket.emit('page load', window.location.href);
-    socket.on('page load', function(url) {
-      // window.location.href = url;
-    });
-
-    $('#disconnectBtn').click(function() {
-      socket.emit('disconnect hang out');
-      $('#statusArea').css('display', 'none');
-      location.reload();
-    });
-
-    socket.on('disconnect hang out', function() {
-      socket.emit('disconnect hang out');
-      $('#statusArea').css('display', 'none');
-      location.reload();
-    });
-
-    $('.floorBtn').click(function() {
-      socket.emit('floor button clicked', $(this).attr('id'));
-    });
-    socket.on('floor button clicked', function(btnId) {
-      $(`#${btnId}`).click();
-    });
-
-    $('.indexStore').click(function() {
-      socket.emit('highlight store', $('.indexStore').index(this));
-    });
-    socket.on('highlight store', function(storeIndex) {
-      $('.indexStore').eq(storeIndex).click();
-    });
-
-    $('.highlight').click(function() {
-      socket.emit('enter store', $('.highlight').index(this));
-    });
-    socket.on('enter store', function(highlightIndex) {
-      $('.highlight').eq(highlightIndex).click();
-    });
-
-    $('#topbarLogo').click(function() {
-      socket.emit('back to mall');
-    });
-    socket.on('back to mall', function(nothing) {
-      window.location.href = window.location.origin;
-    });
   }
 
   function LoadHistoryMsgs() {
@@ -243,10 +152,15 @@ $(document).ready(function() {
   }
 
   function HighlightOnlineUser(index, online){
+    console.log(index);
     if (online && index >= 0){
+      console.log('online');
       $(".chatCollapsible").eq(index).find('i').css('color', '#009100');
     }
     else{
+      console.log('offline');
+      // console.log();
+      // $(".chatCollapsible").eq(index).find('i').css('color', 'red')
       $(".chatCollapsible").eq(index).find('i').css('color', 'rgba(0,0,0,0.54)');
     }
   }
@@ -260,10 +174,5 @@ $(document).ready(function() {
     }
   }
 
-  function ShowNavbarStatus(together) {
-    if (together.status) {
-      $('#statusArea').css('display', 'block');
-      $('#shoppingStatus').html(`${together.status} ${together.company.name}`);
-    }
-  }
+
 });

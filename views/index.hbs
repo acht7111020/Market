@@ -15,11 +15,11 @@
         <input type="submit" name="level" id="fourthFloorBtn" value="4"/>
         <input type="submit" name="level" id="fifthFloorBtn" value="5"/>
       </form>
-      <li><a class="btn-floating red" onclick="document.getElementById('fifthFloorBtn').click();">5</a></li>
-      <li><a class="btn-floating yellow darken-1" onclick="document.getElementById('fourthFloorBtn').click();">4</a></li>
-      <li><a class="btn-floating green" onclick="document.getElementById('thirdFloorBtn').click();">3</a></li>
-      <li><a class="btn-floating blue" onclick="document.getElementById('secondFloorBtn').click();">2</a></li>
-      <li><a class="btn-floating grey darken-1" onclick="document.getElementById('firstFloorBtn').click();">1</a></li>
+      <li><a id="floor5Btn" class="floorBtn btn-floating red" data-floor=5 onclick="document.getElementById('fifthFloorBtn').click();">5</a></li>
+      <li><a id="floor4Btn" class="floorBtn btn-floating yellow darken-1" data-floor=4 onclick="document.getElementById('fourthFloorBtn').click();">4</a></li>
+      <li><a id="floor3Btn" class="floorBtn btn-floating green" data-floor=3 onclick="document.getElementById('thirdFloorBtn').click();">3</a></li>
+      <li><a id="floor2Btn" class="floorBtn btn-floating blue" data-floor=2 onclick="document.getElementById('secondFloorBtn').click();">2</a></li>
+      <li><a id="floor1Btn" class="floorBtn btn-floating grey darken-1" data-floor=1 onclick="document.getElementById('firstFloorBtn').click();">1</a></li>
     </ul>
 </div>
 {{# if storesA}}
