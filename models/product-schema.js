@@ -7,7 +7,6 @@ var schema = new Schema({
   contentImagePath: {type: [String], required: true},
   price: {type: Number, required: true},
   description: {type: String, required: true},
-  position: {type: Number},
   ownerStore: Schema.Types.ObjectId
 });
 
