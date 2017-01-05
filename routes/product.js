@@ -25,7 +25,6 @@ router.get('/:productId', RoutesLogic, function(req, res) {
         req.renderValues.product = product;
         req.renderValues.storeState = "in";
         req.renderValues.storeId = req.session.storeId;
-        req.renderValues.userId = req.user._id;
         req.renderValues.ownerId = store.detail.owner;
         res.render('product/product', req.renderValues);
       });
