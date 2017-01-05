@@ -4,7 +4,7 @@ var floors = [['Cosmetic','Exchange','Starbucks','Luxury','Boutique','Women','La
   ['Lingerie','Pajama','Bed','Aromatherapy','Porcelain','Cooking','Pot','Home'],
   ['Men','Shirt','Suit','Outdoor','Shoes','Sport','Jean','Swimsuit','Casual','SALES']];
 var questions = [['what','floor']];
-var answers = ["Floor Guide\n5F Sports & Jeans/Home Appliances/Gentlemen's Wear\n4F Living & Leisure/Lingerie & Pajamas\n3F Children's Wear/Young Ladies' Wear\n2F Ladies' Elegance Fashion\n1F Cosmetics/Luxury Boutique & Women's Shoes\n"];
+var answers = [["Floor Guide","5F Sports & Jeans/Home Appliances/Gentlemen's Wear","4F Living & Leisure/Lingerie & Pajamas","3F Children's Wear/Young Ladies' Wear","2F Ladies' Elegance Fashion","1F Cosmetics/Luxury Boutique & Women's Shoes"]];
 var dirMsg_prefix = "You could go to floor ";
 var dirMsg_suffix = " to find what you want";
 
@@ -39,9 +39,10 @@ $(document).ready(function() {
 
     $('.messageForm').submit(function(e) {
       e.preventDefault();
-      var index = $('.messageForm').index(this);
+      var index = $('.messageForm').index(this)+1;
       var $messageInput = $('.messageInput').eq(index);
       sendNewMsg(myId, chooseId, $messageInput.val());
+      socket.emit('send message', $messageInput.val());
       $messageInput.val('');
     });
 
@@ -56,24 +57,25 @@ $(document).ready(function() {
 
     function replyMsg(myId, chooseId, thisMsg){
       sendNewMsg(myId, chooseId, thisMsg);
+      thisMsg = thisMsg.toUpperCase();
       for(i in floors){ // Floor
         for(c in floors[i]){ // Category
-          if(thisMsg.includes(floors[i][c])){
+          if(thisMsg.includes(floors[i][c].toUpperCase())){
             sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
             break;
           }
         }
       }
       for(i in questions){
+        var numHasThis = 0;
         for(limit in questions[i]){ // limit
-          var hasThis = false;
-          if(thisMsg.includes(questions[i][limit])){
-            hasThis = true;
-            break;
+          if(thisMsg.includes(questions[i][limit].toUpperCase())){
+            numHasThis += 1;
           }
         }
-        if(hasThis){
-          sendNewMsg(chooseId, myId, answers[i]);
+        if(numHasThis==questions[i].length){
+          for(j in answers[i])
+            sendNewMsg(chooseId, myId, answers[i][j]);
         }
       }
     }
