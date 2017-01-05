@@ -27,28 +27,6 @@
         <a class="collapsible-header"><i class="material-icons">chat</i>Chat</a>
         <div class="collapsible-body">
           <ul class="collapsible" data-collapsible="accordion" id="chatArea">
-            <!-- Customer service part -->
-            <li class="chatBox">
-              <div class="friendsId" style="display: none;">00000</div>
-              <a class="collapsible-header chatCollapsible">
-                <i class="material-icons">perm_identity</i>Good fairy
-                <span class="unreadMessages"></span>
-              </a>
-              <div class="collapsible-body">
-                <form class="messageBotForm">
-                  <div class="chatContent">
-                  </div>
-                  <div class="inputField">
-                    <input type="text" class="messageInput" placeholder="Input message..."/>
-                  </div>
-                  <button class="btn waves-effect waves-light sendBtn" type="submit">
-                    Send
-                    <i class="material-icons right">send</i>
-                  </button>
-                </form>
-              </div>
-            </li>
-
             {{# each fb_user.friends}}
               <li class="chatBox">
                 <div class="friendsId" style="display: none;">{{this.id}}</div>
@@ -79,6 +57,27 @@
                 </div>
               </li>
             {{/ each}}
+            <!-- Customer service part -->
+            <li class="chatBox">
+              <div class="friendsId" style="display: none;">000000</div>
+              <a class="collapsible-header chatCollapsible">
+                <i class="material-icons">perm_identity</i>Good fairy
+                <span class="unreadMessages"></span>
+              </a>
+              <div class="collapsible-body">
+                <form class="messageForm">
+                  <div class="chatContent">
+                  </div>
+                  <div class="inputField">
+                    <input type="text" class="messageInput" placeholder="Input message..."/>
+                  </div>
+                  <button class="btn waves-effect waves-light sendBtn" type="submit">
+                    Send
+                    <i class="material-icons right">send</i>
+                  </button>
+                </form>
+              </div>
+            </li>
           </ul>
         </div>
       </li>
