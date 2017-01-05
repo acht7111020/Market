@@ -23,18 +23,26 @@ router.get('/:storeId', RoutesLogic, function(req, res, next) {
     else if (!store) res.redirect('/');
     else if(store.status.level != req.session.level) res.redirect('/');
     else {
-      Product.find({ownerStore: req.params.storeId}, function(productErr, products) {
-        if(productErr) res.redirect('/');
-        else if (!products) res.redirect('/');
+      console.log(store);
+      store.status.pageView ++;
+      store.save(function(err, updatedStore) {
+        console.log(updatedStore);
+        if (err) throw err;
         else {
-          req.renderValues.products = products;
-          req.session.storeId = req.params.storeId;
-          req.renderValues.storeId = req.session.storeId;
-          req.renderValues.storeState = "in";
-          req.renderValues.leftbarImg = store.detail.coverImage;
-          req.renderValues.leftbarTitle = store.detail.title;
-          req.renderValues.leftbarAbout = req.params.storeId;
-          res.render('store/store', req.renderValues);
+          Product.find({ownerStore: req.params.storeId}, function(productErr, products) {
+            if(productErr) res.redirect('/');
+            else if (!products) res.redirect('/');
+            else {
+              req.renderValues.products = products;
+              req.session.storeId = req.params.storeId;
+              req.renderValues.storeId = req.session.storeId;
+              req.renderValues.storeState = "in";
+              req.renderValues.leftbarImg = store.detail.coverImage;
+              req.renderValues.leftbarTitle = store.detail.title;
+              req.renderValues.leftbarAbout = req.params.storeId;
+              res.render('store/store', req.renderValues);
+            }
+          });
         }
       });
     }

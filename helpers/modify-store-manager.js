@@ -17,6 +17,9 @@ module.exports = function ModifyStore() {
           contentImage = `/uploads/stores/${files.minorImage[0].filename}`;
         else
           contentImage = store.detail.contentImage;
+        if (!store.detail.title) {
+          store.status.pageView = 0;
+        }
         store.detail = {
           title: body.title,
           owner: owner._id,

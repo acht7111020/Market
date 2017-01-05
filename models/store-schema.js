@@ -7,7 +7,8 @@ var schema = new Schema({
     level: String,
     area: String,
     position: Number,
-    price: Number
+    price: Number,
+    pageView: Number
   },
   detail: {
     title: String,

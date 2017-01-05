@@ -35,11 +35,19 @@ router.post('/', RoutesLogic, function(req, res, next) {
 });
 
 router.get('/loading', RoutesLogic, function(req, res, next) {
-  req.renderValues.level = req.session.level;
-  req.renderValues.type = "purchase";
-  req.renderValues.leftbarTitle = 'loading';
-  req.renderValues.leftbarImg = '/images/online-store.png';
-  res.render('load/loading', req.renderValues);
+
+  var findQuery = Store.find({"status.level":req.session.level});
+  findQuery.sort('-status.pageView').exec(function(storeErr, storeDocs) {
+    console.log(storeDocs[0]);
+    console.log(storeDocs[1]);
+    req.renderValues.storesA = storeDocs[0];
+    req.renderValues.storesB = storeDocs[1];
+    req.renderValues.type = "purchase";
+    req.renderValues.level = req.session.level;
+    req.renderValues.leftbarTitle = 'loading';
+    req.renderValues.leftbarImg = '/images/online-store.png';
+    res.render('load/loading', req.renderValues);
+  });
 });
 
 // router.get('/:level', RoutesLogic, function(req, res, next) {

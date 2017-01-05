@@ -11,7 +11,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'A',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -27,7 +28,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'A',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -43,7 +45,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'A',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -59,7 +62,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'A',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -75,7 +79,8 @@ var stores = [
       price: '20000000',
       level: '1',
       area: 'A',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -91,7 +96,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'A',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -107,7 +113,8 @@ var stores = [
       price: '400000000',
       level: '1',
       area: 'A',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Puma',
@@ -123,7 +130,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'B',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -139,7 +147,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'B',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -155,7 +164,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'B',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -171,7 +181,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'B',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -187,7 +198,8 @@ var stores = [
       price: '20000000',
       level: '1',
       area: 'B',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -203,7 +215,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'B',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -219,7 +232,8 @@ var stores = [
       price: '400000000',
       level: '1',
       area: 'B',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -235,7 +249,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'C',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -251,7 +266,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'C',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -267,7 +283,8 @@ var stores = [
       price: '300000000',
       level: '1',
       area: 'C',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -283,7 +300,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'C',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -299,7 +317,8 @@ var stores = [
       price: '20000000',
       level: '1',
       area: 'C',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -315,7 +334,8 @@ var stores = [
       price: '100000000',
       level: '1',
       area: 'C',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -331,7 +351,8 @@ var stores = [
       price: '400000000',
       level: '1',
       area: 'C',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -347,7 +368,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'A',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -363,7 +385,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'A',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -379,7 +402,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'A',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -395,7 +419,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'A',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -411,7 +436,8 @@ var stores = [
       price: '20000000',
       level: '2',
       area: 'A',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -427,7 +453,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'A',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -443,7 +470,8 @@ var stores = [
       price: '400000000',
       level: '2',
       area: 'A',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -459,7 +487,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'B',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -475,7 +504,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'B',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -491,7 +521,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'B',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -507,7 +538,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'B',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -523,7 +555,8 @@ var stores = [
       price: '20000000',
       level: '2',
       area: 'B',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -539,7 +572,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'B',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -555,7 +589,8 @@ var stores = [
       price: '400000000',
       level: '2',
       area: 'B',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -571,7 +606,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'C',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -587,7 +623,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'C',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -603,7 +640,8 @@ var stores = [
       price: '300000000',
       level: '2',
       area: 'C',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -619,7 +657,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'C',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -635,7 +674,8 @@ var stores = [
       price: '20000000',
       level: '2',
       area: 'C',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -651,7 +691,8 @@ var stores = [
       price: '100000000',
       level: '2',
       area: 'C',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -667,7 +708,8 @@ var stores = [
       price: '400000000',
       level: '2',
       area: 'C',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -683,7 +725,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'A',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -699,7 +742,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'A',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -715,7 +759,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'A',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -731,7 +776,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'A',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -747,7 +793,8 @@ var stores = [
       price: '20000000',
       level: '3',
       area: 'A',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -763,7 +810,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'A',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -779,7 +827,8 @@ var stores = [
       price: '400000000',
       level: '3',
       area: 'A',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Puma',
@@ -795,7 +844,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'B',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -811,7 +861,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'B',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -827,7 +878,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'B',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -843,7 +895,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'B',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -859,7 +912,8 @@ var stores = [
       price: '20000000',
       level: '3',
       area: 'B',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -875,7 +929,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'B',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -891,7 +946,8 @@ var stores = [
       price: '400000000',
       level: '3',
       area: 'B',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -907,7 +963,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'C',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -923,7 +980,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'C',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -939,7 +997,8 @@ var stores = [
       price: '300000000',
       level: '3',
       area: 'C',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -955,7 +1014,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'C',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -971,7 +1031,8 @@ var stores = [
       price: '20000000',
       level: '3',
       area: 'C',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -987,7 +1048,8 @@ var stores = [
       price: '100000000',
       level: '3',
       area: 'C',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1003,7 +1065,8 @@ var stores = [
       price: '400000000',
       level: '3',
       area: 'C',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1019,7 +1082,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'A',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1035,7 +1099,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'A',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1051,7 +1116,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'A',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1067,7 +1133,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'A',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1083,7 +1150,8 @@ var stores = [
       price: '20000000',
       level: '4',
       area: 'A',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1099,7 +1167,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'A',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1115,7 +1184,8 @@ var stores = [
       price: '400000000',
       level: '4',
       area: 'A',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Puma',
@@ -1131,7 +1201,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'B',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1147,7 +1218,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'B',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1163,7 +1235,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'B',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1179,7 +1252,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'B',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1195,7 +1269,8 @@ var stores = [
       price: '20000000',
       level: '4',
       area: 'B',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1211,7 +1286,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'B',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1227,7 +1303,8 @@ var stores = [
       price: '400000000',
       level: '4',
       area: 'B',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1243,7 +1320,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'C',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1259,7 +1337,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'C',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1275,7 +1354,8 @@ var stores = [
       price: '300000000',
       level: '4',
       area: 'C',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1291,7 +1371,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'C',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1307,7 +1388,8 @@ var stores = [
       price: '20000000',
       level: '4',
       area: 'C',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1323,7 +1405,8 @@ var stores = [
       price: '100000000',
       level: '4',
       area: 'C',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1339,7 +1422,8 @@ var stores = [
       price: '400000000',
       level: '4',
       area: 'C',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1355,7 +1439,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'A',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1371,7 +1456,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'A',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1387,7 +1473,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'A',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1403,7 +1490,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'A',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1419,7 +1507,8 @@ var stores = [
       price: '20000000',
       level: '5',
       area: 'A',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1435,7 +1524,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'A',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1451,7 +1541,8 @@ var stores = [
       price: '400000000',
       level: '5',
       area: 'A',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Puma',
@@ -1467,7 +1558,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'B',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1483,7 +1575,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'B',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1499,7 +1592,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'B',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1515,7 +1609,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'B',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1531,7 +1626,8 @@ var stores = [
       price: '20000000',
       level: '5',
       area: 'B',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1547,7 +1643,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'B',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1563,7 +1660,8 @@ var stores = [
       price: '400000000',
       level: '5',
       area: 'B',
-      position: 7
+      position: 7,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1579,7 +1677,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'C',
-      position: 1
+      position: 1,
+      pageView: 0
     },
     // detail: {
     //   title: 'Adidas',
@@ -1595,7 +1694,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'C',
-      position: 2
+      position: 2,
+      pageView: 0
     },
     // detail: {
     //   title: 'Converse',
@@ -1611,7 +1711,8 @@ var stores = [
       price: '300000000',
       level: '5',
       area: 'C',
-      position: 3
+      position: 3,
+      pageView: 0
     },
     // detail: {
     //   title: 'Jordan',
@@ -1627,7 +1728,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'C',
-      position: 4
+      position: 4,
+      pageView: 0
     },
     // detail: {
     //   title: 'New Balance',
@@ -1643,7 +1745,8 @@ var stores = [
       price: '20000000',
       level: '5',
       area: 'C',
-      position: 5
+      position: 5,
+      pageView: 0
     },
     // detail: {
     //   title: 'Nike',
@@ -1659,7 +1762,8 @@ var stores = [
       price: '100000000',
       level: '5',
       area: 'C',
-      position: 6
+      position: 6,
+      pageView: 0
     },
     // detail: {
     //   title: 'Under Armour',
@@ -1675,7 +1779,8 @@ var stores = [
       price: '400000000',
       level: '5',
       area: 'C',
-      position: 7
+      position: 7,
+      pageView: 0
     }
     })
 ];
