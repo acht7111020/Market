@@ -246,7 +246,6 @@ $(document).ready(function() {
       socket.emit('enter product', $('productCard').index(this));
     });
     socket.on('enter product', function(productIndex) {
-      console.log('hi');
       $('.productCard').eq(productIndex).click();
     });
 
@@ -254,8 +253,21 @@ $(document).ready(function() {
       socket.emit('about button clicked');
     });
     socket.on('about button clicked', function() {
-      console.log('hi');
       window.location = $('#aboutBtn').attr('href');
+    });
+
+    $('#storeOwnerName').click(function() {
+      socket.emit('store owner clicked');
+    });
+    socket.on('store owner clicked', function() {
+      window.location = $('#storeOwnerName').attr('href');
+    });
+
+    $('.storeTr').click(function() {
+      socket.emit('user store table clicked', $('.storeTr').index(this));
+    });
+    socket.on('user store table clicked', function(trIndex) {
+      window.location = $('.storeTr').eq(trIndex).data('hrefurl');
     });
 
     // ------------------------------ run into friends part ------------------------------

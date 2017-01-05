@@ -3,6 +3,7 @@
 <!-- dropdown -->
 <ul id="dropdown1" class="dropdown-content">
   {{# if login}}
+    <li><a href="/user/profile/{{userId}}">Profile</a></li>
     <li><a href="/user/logout">Logout</a></li>
   {{ else}}
     <li>
@@ -10,8 +11,6 @@
     </li>
   {{/if}}
 </ul>
-<!-- /dropdown -->
-<!-- color: #37474f grey darken-3 -->
 <div class="navbar-fixed">
   <nav id="topbarNav">
     <div id = "topbar" class="nav-wrapper blue-grey darken-2">

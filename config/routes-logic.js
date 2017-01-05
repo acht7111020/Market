@@ -6,6 +6,7 @@ function RoutesLogic (req, res, next) {
     req.renderValues = {
       title: "GoodGoods",
       fb_user: req.user.facebook,
+      userId: req.user._id
     }
     return next();
   }

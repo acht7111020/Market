@@ -38,7 +38,6 @@ router.get('/:storeId', RoutesLogic, function(req, res, next) {
               req.renderValues.leftbarImg = store.detail.coverImage;
               req.renderValues.leftbarTitle = store.detail.title;
               req.renderValues.leftbarAbout = req.params.storeId;
-              req.renderValues.userId = req.user._id;
               req.renderValues.ownerId = store.detail.owner;
               res.render('store/store', req.renderValues);
             }
