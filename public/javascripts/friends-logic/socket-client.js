@@ -1,3 +1,10 @@
+var floors = [['Cosmetic','Exchange','Restaurant','Starbucks','Luxury','Boutique','Women','Ladies','Shoe','Leather'],
+  ['Sewing','Clock','Watch','Bag','Clothing','Accessories'],
+  ['Wear','Jewelry','Children','Toy','Maternity','Baby'],
+  ['Lingerie','Pajama','Bed','Aromatherapy','Porcelain','Cooking','Pot','Home'],
+  ['Men','Shirt','Suit','Outdoor','Shoes','Sport','Jean','Swimsuit','Casual','SALES']];
+var dirMsg_prefix = "You could go to floor ";
+var dirMsg_suffix = " to find what you want";
 $(document).ready(function() {
   $('#consent').modal();
   $('#waiting').modal({
@@ -43,9 +50,19 @@ $(document).ready(function() {
       replyMsg(myId, chooseId, $messageInput.val());
       $messageInput.val('');
     });
+
     function replyMsg(myId, chooseId, thisMsg){
       sendNewMsg(myId, chooseId, thisMsg);
+      for(i in floors){ // Floor
+        for(c in floors[i]){ // Category
+          if(thisMsg.includes(floors[i][c])){
+            sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
+            break;
+          }
+        }
+      }
     }
+
     function sendNewMsg(myId, chooseId, thisMsg){
       var newMsg = {
         fromUser: myId,
@@ -53,7 +70,6 @@ $(document).ready(function() {
         msg: thisMsg,
         read: false
       };
-      socket.emit('send message', newMsg);
       DisplayMsg(newMsg);
     }
     // ------------------------------ ---------------------- ------------------------------
