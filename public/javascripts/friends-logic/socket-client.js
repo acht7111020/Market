@@ -1,10 +1,13 @@
-var floors = [['Cosmetic','Exchange','Restaurant','Starbucks','Luxury','Boutique','Women','Ladies','Shoe','Leather'],
+var floors = [['Cosmetic','Exchange','Starbucks','Luxury','Boutique','Women','Ladies','Shoe','Leather'],
   ['Sewing','Clock','Watch','Bag','Clothing','Accessories'],
   ['Wear','Jewelry','Children','Toy','Maternity','Baby'],
   ['Lingerie','Pajama','Bed','Aromatherapy','Porcelain','Cooking','Pot','Home'],
   ['Men','Shirt','Suit','Outdoor','Shoes','Sport','Jean','Swimsuit','Casual','SALES']];
+var questions = [['what','floor']];
+var answers = ["Floor Guide\n5F Sports & Jeans/Home Appliances/Gentlemen's Wear\n4F Living & Leisure/Lingerie & Pajamas\n3F Children's Wear/Young Ladies' Wear\n2F Ladies' Elegance Fashion\n1F Cosmetics/Luxury Boutique & Women's Shoes\n"];
 var dirMsg_prefix = "You could go to floor ";
 var dirMsg_suffix = " to find what you want";
+
 $(document).ready(function() {
   $('#consent').modal();
   $('#waiting').modal({
@@ -38,7 +41,7 @@ $(document).ready(function() {
       e.preventDefault();
       var index = $('.messageForm').index(this);
       var $messageInput = $('.messageInput').eq(index);
-      replyMsg(myId, chooseId, $messageInput.val());
+      sendNewMsg(myId, chooseId, $messageInput.val());
       $messageInput.val('');
     });
 
@@ -59,6 +62,18 @@ $(document).ready(function() {
             sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
             break;
           }
+        }
+      }
+      for(i in questions){
+        for(limit in questions[i]){ // limit
+          var hasThis = false;
+          if(thisMsg.includes(questions[i][limit])){
+            hasThis = true;
+            break;
+          }
+        }
+        if(hasThis){
+          sendNewMsg(chooseId, myId, answers[i]);
         }
       }
     }
