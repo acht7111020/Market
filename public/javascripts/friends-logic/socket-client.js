@@ -194,6 +194,10 @@ $(document).ready(function() {
     });
 
     socket.on('scroll', function(scrollTop) {
+      // $(window).animate({scrollTop:scrollTop}, function() {
+      //
+      // };
+      // $(window).animate({ scrollTop: scrollTop }, 600);
       $(window).scrollTop(scrollTop);
     });
 
@@ -211,6 +215,7 @@ $(document).ready(function() {
     socket.on('disconnect hang out', function() {
       socket.emit('disconnect hang out');
       $('#statusArea').css('display', 'none');
+      $('.MouseDiv').css('display', 'none');
       location.reload();
     });
 
@@ -268,6 +273,29 @@ $(document).ready(function() {
     });
     socket.on('user store table clicked', function(trIndex) {
       window.location = $('.storeTr').eq(trIndex).data('hrefurl');
+    });
+
+    function myMoveFunction(mouse){
+
+      var x = mouse.x;
+      var y = mouse.y;
+      console.log(mouse);
+      if (y < 64) y = 64;
+      $('.MouseDiv').css('display', 'block');
+      $(".MouseDiv").css({left:x, top:y});
+    }
+    window.setInterval(function(){
+      socket.emit('mouse move', mouse);
+    }, 100);
+
+    var mouse = {}
+    $( "body" ).mousemove(function( event ) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+
+    });
+    socket.on('mouse move', function(mouse) {
+      myMoveFunction(mouse);
     });
 
     // ------------------------------ run into friends part ------------------------------

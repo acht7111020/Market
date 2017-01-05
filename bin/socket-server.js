@@ -183,6 +183,10 @@ function socket(server) {
       NoticeInvitee('user store table clicked', trIndex);
     });
 
+    socket.on('mouse move', function(mouse) {
+      NoticeInvitee('mouse move', mouse);
+    });
+
     // ------------------------------ run into friends part ------------------------------
     socket.on('run into friends', function(info) {
       socket.id = info.myId;

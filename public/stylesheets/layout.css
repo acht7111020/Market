@@ -30,6 +30,8 @@ main {
   position: fixed;
   z-index: 30;
   height: 50px;
+  display: none;
+  transition: all 0.1s linear;
 }
 
 .MouseDiv img{
