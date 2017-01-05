@@ -12,9 +12,9 @@ router.get('/', RoutesLogic, function(req, res, next) {
   var findQueryC = Store.find({"status.level":req.session.level, "status.area":"C"});
   var allstores;
   //db.stores.find({"status.area":"A"})
-  findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
-    findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
-      findQueryC.sort('position').exec(function(storeErr, storeDocsC) {
+  findQueryA.sort('status.position').exec(function(storeErr, storeDocsA) {
+    findQueryB.sort('status.position').exec(function(storeErr, storeDocsB) {
+      findQueryC.sort('status.position').exec(function(storeErr, storeDocsC) {
         //allstores = [storeDocsA, storeDocsB, storeDocsC];
         req.renderValues.storesA = storeDocsA;
         req.renderValues.storesB = storeDocsB;
