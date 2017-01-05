@@ -11,12 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script type="text/javascript" src="/javascripts/friends-logic/socket-client.js"></script>
+    <script type="text/javascript" src="/javascripts/layout/layout.js"></script>
   </head>
   <body>
+    <div class="MouseDiv">
+      <img src="/images/mouse.png"/>
+    </div>
     {{> topbar}}
     {{> leftbar}}
-    <main>
+    <main >
       {{{body}}}
     </main>
+
   </body>
 </html>

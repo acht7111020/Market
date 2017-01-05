@@ -23,3 +23,15 @@ main {
   /*height: 100%;
   overflow: scroll;*/
 }
+
+.MouseDiv{
+  top: 399px;
+  left: 400px;
+  position: fixed;
+  z-index: 30;
+  height: 50px;
+}
+
+.MouseDiv img{
+  height: inherit;
+}
