@@ -7,6 +7,7 @@ var questions = [['what','floor']];
 var answers = [["Floor Guide","5F Sports & Jeans/Home Appliances/Gentlemen's Wear","4F Living & Leisure/Lingerie & Pajamas","3F Children's Wear/Young Ladies' Wear","2F Ladies' Elegance Fashion","1F Cosmetics/Luxury Boutique & Women's Shoes"]];
 var dirMsg_prefix = "You could go to floor ";
 var dirMsg_suffix = " to find what you want";
+var errMsg = "Sorry. I don't get your question.";
 
 $(document).ready(function() {
   $('#consent').modal();
@@ -56,12 +57,14 @@ $(document).ready(function() {
     });
 
     function replyMsg(myId, chooseId, thisMsg){
+      var hasReply = false;
       sendNewMsg(myId, chooseId, thisMsg);
       thisMsg = thisMsg.toUpperCase();
       for(i in floors){ // Floor
         for(c in floors[i]){ // Category
           if(thisMsg.includes(floors[i][c].toUpperCase())){
             sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
+            hasReply = true;
             break;
           }
         }
@@ -76,8 +79,12 @@ $(document).ready(function() {
         if(numHasThis==questions[i].length){
           for(j in answers[i])
             sendNewMsg(chooseId, myId, answers[i][j]);
+            hasReply = true;
+          return 0;
         }
       }
+      if(!hasReply)
+        sendNewMsg(chooseId, myId, errMsg);
     }
 
     function sendNewMsg(myId, chooseId, thisMsg){
