@@ -7,6 +7,8 @@ var questions = [['what','floor']];
 var answers = [["Floor Guide","5F Sports & Jeans/Home Appliances/Gentlemen's Wear","4F Living & Leisure/Lingerie & Pajamas","3F Children's Wear/Young Ladies' Wear","2F Ladies' Elegance Fashion","1F Cosmetics/Luxury Boutique & Women's Shoes"]];
 var dirMsg_prefix = "You could go to floor ";
 var dirMsg_suffix = " to find what you want";
+var errMsg = "Sorry. I don't get your question.";
+var idRob = "000000";
 
 $(document).ready(function() {
   $('#consent').modal();
@@ -39,29 +41,28 @@ $(document).ready(function() {
 
     $('.messageForm').submit(function(e) {
       e.preventDefault();
-      var index = $('.messageForm').index(this)+1;
+      var index = $('.messageForm').index(this);
       var $messageInput = $('.messageInput').eq(index);
-      sendNewMsg(myId, chooseId, $messageInput.val());
-      socket.emit('send message', $messageInput.val());
+      if(chooseId==idRob){
+        replyMsg(myId, chooseId, $messageInput.val());
+      }
+      else {
+        var newMsg = sendNewMsg(myId, chooseId, $messageInput.val());
+        socket.emit('send message', newMsg);
+      }
       $messageInput.val('');
     });
 
     // ------------------------------ Customer service part ------------------------------
-    $('.messageBotForm').submit(function(e) {
-      e.preventDefault();
-      var index = $('.messageBotForm').index(this);
-      var $messageInput = $('.messageInput').eq(index);
-      replyMsg(myId, chooseId, $messageInput.val());
-      $messageInput.val('');
-    });
-
     function replyMsg(myId, chooseId, thisMsg){
+      var hasReply = false;
       sendNewMsg(myId, chooseId, thisMsg);
       thisMsg = thisMsg.toUpperCase();
       for(i in floors){ // Floor
         for(c in floors[i]){ // Category
           if(thisMsg.includes(floors[i][c].toUpperCase())){
             sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
+            hasReply = true;
             break;
           }
         }
@@ -76,8 +77,12 @@ $(document).ready(function() {
         if(numHasThis==questions[i].length){
           for(j in answers[i])
             sendNewMsg(chooseId, myId, answers[i][j]);
+            hasReply = true;
+          return 0;
         }
       }
+      if(!hasReply)
+        sendNewMsg(chooseId, myId, errMsg);
     }
 
     function sendNewMsg(myId, chooseId, thisMsg){
@@ -88,6 +93,7 @@ $(document).ready(function() {
         read: false
       };
       DisplayMsg(newMsg);
+      return newMsg;
     }
     // ------------------------------ ---------------------- ------------------------------
 
