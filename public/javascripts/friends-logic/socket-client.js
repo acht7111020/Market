@@ -31,16 +31,32 @@ $(document).ready(function() {
       e.preventDefault();
       var index = $('.messageForm').index(this);
       var $messageInput = $('.messageInput').eq(index);
+      replyMsg(myId, chooseId, $messageInput.val());
+      $messageInput.val('');
+    });
+
+    // ------------------------------ Customer service part ------------------------------
+    $('.messageBotForm').submit(function(e) {
+      e.preventDefault();
+      var index = $('.messageBotForm').index(this);
+      var $messageInput = $('.messageInput').eq(index);
+      replyMsg(myId, chooseId, $messageInput.val());
+      $messageInput.val('');
+    });
+    function replyMsg(myId, chooseId, thisMsg){
+      sendNewMsg(myId, chooseId, thisMsg);
+    }
+    function sendNewMsg(myId, chooseId, thisMsg){
       var newMsg = {
         fromUser: myId,
         toUser: chooseId,
-        msg: $messageInput.val(),
+        msg: thisMsg,
         read: false
       };
       socket.emit('send message', newMsg);
       DisplayMsg(newMsg);
-      $messageInput.val('');
-    });
+    }
+    // ------------------------------ ---------------------- ------------------------------
 
     socket.on('load history messages', function(data) {
       historyMsgs[data.friend] = data.msgs;
