@@ -23,10 +23,8 @@ router.get('/:storeId', RoutesLogic, function(req, res, next) {
     else if (!store) res.redirect('/');
     else if(store.status.level != req.session.level) res.redirect('/');
     else {
-      console.log(store);
       store.status.pageView ++;
       store.save(function(err, updatedStore) {
-        console.log(updatedStore);
         if (err) throw err;
         else {
           Product.find({ownerStore: req.params.storeId}, function(productErr, products) {
@@ -40,6 +38,8 @@ router.get('/:storeId', RoutesLogic, function(req, res, next) {
               req.renderValues.leftbarImg = store.detail.coverImage;
               req.renderValues.leftbarTitle = store.detail.title;
               req.renderValues.leftbarAbout = req.params.storeId;
+              req.renderValues.userId = req.user._id;
+              req.renderValues.ownerId = store.detail.owner;
               res.render('store/store', req.renderValues);
             }
           });

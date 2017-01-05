@@ -6,4 +6,10 @@ $(document).ready(function(){
     var productId = $(this).data('productid');
     window.location = `/product/${productId}`;
   });
+
+  var userId = $('#editBtn').data('userid');
+  var ownerId = $('#editBtn').data('ownerid');
+  if (userId != ownerId) {
+    $('#editBtn').css('display', 'none');
+  }
 });
