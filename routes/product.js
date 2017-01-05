@@ -21,10 +21,14 @@ router.get('/:productId', RoutesLogic, function(req, res) {
   Product.findById(req.params.productId, function(err, product) {
     if (err) res.redirect('/');
     else {
-      req.renderValues.product = product;
-      req.renderValues.storeState = "in";
-      req.renderValues.storeId = req.session.storeId;
-      res.render('product/product', req.renderValues);
+      Store.findById(product.ownerStore, function(storeErr, store) {
+        req.renderValues.product = product;
+        req.renderValues.storeState = "in";
+        req.renderValues.storeId = req.session.storeId;
+        req.renderValues.userId = req.user._id;
+        req.renderValues.ownerId = store.detail.owner;
+        res.render('product/product', req.renderValues);
+      });
     }
   });
 });
