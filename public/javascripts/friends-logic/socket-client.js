@@ -61,7 +61,7 @@ $(document).ready(function() {
       for(i in floors){ // Floor
         for(c in floors[i]){ // Category
           if(thisMsg.includes(floors[i][c].toUpperCase())){
-            sendNewMsg(chooseId, myId, dirMsg_prefix+i+dirMsg_suffix);
+            sendNewMsg(chooseId, myId, dirMsg_prefix+(i+1)+dirMsg_suffix);
             hasReply = true;
             break;
           }
@@ -77,7 +77,7 @@ $(document).ready(function() {
         if(numHasThis==questions[i].length){
           for(j in answers[i])
             sendNewMsg(chooseId, myId, answers[i][j]);
-            hasReply = true;
+          hasReply = true;
           return 0;
         }
       }
