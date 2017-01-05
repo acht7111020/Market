@@ -151,7 +151,8 @@ $(document).ready(function() {
     $('.chatMenuForm').submit(function(e) {
       e.preventDefault();
       var index = $('.chatMenuForm').index(this);
-      var friendsId = $('.friendsId').eq(index).html();
+      // var friendsId = $('.friendsId').eq(index).html();
+      var friendsId = $(this).data('friendsid');
       $('#waiting').modal('open');
 
       var invitation = {
