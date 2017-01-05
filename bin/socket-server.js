@@ -175,6 +175,14 @@ function socket(server) {
       NoticeInvitee('about button clicked', {});
     });
 
+    socket.on('store owner clicked', function() {
+      NoticeInvitee('store owner clicked', {});
+    });
+
+    socket.on('user store table clicked', function(trIndex) {
+      NoticeInvitee('user store table clicked', trIndex);
+    });
+
     // ------------------------------ run into friends part ------------------------------
     socket.on('run into friends', function(info) {
       socket.id = info.myId;
