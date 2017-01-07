@@ -13,7 +13,6 @@ module.exports = function ModifyProduct() {
     });
     newProduct.save(function(err, updatedProduct) {
       if (err) throw err;
-      console.log(updatedProduct);
     });
   };
 
