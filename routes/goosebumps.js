@@ -25,7 +25,7 @@ router.post('/leaderboard', function(req, res) {
       var rate = players.length;
       for(var i = 0; i < players.length; i++) {
         if (newPlayer.score == players[i].score) {
-          rate = i;
+          rate = i + 1;
           break;
         }
       }
