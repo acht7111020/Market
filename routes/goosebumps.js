@@ -5,7 +5,7 @@ var Player = require('../models/player-schema');
 router.get('/leaderboard', function(req, res) {
   Player.find(function(err, players) {
     var leaderboard = {
-      leaderboard: players
+      leaderboard: players,
     }
     res.json(leaderboard);
   });
@@ -20,12 +20,20 @@ router.post('/leaderboard', function(req, res) {
   newPlayer.save(function(err) {
     if (err) throw err;
     console.log(newPlayer);
-    Player.find(function(playerErr, players) {
+    var findQuery = Player.find();
+    findQuery.sort('-score').limit(5).exec(function(err, players) {
       var leaderboard = {
         leaderboard: players
       }
       console.log(leaderboard);
       res.json(leaderboard);
+    });
+    // Player.find(function(playerErr, players) {
+    //   var leaderboard = {
+    //     leaderboard: players
+    //   }
+    //   console.log(leaderboard);
+    //   res.json(leaderboard);
     });
   });
 });
