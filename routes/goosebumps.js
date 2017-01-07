@@ -34,7 +34,7 @@ router.post('/leaderboard', function(req, res) {
     //   }
     //   console.log(leaderboard);
     //   res.json(leaderboard);
-    });
+    // });
   });
 });
 
