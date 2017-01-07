@@ -19,6 +19,7 @@ router.post('/leaderboard', function(req, res) {
   });
   newPlayer.save(function(err) {
     if (err) throw err;
+    console.log(newPlayer);
     Player.find(function(playerErr, players) {
       var leaderboard = {
         leaderboard: players
