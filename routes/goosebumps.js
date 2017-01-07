@@ -24,6 +24,7 @@ router.post('/leaderboard', function(req, res) {
       var leaderboard = {
         leaderboard: players
       }
+      console.log(leaderboard);
       res.json(leaderboard);
     });
   });
