@@ -4,7 +4,10 @@ var Player = require('../models/player-schema');
 
 router.get('/leaderboard', function(req, res) {
   Player.find(function(err, players) {
-    res.json(players);
+    var leaderboard = {
+      leaderboard: players
+    }
+    res.json(leaderboard);
   });
 });
 
