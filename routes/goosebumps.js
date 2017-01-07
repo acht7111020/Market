@@ -12,7 +12,7 @@ router.get('/leaderboard', function(req, res) {
 });
 
 router.post('/leaderboard', function(req, res) {
-  console.log(req);
+  console.log(req.body);
   res.redirect('/goosebumps/leaderboard');
 });
 
