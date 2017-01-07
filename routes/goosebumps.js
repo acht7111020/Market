@@ -21,20 +21,21 @@ router.post('/leaderboard', function(req, res) {
     if (err) throw err;
     console.log(newPlayer);
     var findQuery = Player.find();
-    findQuery.sort('-score').limit(5).exec(function(err, players) {
+    findQuery.sort('-score').exec(function(err, players) {
+      var rate = players.length;
+      for(var i = 0; i < players.length; i++) {
+        if (newPlayer.score == players[i].score) {
+          rate = i;
+          break;
+        }
+      }
       var leaderboard = {
-        leaderboard: players
+        leaderboard: players,
+        myRate: rate
       }
       console.log(leaderboard);
       res.json(leaderboard);
     });
-    // Player.find(function(playerErr, players) {
-    //   var leaderboard = {
-    //     leaderboard: players
-    //   }
-    //   console.log(leaderboard);
-    //   res.json(leaderboard);
-    // });
   });
 });
 
