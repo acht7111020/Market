@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
   name: String,
-  score: Number
+  score: Number,
+  level: Number
 });
 
 module.exports = mongoose.model('Player', schema);
