@@ -22,7 +22,7 @@ router.post('/leaderboard', function(req, res) {
   });
   newPlayer.save(function(err) {
     if (err) throw err;
-    var findQuery = Player.find({level: req.body.level, difficulty: req.doby.difficulty});
+    var findQuery = Player.find({level: req.body.level, difficulty: req.body.difficulty});
     findQuery.sort('-score').exec(function(err, players) {
       var rate = players.length;
       for(var i = 0; i < players.length; i++) {
