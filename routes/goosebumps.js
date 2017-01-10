@@ -8,10 +8,13 @@ router.get('/leaderboard/:level/:difficulty', function(req, res) {
   var findQuery = Player.find({level: req.params.level, difficulty: req.params.difficulty});
   findQuery.sort('-score').limit(5).exec(function(err, players) {
     if (err) throw err;
-    var leaderboard = {
-      leaderboard: players
+
+    else {
+      var leaderboard = {
+        leaderboard: players
+      }
+      res.json(leaderboard);
     }
-    else res.json(leaderboard);
   });
 });
 
