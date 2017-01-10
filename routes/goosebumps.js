@@ -3,14 +3,14 @@ var router = express.Router();
 var Player = require('../models/player-schema');
 var Leaderboard = require('../models/leaderboord-schema');
 
-// router.get('/leaderboard/:level', function(req, res) {
-//   Player.find({level: req.params.level}, function(err, players) {
-//     var leaderboard = {
-//       leaderboard: players,
-//     }
-//     res.json(leaderboard);
-//   });
-// });
+router.get('/leaderboard/:level/:difficulty', function(req, res) {
+  console.log(req.params);
+  var findQuery = Player.find({level: req.params.level, difficulty: req.params.difficulty});
+  findQuery.sort('-score').limit(5).exec(function(err, players) {
+    if (err) throw err;
+    else res.json(players);
+  });
+});
 
 router.post('/leaderboard', function(req, res) {
   console.log(req.body);
