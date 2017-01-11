@@ -6,7 +6,7 @@ var Leaderboard = require('../models/leaderboord-schema');
 router.get('/leaderboard/:level/:difficulty', function(req, res) {
   console.log(req.params);
   var findQuery = Player.find({level: req.params.level, difficulty: req.params.difficulty});
-  findQuery.sort('-score').limit(5).exec(function(err, players) {
+  findQuery.sort('-score').exec(function(err, players) {
     if (err) throw err;
 
     else {
