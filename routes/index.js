@@ -6,57 +6,46 @@ var expressHbs = require('express-handlebars');
 var RoutesLogic = require('../config/routes-logic');
 
 router.get('/', RoutesLogic, function(req, res, next) {
-  var findQueryA = Store.find({"status.level":"G", "status.area":"A"});
-  var findQueryB = Store.find({"status.level":"G", "status.area":"B"});
-  var findQueryC = Store.find({"status.level":"G", "status.area":"C"});
+  var findQueryA = Store.find({"status.level":req.session.level, "status.area":"A"});
+  var findQueryB = Store.find({"status.level":req.session.level, "status.area":"B"});
+  var findQueryC = Store.find({"status.level":req.session.level, "status.area":"C"});
 
   //db.stores.find({"status.area":"A"})
-  findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
-    findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
-      findQueryC.sort('position').exec(function(storeErr, storeDocsC) {
+  findQueryA.sort('status.position').exec(function(storeErr, storeDocsA) {
+    findQueryB.sort('status.position').exec(function(storeErr, storeDocsB) {
+      findQueryC.sort('status.position').exec(function(storeErr, storeDocsC) {
         //allstores = [storeDocsA, storeDocsB, storeDocsC];
         req.renderValues.storesA = storeDocsA;
         req.renderValues.storesB = storeDocsB;
         req.renderValues.storesC = storeDocsC;
+        req.renderValues.storeId = req.session.storeId;
+        req.renderValues.storeState = "out";
         req.renderValues.leftbarTitle = req.session.level;
         req.renderValues.leftbarImg = '/images/online-store.png';
         res.render('index', req.renderValues);
       });
     });
   });
-
 });
 
-router.get('/floor/:level/', RoutesLogic, function(req, res, next) {
+router.post('/', RoutesLogic, function(req, res, next) {
+  req.session.level = req.body.level;
+  res.redirect('/loading');
+});
 
-  var findQueryA = Store.find({"status.level":req.params.level, "status.area":"A"});
-  var findQueryB = Store.find({"status.level":req.params.level, "status.area":"B"});
-  var findQueryC = Store.find({"status.level":req.params.level, "status.area":"C"});
-  //db.stores.find({"status.area":"A"})
-  findQueryA.sort('position').exec(function(storeErr, storeDocsA) {
-    findQueryB.sort('position').exec(function(storeErr, storeDocsB) {
-      findQueryC.sort('position').exec(function(storeErr, storeDocsC) {
-        //allstores = [storeDocsA, storeDocsB, storeDocsC];
-        req.renderValues.storesA = storeDocsA;
-        req.renderValues.storesB = storeDocsB;
-        req.renderValues.storesC = storeDocsC;
-        req.session.level = req.params.level;
-        req.renderValues.leftbarTitle = req.params.level;
-        req.renderValues.leftbarImg = '/images/online-store.png';
-        res.render('index', req.renderValues);
-      });
-    });
+router.get('/loading', RoutesLogic, function(req, res, next) {
+
+  var findQuery = Store.find({"status.level":req.session.level});
+  findQuery.sort('-status.pageView').exec(function(storeErr, storeDocs) {
+    console.log(storeDocs[0]);
+    console.log(storeDocs[1]);
+    req.renderValues.storesA = storeDocs[0];
+    req.renderValues.storesB = storeDocs[1];
+    req.renderValues.level = req.session.level;
+    req.renderValues.leftbarTitle = 'loading';
+    req.renderValues.leftbarImg = '/images/online-store.png';
+    res.render('load/loading', req.renderValues);
   });
-
-});
-
-router.get('/loading/:type/:level', RoutesLogic, function(req, res, next) {
-  req.renderValues.level = req.params.level;
-  req.renderValues.type = req.params.type;
-  req.session.level = req.params.level;
-  req.renderValues.leftbarTitle = 'loading';
-  req.renderValues.leftbarImg = '/images/online-store.png';
-  res.render('load/loading', req.renderValues);
 });
 
 

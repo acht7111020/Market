@@ -14,33 +14,26 @@ body {
   /*padding: 0 !important;*/
   /*margin-top: 3%;*/
   z-index: 0;
-  background-color: transparent !important;
+  /*background-color: transparent !important;*/
 }
 
 main {
   padding-left: 300px;
   margin: 3%;
+  /*height: 100%;
+  overflow: scroll;*/
 }
 
-/*#mainArea {
-  width: 80%;
-  margin-left: 20%;
+.MouseDiv{
+  top: 399px;
+  left: 400px;
+  position: fixed;
+  z-index: 30;
+  height: 50px;
+  display: none;
+  transition: all 0.1s linear;
 }
 
-#mainAreaBody > .signForm {
-  padding: 0 30%;
+.MouseDiv img{
+  height: inherit;
 }
-
-#mainArea > #mainAreaBody{
-  margin: 2% 7%;
-}
-
-.signupBtn {
-  float: right;
-  margin: 30px 0px 0px 30px;
-}
-
-.errorMsg {
-  color: red;
-  font-size: 20px;
-}*/

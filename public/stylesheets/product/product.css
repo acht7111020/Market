@@ -39,3 +39,12 @@
             drop-shadow(0px 0px 10px rgba(0,0,0,.5));
   -webkit-transition : -webkit-filter 200ms linear
 }
+
+.UserIcon{
+  float: right;
+  z-index: 21;
+  position: fixed;
+  text-align: right;
+  right: 2%;
+  top: 12%;
+}

@@ -13,6 +13,7 @@ var upload = multer({ storage: storage});
 
 var RoutesLogic = require('../config/routes-logic');
 var Product = require('../models/product-schema');
+var Store = require('../models/store-schema');
 var CartManager = require('../helpers/cart-manager');
 var ModifyProduct = require('../helpers/modify-product-manager');
 
@@ -20,8 +21,13 @@ router.get('/:productId', RoutesLogic, function(req, res) {
   Product.findById(req.params.productId, function(err, product) {
     if (err) res.redirect('/');
     else {
-      req.renderValues.product = product;
-      res.render('product/product', req.renderValues);
+      Store.findById(product.ownerStore, function(storeErr, store) {
+        req.renderValues.product = product;
+        req.renderValues.storeState = "in";
+        req.renderValues.storeId = req.session.storeId;
+        req.renderValues.ownerId = store.detail.owner;
+        res.render('product/product', req.renderValues);
+      });
     }
   });
 });
@@ -49,12 +55,19 @@ router.post('/add/:storeId', RoutesLogic, upload.array('photos', 5), function(re
 });
 
 router.get('/modify/:productId', RoutesLogic, function(req, res) {
-  Product.findById(req.params.productId, function(err, product) {
-    if (err) res.redirect('/');
-    if (!product) res.redirect('/');
+  Product.findById(req.params.productId, function(productErr, product) {
+    if (productErr) res.redirect('/');
+    else if (!product) res.redirect('/');
     else {
-      req.renderValues.product = product;
-      res.render('product/modify', req.renderValues);
+      Store.findById(product.ownerStore, function(storeErr, store) {
+        if (storeErr) res.redirect('/');
+        else if (!store) res.redirect('/');
+        else if (store.detail.owner != req.user._id) res.redirect('/');
+        else {
+          req.renderValues.product = product;
+          res.render('product/modify', req.renderValues);
+        }
+      });
     }
   });
 });
@@ -64,7 +77,7 @@ router.post('/modify/:productId', RoutesLogic, upload.array('photos', 5), functi
   modifyProduct.modify(req.body, req.files, req.params.productId);
   Product.findById(req.params.productId, function(err, product) {
     if (err) res.redirect('/');
-    if (!product) res.redirect('/');
+    else if (!product) res.redirect('/');
     else res.redirect(`/store/${product.ownerStore}`);
   });
 });

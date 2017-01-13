@@ -18,19 +18,31 @@ var Store = require('../models/store-schema');
 var ModifyStore = require('../helpers/modify-store-manager');
 
 router.get('/:storeId', RoutesLogic, function(req, res, next) {
-  var findProductQuery = Product.find({ownerStore: req.params.storeId});
-  findProductQuery.sort('position').exec(function(productErr, products){
-    if(productErr) res.redirect('/');
-    if (!products) res.redirect('/');
+  Store.findById(req.params.storeId, function(storeErr, store) {
+    if (storeErr) res.redirect('/');
+    else if (!store) res.redirect('/');
+    else if(store.status.level != req.session.level) res.redirect('/');
     else {
-      Store.findById(req.params.storeId, function(storeErr, store) {
-        if (storeErr) throw storeErr;
-        req.renderValues.products = products;
-        req.renderValues.storeId = req.params.storeId;
-        req.renderValues.leftbarImg = store.detail.coverImage;
-        req.renderValues.leftbarTitle = store.detail.title;
-        req.renderValues.leftbarAbout = req.params.storeId;
-        res.render('store/store', req.renderValues);
+      store.status.pageView ++;
+      store.save(function(err, updatedStore) {
+        if (err) throw err;
+        else {
+          Product.find({ownerStore: req.params.storeId}, function(productErr, products) {
+            if(productErr) res.redirect('/');
+            else if (!products) res.redirect('/');
+            else {
+              req.renderValues.products = products;
+              req.session.storeId = req.params.storeId;
+              req.renderValues.storeId = req.session.storeId;
+              req.renderValues.storeState = "in";
+              req.renderValues.leftbarImg = store.detail.coverImage;
+              req.renderValues.leftbarTitle = store.detail.title;
+              req.renderValues.leftbarAbout = req.params.storeId;
+              req.renderValues.ownerId = store.detail.owner;
+              res.render('store/store', req.renderValues);
+            }
+          });
+        }
       });
     }
   });
@@ -46,6 +58,8 @@ router.get('/about/:storeId', RoutesLogic, function(req, res) {
         if (!user) res.redirect('/');
         else {
           req.renderValues.store = store;
+          req.renderValues.storeId = req.session.storeId;
+          req.renderValues.storeState = "in";
           req.renderValues.owner = user.facebook;
           req.renderValues.rating = ['#ED8A19', '#ED8A19', '#ED8A19', '#ED8A19', '#bdbdbd'];
           res.render('store/about', req.renderValues);
@@ -68,7 +82,8 @@ router.post('/rent/:storeId', RoutesLogic, upload.fields([{ name: 'mainImage', m
 router.get('/modify/:storeId', RoutesLogic, function(req, res) {
   Store.findById(req.params.storeId, function(err, store) {
     if (err) res.redirect('/');
-    if (!store) res.redirect('/');
+    else if (!store) res.redirect('/');
+    else if (store.detail.owner != req.user._id) res.redirect('/');
     else {
       req.renderValues.store = store;
       res.render('store/modify', req.renderValues);

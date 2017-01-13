@@ -1,11 +1,12 @@
 function RoutesLogic (req, res, next) {
   if (req.isAuthenticated()) {
     if (!req.session.level) {
-      req.session.level = 'G';
+      req.session.level = 1;
     }
     req.renderValues = {
       title: "GoodGoods",
-      fb_user: req.user.facebook
+      fb_user: req.user.facebook,
+      userId: req.user._id
     }
     return next();
   }

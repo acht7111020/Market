@@ -1,6 +1,10 @@
-#topbarLogo {
+#topbarLogoImg {
   width: auto;
   height: 100%;
   max-height: 64px;
   object-fit: contain;
+}
+
+#shoppingStatus {
+  color: #ff8a80;
 }
